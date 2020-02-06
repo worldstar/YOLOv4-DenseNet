@@ -18,9 +18,9 @@ def _main():
     annotation_path = 'model_data/train.txt'
     classes_path = 'model_data/voc_classes.txt'
     anchors_path = 'model_data/yolo_anchors.txt'
-    valSplit = 0.2 #20% validation
+    valSplit = 0.1 #10% validation
     monitor = 'val_loss'
-    epoch = 10000
+    epoch = 100
     batchSize = 4
     stepMultiple = 1
     getRandomData = True 
@@ -30,16 +30,20 @@ def _main():
     anchors = get_anchors(anchors_path)
     is_tiny_version = len(anchors)==6 # default setting
 
-    if is_tiny_version:
-        model = create_tiny_model(input_shape, anchors, num_classes,
-            freeze_body=2, weights_path='model_data/tiny_yolo_weights.h5')
-    else:
-        model = create_model(input_shape, anchors, len(class_names) , 
-            load_pretrained = False ,
-            weights_path='model/epoch10000_博物館YOLOv3.h5')
+    # if is_tiny_version:
+    #     model = create_tiny_model(input_shape, anchors, num_classes,
+    #         freeze_body=2, weights_path='model_data/tiny_yolo_weights.h5')
+    # else:
+    #     model = create_model(input_shape, anchors, len(class_names) , 
+    #         load_pretrained = False ,
+    #         weights_path='model/epoch10000_博物館YOLOv3.h5')
+    model = create_model(input_shape, anchors, len(class_names) , 
+                        load_pretrained = False ,
+                        weights_path='model/epoch10000_博物館YOLOv3.h5')
 
     train(model=model,annotation_path=annotation_path,input_shape=input_shape,anchors=anchors,num_classes=num_classes,
         log_dir=log_dir,valSplit=valSplit,monitor=monitor,epoch=epoch,batchSize=batchSize,stepMultiple=stepMultiple,getRandomData=getRandomData)
+
 def train(model=None, annotation_path=None, input_shape=None, anchors=None, num_classes=None,
         log_dir='logs/',valSplit=None,monitor=None,epoch=None,batchSize=None,stepMultiple=None,getRandomData=True):
     
@@ -64,8 +68,8 @@ def train(model=None, annotation_path=None, input_shape=None, anchors=None, num_
         checkpoint = ModelCheckpoint(log_dir + "ep{epoch:03d}-loss{loss:.3f}-val_loss{val_loss:.3f}.h5",
             monitor='val_loss', save_weights_only=True, save_best_only=True, period=1)
     
-    reduce_lr = ReduceLROnPlateau(monitor=monitor, factor=0.1, patience=3, verbose=1)
-    early_stopping = EarlyStopping(monitor=monitor, min_delta=0, patience=10, verbose=1)
+    # reduce_lr = ReduceLROnPlateau(monitor=monitor, factor=0.1, patience=3, verbose=1)
+    # early_stopping = EarlyStopping(monitor=monitor, min_delta=0, patience=10, verbose=1)
 
     callbacks_list = [logging,checkpoint]
     batch_size = batchSize
@@ -188,7 +192,8 @@ def create_model(input_shape, anchors, num_classes, load_pretrained=True, freeze
         arguments={'anchors': anchors, 'num_classes': num_classes, 'ignore_thresh': 0.5})(
         [*model_body.output, *y_true])
     model = Model([model_body.input, *y_true], model_loss)
-
+    model.summary()
+    
     return model
 
 def create_tiny_model(input_shape, anchors, num_classes, load_pretrained=True, freeze_body=2,
@@ -238,9 +243,8 @@ def data_generator(annotation_lines, batch_size, input_shape, anchors, num_class
     '''data generator for fit_generator'''
     n = len(annotation_lines)
     #調整的部分
-    np.random.shuffle(annotation_lines)
+    #np.random.shuffle(annotation_lines)
     #調整的部分
-
     i = 0
     while True:
         image_data = []

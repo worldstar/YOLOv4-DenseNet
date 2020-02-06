@@ -1,4 +1,4 @@
- # -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """
 Class definition of YOLO_v3 style detection model on image and video
 """
@@ -6,6 +6,7 @@ Class definition of YOLO_v3 style detection model on image and video
 import colorsys
 import os
 from timeit import default_timer as timer
+import glob
 
 import numpy as np
 from keras import backend as K
@@ -15,16 +16,79 @@ from PIL import Image, ImageFont, ImageDraw
 
 from yolo3.model import yolo_eval, yolo_body, tiny_yolo_body
 from yolo3.utils import letterbox_image
-import os
 from keras.utils import multi_gpu_model
+
+os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+
+def _main():
+    detect_img(YOLO())
+
+def detect_img(yolo):
+    path = "Data/JPEGImages2/*.jpg"
+    outdir = "Data/SegmentationClass"
+    onefile = "Data/JPEGImages/20000010015_I001.jpg"
+    img = Image.open(onefile)
+    img,noFound,strJsonResult = yolo.detect_image(img)
+    # for jpgfile in glob.glob(path):
+    #     fw = open("mAPTxt_Pre/"+os.path.basename(jpgfile).split('.')[0]+".txt", "w")
+    #     img = Image.open(jpgfile)
+    #     img,noFound,strJsonResult = yolo.detect_image(img)
+    #     # if(noFound == False):
+    #     #     img.save(os.path.join(outdir, os.path.basename(jpgfile)))
+    #     #     fw.write(strJsonResult)
+    #     img.save(os.path.join(outdir, os.path.basename(jpgfile)))
+    #     fw.write(strJsonResult)
+    #     fw.close()
+    yolo.close_session()
+
+def detect_video(yolo, video_path, output_path=""):
+    import cv2
+    vid = cv2.VideoCapture(video_path)
+    if not vid.isOpened():
+        raise IOError("Couldn't open webcam or video")
+    video_FourCC    = int(vid.get(cv2.CAP_PROP_FOURCC))
+    video_fps       = vid.get(cv2.CAP_PROP_FPS)
+    video_size      = (int(vid.get(cv2.CAP_PROP_FRAME_WIDTH)),
+                        int(vid.get(cv2.CAP_PROP_FRAME_HEIGHT)))
+    isOutput = True if output_path != "" else False
+    if isOutput:
+        print("!!! TYPE:", type(output_path), type(video_FourCC), type(video_fps), type(video_size))
+        out = cv2.VideoWriter(output_path, video_FourCC, video_fps, video_size)
+    accum_time = 0
+    curr_fps = 0
+    fps = "FPS: ??"
+    prev_time = timer()
+    while True:
+        return_value, frame = vid.read()
+        image = Image.fromarray(frame)
+        image = yolo.detect_image(image)
+        result = np.asarray(image)
+        curr_time = timer()
+        exec_time = curr_time - prev_time
+        prev_time = curr_time
+        accum_time = accum_time + exec_time
+        curr_fps = curr_fps + 1
+        if accum_time > 1:
+            accum_time = accum_time - 1
+            fps = "FPS: " + str(curr_fps)
+            curr_fps = 0
+        cv2.putText(result, text=fps, org=(3, 15), fontFace=cv2.FONT_HERSHEY_SIMPLEX,
+                    fontScale=0.50, color=(255, 0, 0), thickness=2)
+        cv2.namedWindow("result", cv2.WINDOW_NORMAL)
+        cv2.imshow("result", result)
+        if isOutput:
+            out.write(result)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+    yolo.close_session()
 
 class YOLO(object):
     _defaults = {
-        "model_path": 'model_data/yolo.h5',
+        "model_path": 'model_end/epoch20000_博物館YOLOv3.h5',
         "anchors_path": 'model_data/yolo_anchors.txt',
-        "classes_path": 'model_data/coco_classes.txt',
-        "score" : 0.3,
-        "iou" : 0.45,
+        "classes_path": 'model_data/voc_classes.txt',
+        "score" : 0.01,#0.5
+        "iou" : 0.1 ,#0.5
         "model_image_size" : (416, 416),
         "gpu_num" : 1,
     }
@@ -71,6 +135,7 @@ class YOLO(object):
         except:
             self.yolo_model = tiny_yolo_body(Input(shape=(None,None,3)), num_anchors//2, num_classes) \
                 if is_tiny_version else yolo_body(Input(shape=(None,None,3)), num_anchors//3, num_classes)
+            #print('載入權重')
             self.yolo_model.load_weights(self.model_path) # make sure model, anchors and classes match
         else:
             assert self.yolo_model.layers[-1].output_shape[-1] == \
@@ -89,7 +154,6 @@ class YOLO(object):
         np.random.seed(10101)  # Fixed seed for consistent colors across runs.
         np.random.shuffle(self.colors)  # Shuffle colors to decorrelate adjacent classes.
         np.random.seed(None)  # Reset seed to default.
-
         # Generate output tensor targets for filtered bounding boxes.
         self.input_image_shape = K.placeholder(shape=(2, ))
         if self.gpu_num>=2:
@@ -101,7 +165,9 @@ class YOLO(object):
 
     def detect_image(self, image):
         start = timer()
-
+        noFound = False
+        strJsonResult = ""
+        count = 1
         if self.model_image_size != (None, None):
             assert self.model_image_size[0]%32 == 0, 'Multiples of 32 required'
             assert self.model_image_size[1]%32 == 0, 'Multiples of 32 required'
@@ -124,8 +190,9 @@ class YOLO(object):
                 K.learning_phase(): 0
             })
 
-        print('Found {} boxes for {}'.format(len(out_boxes), 'img'))
-
+        print('Found {} boxes for {} '.format(len(out_boxes), 'img'))
+        if(len(out_boxes) == 0):
+            noFound = True
         font = ImageFont.truetype(font='font/FiraMono-Medium.otf',
                     size=np.floor(3e-2 * image.size[1] + 0.5).astype('int32'))
         thickness = (image.size[0] + image.size[1]) // 300
@@ -145,6 +212,13 @@ class YOLO(object):
             bottom = min(image.size[1], np.floor(bottom + 0.5).astype('int32'))
             right = min(image.size[0], np.floor(right + 0.5).astype('int32'))
             print(label, (left, top), (right, bottom))
+            strLabel = label.split(' ')
+            strJsonResult += '%s %s %s %s %s %s\n' %(strLabel[0],strLabel[1],left,top,right,bottom)
+            # if(count == len(out_boxes)):
+            #     strJsonResult += '{"x1": %d,"y1": %d,"x2": %d,"y2": %d,"class": "%s","prob": %s}' %(left,top,right,bottom,strLabel[0],strLabel[1])
+            # else:
+            #     strJsonResult += '{"x1": %d,"y1": %d,"x2": %d,"y2": %d,"class": "%s","prob": %s},' %(left,top,right,bottom,strLabel[0],strLabel[1])
+            #     count += 1
 
             if top - label_size[1] >= 0:
                 text_origin = np.array([left, top - label_size[1]])
@@ -164,49 +238,11 @@ class YOLO(object):
 
         end = timer()
         print(end - start)
-        return image
+        return image,noFound,strJsonResult
 
     def close_session(self):
         self.sess.close()
 
-def detect_video(yolo, video_path, output_path=""):
-    import cv2
-    vid = cv2.VideoCapture(video_path)
-    if not vid.isOpened():
-        raise IOError("Couldn't open webcam or video")
-    video_FourCC    = int(vid.get(cv2.CAP_PROP_FOURCC))
-    video_fps       = vid.get(cv2.CAP_PROP_FPS)
-    video_size      = (int(vid.get(cv2.CAP_PROP_FRAME_WIDTH)),
-                        int(vid.get(cv2.CAP_PROP_FRAME_HEIGHT)))
-    isOutput = True if output_path != "" else False
-    if isOutput:
-        print("!!! TYPE:", type(output_path), type(video_FourCC), type(video_fps), type(video_size))
-        out = cv2.VideoWriter(output_path, video_FourCC, video_fps, video_size)
-    accum_time = 0
-    curr_fps = 0
-    fps = "FPS: ??"
-    prev_time = timer()
-    while True:
-        return_value, frame = vid.read()
-        image = Image.fromarray(frame)
-        image = yolo.detect_image(image)
-        result = np.asarray(image)
-        curr_time = timer()
-        exec_time = curr_time - prev_time
-        prev_time = curr_time
-        accum_time = accum_time + exec_time
-        curr_fps = curr_fps + 1
-        if accum_time > 1:
-            accum_time = accum_time - 1
-            fps = "FPS: " + str(curr_fps)
-            curr_fps = 0
-        cv2.putText(result, text=fps, org=(3, 15), fontFace=cv2.FONT_HERSHEY_SIMPLEX,
-                    fontScale=0.50, color=(255, 0, 0), thickness=2)
-        cv2.namedWindow("result", cv2.WINDOW_NORMAL)
-        cv2.imshow("result", result)
-        if isOutput:
-            out.write(result)
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
-    yolo.close_session()
 
+if __name__ == '__main__':
+    _main()
