@@ -1,5 +1,5 @@
 import keras.backend as K
-from keras.layers import Input, Lambda
+from keras.layers import Dense, Dropout, Flatten
 from keras.models import Model
 from keras.optimizers import Adam
 from keras.callbacks import TensorBoard, ModelCheckpoint, ReduceLROnPlateau, EarlyStopping,LearningRateScheduler
@@ -14,7 +14,7 @@ __test_dir          = os.path.join(__data_dir, "test")
 __trained_model_dir = os.path.join(__data_dir, "models")
 __model_class_dir   = os.path.join(__data_dir, "json")
 num_classes         = 4
-__num_epochs        = 50
+__num_epochs        = 150
 height_shift_range  = 0#[0, 0.25, 0.5, 0.75, 1]
 width_shift_range   = 0#[0, 0.25, 0.5, 0.75, 1]
 rotation_range      = 0 #[0, 15, 30]
@@ -24,34 +24,8 @@ training_image_size = 224
 log_dir = 'D:/JungWei/revisedYOLOv3_GithubDesktop/revisedYOLOv3/keras-yolo3/logs/ResNet/'
 
 def _main():
-    # annotation_path = 'model_data/train.txt'
-    # classes_path = 'model_data/voc_classes.txt'
-    # anchors_path = 'model_data/yolo_anchors.txt'
-    # valSplit = 0.1 #10% validation
-    # monitor = 'val_loss'
-    # epoch = 100
-    # batchSize = 4
-    # stepMultiple = 1
-    # getRandomData = True 
-    # input_shape = (416,416) # multiple of 32, hw
-    # class_names = get_classes(classes_path)
-    # num_classes = len(class_names)
-    # anchors = get_anchors(anchors_path)
-    # is_tiny_version = len(anchors)==6 # default setting
-    
-    # if is_tiny_version:
-    #     model = create_tiny_model(input_shape, anchors, num_classes,
-    #         freeze_body=2, weights_path='model_data/tiny_yolo_weights.h5')
-    # else:
-    #     model = create_model(input_shape, anchors, len(class_names) , 
-    #         load_pretrained = False ,
-    #         weights_path='model/epoch10000_博物館YOLOv3.h5')
-    # model = create_model(input_shape, anchors, len(class_names) , 
-    #                     load_pretrained = False ,
-    #                     weights_path='model/epoch10000_博物館YOLOv3.h5')
-
     train(num_objects=num_classes, num_experiments=__num_epochs, enhance_data=False, 
-             batch_size=8, show_network_summary=False, training_image_size = training_image_size, rotation_range=rotation_range,
+             batch_size=16, show_network_summary=False, training_image_size = training_image_size, rotation_range=rotation_range,
              height_shift_range=height_shift_range, width_shift_range=width_shift_range, 
              zoom_range=zoom_range,shear_range=shear_range)
 
@@ -60,9 +34,16 @@ def train(num_objects=4, num_experiments=150, enhance_data=False, batch_size = 3
                    rotation_range=0, height_shift_range=0.5, width_shift_range=0.5, zoom_range=0.3,
                    shear_range=0.2, optimizer='adam'):
     #lr_scheduler = LearningRateScheduler(self.lr_schedule)
+    image_input = (training_image_size, training_image_size, 3)
+    #image_input = Input(shape=(training_image_size, training_image_size, 3))
+    model = ResNet50(include_top=True, weights=None,
+                  input_shape=image_input, classes=num_classes)
+    x = model.layers[-1].output
+    #x = Flatten(name='flatten')(x)
+    # x = Dropout(0.5)(x)
+    # x = Dense(num_classes, activation='softmax', name='predictions')(x)
+    # model = Model(input=model.input, output=x) 
 
-    image_input = Input(shape=(training_image_size, training_image_size, 3))
-    model = ResNet50(include_top=True,weights=None,classes=num_classes, input_tensor=image_input)
     model.compile(loss="categorical_crossentropy", optimizer=optimizer, metrics=["accuracy"])
     model.summary()
 

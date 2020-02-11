@@ -2,7 +2,8 @@ from keras.applications import imagenet_utils
 from keras.applications.resnet50 import  preprocess_input,ResNet50
 from keras.preprocessing import image
 from keras.layers.core import Lambda
-from keras.layers import Input
+from keras.layers import Input,Dense, Dropout, Flatten
+from keras.models import Model
 #from imageai.Prediction.ResNet.resnet50 import ResNet50
 import keras.backend as K
 #import tensorflow as tf
@@ -14,13 +15,14 @@ import os
 from matplotlib import pyplot as plt
 from os import walk
 
-image_Paths = "D:/Ultrasound/mydataset/test/VSDType1/"
+image_Paths = "D:/JungWei/revisedYOLOv3_GithubDesktop/revisedYOLOv3/keras-yolo3/ResNetDataSet/datagentest/"
 image_path = "D:/JungWei/revisedYOLOv3_GithubDesktop/revisedYOLOv3/keras-yolo3/test.png"
 execution_path = "D:/JungWei/revisedYOLOv3_GithubDesktop/revisedYOLOv3/keras-yolo3/logs"
-model_path   = 'Resnet/resnet-15-0.25-0.25-0.15-0.15-adagrad--model_ex-001_acc-0.669540-1.194973.h5'
+model_path   = 'Resnet/ep002-loss1.130.h5'
 # model_path   = 'logs/002/trained_weights_final.h5'
 #anchors_paths = 'Densenet/yolo_anchors.txt'
 classes_paths = 'logs/Densenet/model_class.json'
+
 
 def get_class():
     classes_path = os.path.expanduser(classes_paths)
@@ -115,11 +117,11 @@ def deprocess_image(x):
     return x
 
 def _compute_gradients(tensor, var_list):
-	grads = tf.gradients(tensor, var_list)
-	return [grad if grad is not None else tf.zeros_like(var) for var, grad in zip(var_list, grads)]
+    grads = tf.gradients(tensor, var_list)
+    return [grad if grad is not None else tf.zeros_like(var) for var, grad in zip(var_list, grads)]
 
 def processing_image(img_path):
-    print(img_path)
+    #print(img_path)
     # 讀取影像為 PIL 影像
     img = image.load_img(img_path, target_size=(224, 224))
     
@@ -133,49 +135,27 @@ def processing_image(img_path):
     x = preprocess_input(x)
     
     return x
-# def gradcam(model, x):
-#     # 取得影像的分類類別
-#     preds = model.predict(x)
-#     pred_class = np.argmax(preds[0])
-#     # 取得影像分類名稱
-#     #pred_class_name = imagenet_utils.decode_predictions(preds)[0][0][1]
-#     # 預測分類的輸出向量
-#     pred_output = model.output[:, pred_class]
-#     #print(pred_output)
-#     # 最後一層 convolution layer 輸出的 feature map
-#     # ResNet 的最後一層 convolution layer
-#     last_conv_layer = model.get_layer('global_avg_pooling')   
-#     # 求得分類的神經元對於最後一層 convolution layer 的梯度
-#     grads = K.gradients(pred_output, last_conv_layer.output)[0]
-#     print(K.gradients(pred_output, last_conv_layer.output)[0])
+def decode_predictions_custom(preds, top=5):
+    CLASS_CUSTOM = []
+    for x in range(1001):
+        CLASS_CUSTOM.append(str(x))
+        pass
+    #print(CLASS_CUSTOM)
+    results = []
+    for pred in preds:
+        top_indices = pred.argsort()[-top:][::-1]
+        result = [tuple(CLASS_CUSTOM[i]) + (pred[i]*100,) for i in top_indices]
+        results.append(result)
 
-#     # 求得針對每個 feature map 的梯度加總
-#     pooled_grads = K.sum(grads, axis=(0, 1, 2))
-    
-#     # K.function() 讓我們可以藉由輸入影像至 `model.input` 得到 `pooled_grads` 與
-#     # `last_conv_layer[0]` 的輸出值，像似在 Tensorflow 中定義計算圖後使用 feed_dict
-#     # 的方式。
-#     iterate = K.function([model.input], [pooled_grads, last_conv_layer.output[0]])
-    
-#     # 傳入影像矩陣 x，並得到分類對 feature map 的梯度與最後一層 convolution layer 的 
-#     # feature map
-#     pooled_grads_value, conv_layer_output_value = iterate([x])
-    
-#     # 將 feature map 乘以權重，等於該 feature map 中的某些區域對於該分類的重要性
-#     for i in range(pooled_grads_value.shape[0]):
-#         conv_layer_output_value[:, :, i] *= (pooled_grads_value[i])
-        
-#     # 計算 feature map 的 channel-wise 加總
-#     heatmap = np.sum(conv_layer_output_value, axis=-1)
-#     #print(heatmap)
-#     return heatmap, 'test'
+    return results
+
 def gradcam(model, x):
     # 取得影像的分類類別
     preds = model.predict(x)
     pred_class = np.argmax(preds[0])
     
     # 取得影像分類名稱
-    #pred_class_name = imagenet_utils.decode_predictions(preds)[0][0][1]
+    pred_class_name = decode_predictions_custom(preds)[0][0][0]
     
     # 預測分類的輸出向量
     pred_output = model.output[:, pred_class]
@@ -206,12 +186,12 @@ def gradcam(model, x):
     # 計算 feature map 的 channel-wise 加總
     heatmap = np.sum(conv_layer_output_value, axis=-1)
     
-    return heatmap, 'test'
+    return heatmap, pred_class_name
 
 def plot_heatmap(heatmap, img_path, pred_class_name):
     # ReLU
     heatmap = np.maximum(heatmap, 0)
-    #print(heatmap)
+    print(heatmap)
     # 正規化
     heatmap /= np.max(heatmap)
     
@@ -233,57 +213,44 @@ def plot_heatmap(heatmap, img_path, pred_class_name):
     # 以 0.4 透明度繪製熱力圖
     ax.imshow(heatmap, cmap='jet', alpha=0.4)
     
-    #plt.title(pred_class_name)
-    
-    plt.show()
+    plt.title(pred_class_name)
+    #plt.show()
+
+    #plt.show()
 
 num_classes = 4
 training_image_size = 224
 optimizer ="adagrad"
-image_input = Input(shape=(training_image_size, training_image_size, 3))
-model = ResNet50(include_top=True,weights=None,classes=num_classes, input_tensor=image_input)
-#model = ResNet50(weights="custom", num_classes=num_classes, model_input=image_input)
-#model.compile(loss="categorical_crossentropy", optimizer=optimizer, metrics=["accuracy"])
-#model.load_weights(os.path.join(execution_path, model_path))
+image_input = (training_image_size, training_image_size, 3)
+
+model = ResNet50()
+x = model.layers[-1].output
+#x = Flatten(name='flatten')(x)
+x = Dropout(0.5)(x)
+x = Dense(num_classes, activation='softmax', name='predictions')(x)
+model = Model(input=model.input, output=x) 
+model.compile(loss="categorical_crossentropy", optimizer=optimizer, metrics=["accuracy"])
 model.summary()
-#img = processing_image(image_path)
 
-#heatmap, pred_class_name = gradcam(model, img)
-
-#plot_heatmap(heatmap, image_path, pred_class_name)
+#model = Model(input=model.input, output=x) 
+#model.compile(loss="categorical_crossentropy", optimizer=optimizer, metrics=["accuracy"])
+#model = ResNet50()
+#model.compile(loss="categorical_crossentropy", optimizer=optimizer, metrics=["accuracy"])
+model.load_weights(execution_path+"/"+model_path) 
 
 f = []
 for (dirpath, dirnames, filenames) in walk(image_Paths):
     f.extend(filenames)
     break
-
+#print(f)
 for i in range(len(f)):
     img = processing_image(image_Paths+f[i])
     model2 = model
     heatmap, pred_class_name = gradcam(model2, img)
     plot_heatmap(heatmap, image_Paths+f[i], pred_class_name)
-    break
+    if i == 5:
+        break
+        pass
+    #break
+
 plt.show()
-
-
-# model.load_weights(model_path) 
-# #model.summary()
-# #model = VGG16(weights='imagenet')
-
-# predictions = model.predict(preprocessed_input)[0][0][0]
-# #print(predictions)
-
-# # top_1 = decode_predictions(predictions)[0][0]
-# # print('Predicted class:')
-# # print('%s (%s) with probability %.2f' % (top_1[1], top_1[0], top_1[2]))
-# predicted_class = np.argmax(predictions)
-
-# cam, heatmap = grad_cam(model, preprocessed_input, predicted_class, "conv2d_75")
-# #cv2.imwrite("gradcam.jpg", cam)
-
-# register_gradient()
-# guided_model = modify_backprop(model, 'GuidedBackProp')
-# saliency_fn = compile_saliency_function(guided_model)
-# saliency = saliency_fn([preprocessed_input, 0])
-# gradcam = saliency[0] * heatmap[..., np.newaxis]
-# cv2.imwrite("guided_gradcam.jpg", deprocess_image(gradcam))

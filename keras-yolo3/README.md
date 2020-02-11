@@ -97,3 +97,64 @@ If you want to use original pretrained weights for YOLOv3:
 6. The training strategy is for reference only. Adjust it according to your dataset and your goal. And add further strategy if needed.
 
 7. For speeding up the training process with frozen layers train_bottleneck.py can be used. It will compute the bottleneck features of the frozen model first and then only trains the last layers. This makes training on CPU possible in a reasonable time. See [this](https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html) for more information on bottleneck features.
+
+---
+
+## YOLOv3整體流程(存放方式、訓練、預測、評估、回傳資料等)
+
+## 測試環境、存放方式
+
+1. 測試環境
+    - Python 3.7.1
+    - Keras 2.2.4
+    - Keras-gup 2.2.4
+    - tensorflow 1.14.0
+    - tensorflow-gup 1.14.0
+
+2. Data (資料存放)
+  - Annotations(放入要訓練的Annotations xml檔案)
+  - Annotations2(放入要預測的Annotations xml檔案[mAP計算才需使用])
+  - JPEGImages(放入要訓練的Image檔案)
+  - JPEGImages2(放入要預測的Image檔案)
+  - SegmentationClass(產生預測Image結果圖檔)
+
+3. font (字型)
+
+4. mAPTxt (mAP計算所需檔案-Annotations)
+
+5. mAPTxt_Pre (mAP計算所需檔案-Annotations2)
+
+6. model (存放訓練產生model)
+
+7. model_data (存放訓練所需參數資料)
+
+8. yolo3 (主要計算核心)
+
+## 訓練
+
+1. 執行 genAnnotationClasses.py 產生model_data/voc_classes 檔案
+
+2. 執行 genAnnotationTrainPath.py 產生model_data/train.txt 檔案
+
+3. 執行 genKmeans.py 產生model_data/yolo_anchors.txt 檔案
+
+4. 執行 train.py
+
+
+## 預測
+
+1. 執行 predictionGenMAPTxt_Pre.py 預測並產生檔案至Data/SegmentationClass以及mAPTxt_pre
+
+2. 執行 genAnnotationMAPTxt.py 產生實際對應的檔案至mAPTxt
+
+## 評估(mAP)
+
+1. 將mAPTxt、mAPTxt_pre與Data/JPEGImages2放入../mAPCalculate/input內
+
+2. 執行main.py進行評估並產生result資料夾
+
+## 回傳資料
+
+1. 執行result.py
+
+2. 產生相對應result.csv 
