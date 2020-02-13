@@ -8,3 +8,4 @@ Grad-CAM/Grad-CAM.py
 Grad-CAM/Grad-CAMTest.py
 *.pyc
 *.txt
+*.PNG
