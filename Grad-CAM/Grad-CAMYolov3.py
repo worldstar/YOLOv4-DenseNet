@@ -1,86 +1,3 @@
-
-# -*- coding=utf-8 -*-
-"""
-Created on 2019-6-19 21:39:53
-@author: fangsh.Alex
-"""
-# import keras
-# import cv2
-# import numpy as np
-# import keras.backend as K
-# from yolo3.model import yolo_eval, yolo_body, tiny_yolo_body
-# from yolo3.utils import letterbox_image
-
-# from keras.layers import Input, Lambda
-# from keras.applications.resnet50 import preprocess_input
-# from keras.preprocessing.image import load_img,img_to_array
-
-# def get_classes(classes_path):
-#     '''loads the classes'''
-#     with open(classes_path) as f:
-#         class_names = f.readlines()
-#     class_names = [c.strip() for c in class_names]
-#     return class_names
-
-# def get_anchors(anchors_path):
-#     '''loads the anchors from a file'''
-#     with open(anchors_path) as f:
-#         anchors = f.readline()
-#     anchors = [float(x) for x in anchors.split(',')]
-#     return np.array(anchors).reshape(-1, 2)
-
-
-# K.set_learning_phase(1) #set learning phase
- 
-# weight_file_dir = 'model_end/epoch20000_博物館YOLOv3.h5'
-# # img_path = '/data/sfang/logo_classify/keras_model/error_analyez/0614/0/09219.png'
-# img_path = "Data/JPEGImages/20000010015_I001.jpg"
-# classes_path = 'model_data/voc_classes.txt'
-# anchors_path = 'model_data/yolo_anchors.txt'
-# class_names = get_classes(classes_path)
-# num_classes = len(class_names)
-# num_anchors = len(get_anchors(anchors_path))
-# is_tiny_version = num_anchors==6 # default setting
-# try:
-#     model = load_model(weight_file_dir, compile=False)
-# except:
-#     model = tiny_yolo_body(Input(shape=(None,None,3)), num_anchors//2, num_classes) \
-#         if is_tiny_version else yolo_body(Input(shape=(None,None,3)), num_anchors//3, num_classes)
-#     model.load_weights(weight_file_dir) # make sure model, anchors and classes match
-
-# #model = keras.models.load_model(weight_file_dir)
-# image = load_img(img_path,target_size=(224,224))
- 
-# x = img_to_array(image)
-# x = np.expand_dims(x,axis=0)
-# x = preprocess_input(x)
-# pred = model.predict(x)
-# class_idx = np.argmax(pred[0])
-# print(model.output[0])
-# class_output = model.output[:,class_idx]
-# last_conv_layer = model.get_layer("block5_conv3")
- 
-# grads = K.gradients(class_output,last_conv_layer.output)[0]
-# pooled_grads = K.mean(grads,axis=(0,1,2))
-# iterate = K.function([model.input],[pooled_grads,last_conv_layer.output[0]])
-# pooled_grads_value, conv_layer_output_value = iterate([x])
-# for i in range(512):
-#     conv_layer_output_value[:,:,i] *= pooled_grads_value[i]
- 
-# heatmap = np.mean(conv_layer_output_value, axis=-1)
-# heatmap = np.maximum(heatmap,0)
-# heatmap /= np.max(heatmap)
- 
-# img = cv2.imread(img_path)
-# img = cv2.resize(img,dsize=(224,224),interpolation=cv2.INTER_NEAREST)
-# # img = img_to_array(image)
-# heatmap = cv2.resize(heatmap,(img.shape[1],img.shape[0]))
-# heatmap = np.uint8(255 * heatmap)
-# heatmap = cv2.applyColorMap(heatmap,cv2.COLORMAP_JET)
-# superimposed_img = cv2.addWeighted(img,0.6,heatmap,0.4,0)
-# cv2.imshow('Grad-cam',superimposed_img)
-# cv2.waitKey(0)
-
 from keras.applications import imagenet_utils
 from keras.applications.resnet50 import ResNet50, preprocess_input
 from keras.preprocessing import image
@@ -100,9 +17,8 @@ import os
 from matplotlib import pyplot as plt
 from os import walk
 
-image_Paths = "D:/Ultrasound/mydataset/test/VSDType1/"
-model_path   = 'model_end/epoch20000_博物館YOLOv3.h5'
-# model_path   = 'logs/002/trained_weights_final.h5'
+image_Paths   = "TestImage/"
+model_path    = 'model/Temp.h5'
 anchors_paths = 'model_data/yolo_anchors.txt'
 classes_paths = 'model_data/voc_classes.txt'
 
@@ -251,15 +167,6 @@ def processing_image(img_path):
     
     return x
 
-# preds = model.predict(x)
-# pred_class = np.argmax(preds[0])
-# model_output = model.output[:pred_class]
-# last_conv = model.get_layer('conv2d_143')
-# grads = K.gradients(model_output, last_conv.output)[0]
-# pooled_grads = K.sum(grads, axis=(0, 1, 2))
-
-# print(pooled_grads)
-# return ;
 def gradcam(model, x):
     # 取得影像的分類類別
     preds = model.predict(x)
@@ -332,13 +239,6 @@ def plot_heatmap(heatmap, img_path, pred_class_name):
 model = yolo_body(Input(shape=(None, None, 3)), num_anchors//3, num_classes)
 model.load_weights(model_path) # make sure model, anchors and classes match
 model.summary()
-#model = ResNet50(weights='imagenet')
-
-# img = processing_image(sys.argv[1])
-
-# heatmap, pred_class_name = gradcam(model, img)
-
-# plot_heatmap(heatmap, sys.argv[1], pred_class_name)
 
 f = []
 for (dirpath, dirnames, filenames) in walk(image_Paths):
@@ -351,26 +251,3 @@ for i in range(len(f)):
     plot_heatmap(heatmap, image_Paths+f[i], pred_class_name)
     break
 plt.show()
-
-
-# model.load_weights(model_path) 
-# #model.summary()
-# #model = VGG16(weights='imagenet')
-
-# predictions = model.predict(preprocessed_input)[0][0][0]
-# #print(predictions)
-
-# # top_1 = decode_predictions(predictions)[0][0]
-# # print('Predicted class:')
-# # print('%s (%s) with probability %.2f' % (top_1[1], top_1[0], top_1[2]))
-# predicted_class = np.argmax(predictions)
-
-# cam, heatmap = grad_cam(model, preprocessed_input, predicted_class, "conv2d_75")
-# #cv2.imwrite("gradcam.jpg", cam)
-
-# register_gradient()
-# guided_model = modify_backprop(model, 'GuidedBackProp')
-# saliency_fn = compile_saliency_function(guided_model)
-# saliency = saliency_fn([preprocessed_input, 0])
-# gradcam = saliency[0] * heatmap[..., np.newaxis]
-# cv2.imwrite("guided_gradcam.jpg", deprocess_image(gradcam))

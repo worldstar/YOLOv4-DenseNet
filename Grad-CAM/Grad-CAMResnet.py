@@ -15,13 +15,11 @@ import os
 from matplotlib import pyplot as plt
 from os import walk
 
-image_Paths = "D:/JungWei/revisedYOLOv3_GithubDesktop/revisedYOLOv3/keras-yolo3/ResNetDataSet/datagentest/"
-image_path = "D:/JungWei/revisedYOLOv3_GithubDesktop/revisedYOLOv3/keras-yolo3/test.png"
-execution_path = "D:/JungWei/revisedYOLOv3_GithubDesktop/revisedYOLOv3/keras-yolo3/logs"
-model_path   = 'Resnet/ep002-loss1.130.h5'
-# model_path   = 'logs/002/trained_weights_final.h5'
-#anchors_paths = 'Densenet/yolo_anchors.txt'
-classes_paths = 'logs/Densenet/model_class.json'
+
+image_Paths   = "TestImage/"
+model_path    = 'model/Temp.h5'
+anchors_paths = 'model_data/yolo_anchors.txt'
+classes_paths = 'model_data/model_class.json'
 
 
 def get_class():
@@ -31,14 +29,6 @@ def get_class():
     class_names = [c.strip() for c in class_names]
     return class_names
 
-# def get_anchors():
-#     anchors_path = os.path.expanduser(anchors_paths)
-#     with open(anchors_path) as f:
-#         anchors = f.readline()
-#     anchors = [float(x) for x in anchors.split(',')]
-#     return np.array(anchors).reshape(-1, 2)
-
-# num_anchors = len(get_anchors())
 num_classes = len(get_class())
 
 
@@ -224,18 +214,9 @@ optimizer ="adagrad"
 image_input = (training_image_size, training_image_size, 3)
 
 model = ResNet50()
-x = model.layers[-1].output
-#x = Flatten(name='flatten')(x)
-x = Dropout(0.5)(x)
-x = Dense(num_classes, activation='softmax', name='predictions')(x)
-model = Model(input=model.input, output=x) 
 model.compile(loss="categorical_crossentropy", optimizer=optimizer, metrics=["accuracy"])
 model.summary()
 
-#model = Model(input=model.input, output=x) 
-#model.compile(loss="categorical_crossentropy", optimizer=optimizer, metrics=["accuracy"])
-#model = ResNet50()
-#model.compile(loss="categorical_crossentropy", optimizer=optimizer, metrics=["accuracy"])
 model.load_weights(execution_path+"/"+model_path) 
 
 f = []

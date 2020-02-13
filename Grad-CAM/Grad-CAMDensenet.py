@@ -2,14 +2,9 @@
 from tensorflow.keras.applications.imagenet_utils import  preprocess_input
 from imageai.Prediction.Custom import CustomImagePrediction
 from tensorflow.keras.preprocessing import image
-# from keras.layers.core import Lambda
 from tensorflow.keras.layers import Input
 from imageai.Prediction.DenseNet.densenet import DenseNetImageNet121
-# from yolo3.model import yolo_eval, yolo_body, tiny_yolo_body
-# from yolo3.model_densenet import densenet_body
-#from tensorflow.python.framework import ops
 import tensorflow.keras.backend as K
-#import tensorflow as tf
 import numpy as np
 import keras
 import cv2
@@ -17,13 +12,11 @@ import sys
 import os
 from matplotlib import pyplot as plt
 from os import walk
-image_Paths = "D:/Ultrasound/mydataset/test/VSDType1/"
-image_path = "D:/JungWei/revisedYOLOv3_GithubDesktop/revisedYOLOv3/keras-yolo3/test.png"
-execution_path = "D:/JungWei/revisedYOLOv3_GithubDesktop/revisedYOLOv3/keras-yolo3/logs"
-model_path   = 'Densenet/densenet-30-0.0-0.0-0.0-0.0-adagrad--model_ex-009_acc-0.999282-1.626775.h5'
-# model_path   = 'logs/002/trained_weights_final.h5'
-#anchors_paths = 'Densenet/yolo_anchors.txt'
-classes_paths = 'logs/Densenet/model_class.json'
+
+image_Paths   = "TestImage/"
+model_path    = 'model/Temp.h5'
+anchors_paths = 'model_data/yolo_anchors.txt'
+classes_paths = 'model_data/voc_classes.txt'
 
 def get_class():
     classes_path = os.path.expanduser(classes_paths)
@@ -32,14 +25,6 @@ def get_class():
     class_names = [c.strip() for c in class_names]
     return class_names
 
-# def get_anchors():
-#     anchors_path = os.path.expanduser(anchors_paths)
-#     with open(anchors_path) as f:
-#         anchors = f.readline()
-#     anchors = [float(x) for x in anchors.split(',')]
-#     return np.array(anchors).reshape(-1, 2)
-
-# num_anchors = len(get_anchors())
 num_classes = len(get_class())
 
 
@@ -207,20 +192,6 @@ def plot_heatmap(heatmap, img_path, pred_class_name):
     
     #plt.title(pred_class_name)
     
-
-# preprocessed_input = load_image(sys.argv[1])
-#model = densenet_body(Input(shape=(None, None, 3)), num_anchors//3, num_classes)
-#model = yolo_body(Input(shape=(None, None, 3)), num_anchors//3, num_classes)
-#model.load(model_path) # make sure model, anchors and classes match
-#model = ResNet50(weights="custom", num_classes=num_classes, model_input=image_input)
-
-#model = ResNet50(weights='imagenet')
-
-# model = CustomImagePrediction()
-# model.setModelTypeAsDenseNet()
-# model.setModelPath(os.path.join(execution_path, "Densenet/densenet-30-0.0-0.0-0.0-0.0-adagrad--model_ex-014_acc-0.999282-1.587719.h5"))
-# model.setJsonPath(os.path.join(execution_path, "json/model_class.json"))
-# model.loadModel(num_objects=4)
 num_classes = 4
 training_image_size = None
 image_input = Input(shape=(training_image_size, training_image_size, 3))
