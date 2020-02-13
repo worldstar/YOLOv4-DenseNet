@@ -1,9 +1,9 @@
 # Grad-CAM 可視化解釋基於梯度定位的深度網絡
 
 ## 執行檔
-- [x] Grad-CAMYolov3.py
-- [ ] Grad-CAMResnet.py
-- [ ] Grad-CAMDensenet.py
+- [x] [Grad-CAMYolov3.py](#grad-camyolov3py)
+- [ ] [Grad-CAMResnet.py](#grad-camresnetpy)
+- [ ] [Grad-CAMDensenet.py](#grad-camdensenetpy)
 
 ## 參數說明
 
@@ -269,7 +269,8 @@ for i in range(len(f)):
 plt.show()
 
 ```
-- Grad-CAMResnet.py
+
+## Grad-CAMResnet.py
 ```
 from keras.applications import imagenet_utils
 from keras.applications.resnet50 import  preprocess_input,ResNet50
@@ -509,6 +510,7 @@ for i in range(len(f)):
 
 plt.show()
 ```
+
 ## Grad-CAMDensenet.py
 ```
 # from keras.applications import imagenet_utils
