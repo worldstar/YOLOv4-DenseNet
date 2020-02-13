@@ -20,4 +20,4 @@
     【crop】寬高與【m2】不相同將會出錯需多加留意。
     ```
 
-4. 執行 CropImg.py
+4. 執行 [CropImg.py](CropImg.py)

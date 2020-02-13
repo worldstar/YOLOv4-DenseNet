@@ -132,26 +132,22 @@ If you want to use original pretrained weights for YOLOv3:
 
 ## 訓練
 
-1. 執行 genAnnotationClasses.py 產生model_data/voc_classes 檔案
+1. 執行 [genAnnotationClasses.py](genAnnotationClasses.py) 產生model_data/voc_classes 檔案
 
-2. 執行 genAnnotationTrainPath.py 產生model_data/train.txt 檔案
+2. 執行 [genAnnotationTrainPath.py](genAnnotationTrainPath.py) 產生model_data/train.txt 檔案
 
-3. 執行 genKmeans.py 產生model_data/yolo_anchors.txt 檔案
+3. 執行 [genKmeans.py](genKmeans.py) 產生model_data/yolo_anchors.txt 檔案
 
-4. 執行 train.py
+4. 執行 [train.py](train.py)
 
 
 ## 預測
 
-1. 執行 predictionGenMAPTxt_Pre.py 預測並產生檔案至Data/SegmentationClass以及mAPTxt_pre
+1. 執行 [predictionGenMAPTxt_Pre.py](predictionGenMAPTxt_Pre.py) 預測並產生檔案至Data/SegmentationClass以及mAPTxt_pre
 
-2. 執行 genAnnotationMAPTxt.py 產生實際對應的檔案至mAPTxt
+2. 執行 [genAnnotationMAPTxt.py](genAnnotationMAPTxt.py) 產生實際對應的檔案至mAPTxt
 
-## 評估(mAP)
-
-1. 將mAPTxt、mAPTxt_pre與Data/JPEGImages2放入../mAPCalculate/input內
-
-2. 執行main.py進行評估並產生result資料夾
+## [評估(mAP)](../mAPCalculate)
 
 ## 回傳資料
 
