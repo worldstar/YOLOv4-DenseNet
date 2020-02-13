@@ -1,6 +1,3 @@
 
 *.DESKTOP-3B1AQQT
 !.gitignore
-*.PNG
-resize150ResNetData/Result.txt
-keras-yolo3/CropImg.py
