@@ -66,11 +66,11 @@ python genKmeans.py <trainpath> <writePath>
 ```
 
 4. train 參數說明
-- Folderpath 檔案路徑 ex: ./Data/Annotations/
-- writePath   產生檔案路徑 ex: ./model_data/
+- ~~Folderpath 檔案路徑 ex: ./Data/Annotations/~~
+- ~~writePath   產生檔案路徑 ex: ./model_data/~~
 - train.py
 ```
-python train.py <Folderpath> <writePath>
+python train.py 
 ```
 
 ## 預測
