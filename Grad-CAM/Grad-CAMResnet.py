@@ -16,11 +16,9 @@ from matplotlib import pyplot as plt
 from os import walk
 
 
-image_Paths   = "TestImage/"
-model_path    = 'model/Temp.h5'
-anchors_paths = 'model_data/yolo_anchors.txt'
+image_Paths   = "TestImage/VSDType2/"
+model_path    = 'model/ep311-loss0.003.h5'
 classes_paths = 'model_data/model_class.json'
-
 
 def get_class():
     classes_path = os.path.expanduser(classes_paths)
@@ -31,17 +29,6 @@ def get_class():
 
 num_classes = len(get_class())
 
-
-def target_category_loss(x, category_index, nb_classes):
-    return tf.multiply(x, K.one_hot([category_index], nb_classes))
-
-def target_category_loss_output_shape(input_shape):
-    return input_shape
-
-def normalize(x):
-    # utility function to normalize a tensor by its L2 norm
-    return x / (K.sqrt(K.mean(K.square(x))) + 1e-5)
-
 def load_image(path):
     img_path = sys.argv[1]
     img = image.load_img(img_path, target_size=(224, 224))
@@ -49,66 +36,6 @@ def load_image(path):
     x = np.expand_dims(x, axis=0)
     x = preprocess_input(x)
     return x
-
-def register_gradient():
-    if "GuidedBackProp" not in ops._gradient_registry._registry:
-        @ops.RegisterGradient("GuidedBackProp")
-        def _GuidedBackProp(op, grad):
-            dtype = op.inputs[0].dtype
-            return grad * tf.cast(grad > 0., dtype) * \
-                tf.cast(op.inputs[0] > 0., dtype)
-
-def compile_saliency_function(model, activation_layer='block5_conv3'):
-    input_img = model.input
-    layer_dict = dict([(layer.name, layer) for layer in model.layers[1:]])
-    layer_output = layer_dict[activation_layer].output
-    max_output = K.max(layer_output, axis=3)
-    saliency = K.gradients(K.sum(max_output), input_img)[0]
-    return K.function([input_img, K.learning_phase()], [saliency])
-
-def modify_backprop(model, name):
-    g = tf.get_default_graph()
-    with g.gradient_override_map({'Relu': name}):
-
-        # get layers that have an activation
-        layer_dict = [layer for layer in model.layers[1:]
-                      if hasattr(layer, 'activation')]
-
-        # replace relu activation
-        for layer in layer_dict:
-            if layer.activation == keras.activations.relu:
-                layer.activation = tf.nn.relu
-
-        # re-instanciate a new model
-        new_model = VGG16(weights='imagenet')
-    return new_model
-
-def deprocess_image(x):
-    '''
-    Same normalization as in:
-    https://github.com/fchollet/keras/blob/master/examples/conv_filter_visualization.py
-    '''
-    if np.ndim(x) > 3:
-        x = np.squeeze(x)
-    # normalize tensor: center on 0., ensure std is 0.1
-    x -= x.mean()
-    x /= (x.std() + 1e-5)
-    x *= 0.1
-
-    # clip to [0, 1]
-    x += 0.5
-    x = np.clip(x, 0, 1)
-
-    # convert to RGB array
-    x *= 255
-    if K.image_dim_ordering() == 'th':
-        x = x.transpose((1, 2, 0))
-    x = np.clip(x, 0, 255).astype('uint8')
-    return x
-
-def _compute_gradients(tensor, var_list):
-    grads = tf.gradients(tensor, var_list)
-    return [grad if grad is not None else tf.zeros_like(var) for var, grad in zip(var_list, grads)]
 
 def processing_image(img_path):
     #print(img_path)
@@ -152,7 +79,7 @@ def gradcam(model, x):
     
     # 最後一層 convolution layer 輸出的 feature map
     # ResNet 的最後一層 convolution layer
-    last_conv_layer = model.get_layer('res5c_branch2c')
+    last_conv_layer = model.get_layer('conv1')
     
     # 求得分類的神經元對於最後一層 convolution layer 的梯度
     grads = K.gradients(pred_output, last_conv_layer.output)[0]
@@ -213,12 +140,22 @@ training_image_size = 224
 optimizer ="adagrad"
 image_input = (training_image_size, training_image_size, 3)
 
-model = ResNet50()
-model.compile(loss="categorical_crossentropy", optimizer=optimizer, metrics=["accuracy"])
+# model = ResNet50(include_top=False, weights='imagenet',pooling = 'avg',input_shape=image_input)
+# num_classes = 4
+# x = model.layers[-1].output
+# x = Dense(num_classes, activation='softmax', name='predictions')(x)
+
+# # Create your own model 
+# model = Model(input=model.input, output=x) 
+# model.summary()
+#model.load_weights(model_path) 
+
+# model = ResNet50(include_top=True, weights=None,
+#                    input_shape=image_input, classes=num_classes)
+model = ResNet50(include_top=True, weights=None,
+                   input_shape=image_input, classes=num_classes)
+model.load_weights(model_path) 
 model.summary()
-
-model.load_weights(execution_path+"/"+model_path) 
-
 f = []
 for (dirpath, dirnames, filenames) in walk(image_Paths):
     f.extend(filenames)
