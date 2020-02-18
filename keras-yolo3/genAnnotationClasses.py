@@ -1,12 +1,13 @@
 import xml.etree.ElementTree as ET
 import os
 from os import getcwd
+import sys
 
 def _main():
-    path = "./Data/Annotations/"
-    writePath = "./model_data/voc_classes.txt"
+    Folderpath = sys.argv[1]
+    writePath  = sys.argv[2] +"voc_classes.txt"
 
-    Classes = getAnnotationClasses(path)
+    Classes = getAnnotationClasses(Folderpath)
 
     fw = open(writePath, "w")
     for i in range(0,len(Classes),1):
@@ -19,11 +20,14 @@ def _main():
 def getAnnotationClasses(path):
     result = []
     for fileName in os.listdir(path):
+        if fileName in ".gitignore":
+            continue
         print('readFile:',(path+fileName))
         try: 
-            xmlFile = open((path+fileName)) 
+            xmlFile = open((path+fileName))
         except:
-            xmlFile = open((path+fileName),encoding="utf-8")         
+            xmlFile = open((path+fileName),encoding="utf-8") 
+
         xmlTree = ET.parse(xmlFile)
         xmlRoot = xmlTree.getroot()
         for xmlObj in xmlRoot.iter('object'):

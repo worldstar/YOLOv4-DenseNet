@@ -1,19 +1,22 @@
 import xml.etree.ElementTree as ET
 import os
 from os import getcwd
+import sys
 
 def _main():
-    path = "./Data/Annotations/"
-    imagePath = "./Data/JPEGImages/"
-    writePath = "./model_data/train.txt"
+    path = sys.argv[1] #"./Data/Annotations/"
+    imagePath = sys.argv[2]#"./Data/JPEGImages/"
+    writePath = sys.argv[3]+"train.txt"#"./model_data/train.txt"
     deputyFileName = "jpg"
     # classes = ["bicycle","car","cat","dog","person"]
-    fr = open("model_data/voc_classes.txt", 'r')
+    fr = open(sys.argv[4] , 'r')#"model_data/voc_classes.txt"
     classes = fr.read().split("\n")
     fr.close()
 
     fw = open(writePath, "w")
     for fileName in os.listdir(path):
+        if fileName in ".gitignore":
+            continue
         print("readFile:",(path+fileName))
         convertResult = convert_annotation((path+fileName),classes,imagePath,deputyFileName)
         fw.write(convertResult)

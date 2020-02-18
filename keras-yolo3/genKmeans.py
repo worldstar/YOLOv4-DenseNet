@@ -1,16 +1,17 @@
 import numpy as np
+import sys
 
 def _main():
     cluster_number = 9
-    filename = "model_data/train.txt"
-    kmeans = YOLO_Kmeans(cluster_number, filename)
+    filename = sys.argv[1] #"model_data/train.txt"
+    kmeans   = YOLO_Kmeans(cluster_number, filename)
     kmeans.txt2clusters()
 
 class YOLO_Kmeans:
 
     def __init__(self, cluster_number, filename):
         self.cluster_number = cluster_number
-        self.filename = "model_data/train.txt"
+        self.filename = sys.argv[1]
 
     def iou(self, boxes, clusters):  # 1 box -> k clusters
         n = boxes.shape[0]
@@ -63,7 +64,7 @@ class YOLO_Kmeans:
         return clusters
 
     def result2txt(self, data):
-        f = open("model_data/yolo_anchors.txt", 'w')
+        f = open(sys.argv[2]+"yolo_anchors.txt", 'w') #model_data/
         row = np.shape(data)[0]
         for i in range(row):
             if i == 0:
