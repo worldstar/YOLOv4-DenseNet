@@ -11,25 +11,25 @@ from keras.callbacks import TensorBoard, ModelCheckpoint, ReduceLROnPlateau, Ear
 
 from yolo3.model import preprocess_true_boxes, yolo_body, tiny_yolo_body, yolo_loss
 from yolo3.utils import get_random_data
-
+import sys
 
 def _main():
-    log_dir = 'model/'
-    annotation_path = 'model_data/train.txt'
-    classes_path = 'model_data/voc_classes.txt'
-    anchors_path = 'model_data/yolo_anchors.txt'
-    valSplit = 0.1 #10% validation
-    monitor = 'val_loss'
-    epoch = 100
-    batchSize = 4
-    stepMultiple = 1
-    getRandomData = True 
-    input_shape = (416,416) # multiple of 32, hw
-    class_names = get_classes(classes_path)
-    num_classes = len(class_names)
-    anchors = get_anchors(anchors_path)
+    log_dir         = sys.argv[1]#'model/'
+    annotation_path = sys.argv[2]#'model_data/train.txt'
+    classes_path    = sys.argv[3]#'model_data/voc_classes.txt'
+    anchors_path    = sys.argv[4]#'model_data/yolo_anchors.txt'
+    valSplit        = float(sys.argv[5])#0.2 #20% validation
+    monitor         = 'val_loss'
+    epoch           = int(sys.argv[6])#100
+    batchSize       = int(sys.argv[7])#4
+    stepMultiple    = int(sys.argv[8])#1
+    getRandomData   = True 
+    input_shape     = (416,416) # multiple of 32, hw
+    class_names     = get_classes(classes_path)
+    num_classes     = len(class_names)
+    anchors         = get_anchors(anchors_path)
     is_tiny_version = len(anchors)==6 # default setting
-
+    
     # if is_tiny_version:
     #     model = create_tiny_model(input_shape, anchors, num_classes,
     #         freeze_body=2, weights_path='model_data/tiny_yolo_weights.h5')
@@ -39,7 +39,7 @@ def _main():
     #         weights_path='model/epoch10000_博物館YOLOv3.h5')
     model = create_model(input_shape, anchors, len(class_names) , 
                         load_pretrained = False ,
-                        weights_path='model/epoch10000_博物館YOLOv3.h5')
+                        weights_path='model/20200312100epochs_yolov3.h5')
 
     train(model=model,annotation_path=annotation_path,input_shape=input_shape,anchors=anchors,num_classes=num_classes,
         log_dir=log_dir,valSplit=valSplit,monitor=monitor,epoch=epoch,batchSize=batchSize,stepMultiple=stepMultiple,getRandomData=getRandomData)
@@ -77,6 +77,7 @@ def train(model=None, annotation_path=None, input_shape=None, anchors=None, num_
     epochs = epoch
     with open(annotation_path) as f:
         lines = f.readlines()
+        print(len(lines))
     np.random.shuffle(lines)
     num_val = int(len(lines)*val_split)
     num_train = len(lines) - num_val
