@@ -14,14 +14,14 @@ __test_dir          = os.path.join(__data_dir, "test")
 __trained_model_dir = os.path.join(__data_dir, "models")
 __model_class_dir   = os.path.join(__data_dir, "json")
 num_classes         = 4
-__num_epochs        = 150
+__num_epochs        = 455
 height_shift_range  = 0#[0, 0.25, 0.5, 0.75, 1]
 width_shift_range   = 0#[0, 0.25, 0.5, 0.75, 1]
 rotation_range      = 0 #[0, 15, 30]
 zoom_range          = 0#[0, 0.15, 0.3, 0.45]
 shear_range         = 0#[0, 0.15, 0.3]
 training_image_size = 224
-log_dir = 'D:/JungWei/revisedYOLOv3_GithubDesktop/revisedYOLOv3/keras-yolo3/logs/ResNet/'
+log_dir = 'D:/JungWei/revisedYOLOv3_GithubDesktop/revisedYOLOv3/keras-yolo3/logs/ResNet_原圖/'
 
 def _main():
     train(num_objects=num_classes, num_experiments=__num_epochs, enhance_data=False, 
@@ -36,13 +36,20 @@ def train(num_objects=4, num_experiments=150, enhance_data=False, batch_size = 3
     #lr_scheduler = LearningRateScheduler(self.lr_schedule)
     image_input = (training_image_size, training_image_size, 3)
     #image_input = Input(shape=(training_image_size, training_image_size, 3))
+    
     model = ResNet50(include_top=True, weights=None,
-                  input_shape=image_input, classes=num_classes)
-    x = model.layers[-1].output
-    #x = Flatten(name='flatten')(x)
+                   input_shape=image_input, classes=num_classes)
+    
+    #model = ResNet50(include_top=False, weights='imagenet',pooling = 'avg',input_shape=image_input)
+    #num_classes = 4
+    #x = model.layers[-1].output
+    # x = Flatten(name='flatten')(x)
     # x = Dropout(0.5)(x)
-    # x = Dense(num_classes, activation='softmax', name='predictions')(x)
-    # model = Model(input=model.input, output=x) 
+    #x = Dense(num_classes, activation='softmax', name='predictions')(x)
+
+    # Create your own model 
+    #model = Model(input=model.input, output=x) 
+    #model.load_weights(log_dir+"resize_ep045-loss0.007.h5") 
 
     model.compile(loss="categorical_crossentropy", optimizer=optimizer, metrics=["accuracy"])
     model.summary()
@@ -91,11 +98,18 @@ def train(num_objects=4, num_experiments=150, enhance_data=False, batch_size = 3
             
     #early_stopping = EarlyStopping(monitor='val_acc', patience=200, verbose=2)
 
+    # history = model.fit_generator(train_generator, steps_per_epoch=int(num_train / batch_size), 
+    #                               epochs=__num_epochs,
+    #                               validation_data=test_generator,
+    #                               validation_steps=int(num_test / 6), 
+    #                               callbacks=[checkpoint])
+
     history = model.fit_generator(train_generator, steps_per_epoch=int(num_train / batch_size), 
                                   epochs=__num_epochs,
                                   validation_data=test_generator,
-                                  validation_steps=int(num_test / 6), 
+                                  validation_steps=int(num_test / 6),
                                   callbacks=[checkpoint])
+
 
     # model.save_weights(log_dir + 'trained_weights.h5')
 
