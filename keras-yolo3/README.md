@@ -37,7 +37,7 @@
 範例: 
 python genAnnotationClasses.py ./Data/Annotations/ ./model_data/
 自定義:
-python genAnnotationClasses.py <Folderpath> <writePath>
+python genAnnotationClasses.py <Folderpath> <writePath> 
 ```
 
 2. genAnnotationTrainPath 參數說明
@@ -66,11 +66,19 @@ python genKmeans.py <trainpath> <writePath>
 ```
 
 4. train 參數說明
-- ~~Folderpath 檔案路徑 ex: ./Data/Annotations/~~
-- ~~writePath   產生檔案路徑 ex: ./model_data/~~
-- train.py
+- log_dir           產生檔案路徑 ex: model/
+- annotation_path   檔案名稱 ex: model_data/train.txt
+- classes_path      檔案名稱 ex: model_data/voc_classes.txt
+- anchors_path      檔案名稱 ex: model_data/yolo_anchors.txt
+- valSplit          ex:0.2
+- epoch             ex:400
+- batchSize         ex:4
+- stepMultiple      ex:1
 ```
-python train.py 
+範例: 
+python train.py model/ model_data/train.txt  model_data/voc_classes.txt  model_data/yolo_anchors.txt 0.2 400 4 1 
+自定義:
+python train.py <log_dir> <annotation_path> <classes_path> <anchors_path> <valSplit> <epoch> <batchSize> <stepMultiple> 
 ```
 
 ## 預測

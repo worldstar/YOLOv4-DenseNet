@@ -18,3 +18,7 @@ keras-yolo3/model_data/voc_classes.txt
 keras-yolo3/model_data/yolo_anchors.txt
 *.txt
 *.txt
+Grad-CAM/model_data/model_class.json
+*.jpg
+keras-yolo3/model_data/train.txt
+keras-yolo3/model_data/voc_classes.txt
