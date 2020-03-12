@@ -363,6 +363,8 @@ gt_counter_per_class = {}
 counter_images_per_class = {}
 
 for txt_file in ground_truth_files_list:
+    if txt_file  in ".gitignore":
+        continue;
     #print(txt_file)
     file_id = txt_file.split(".txt", 1)[0]
     file_id = os.path.basename(os.path.normpath(file_id))
@@ -462,6 +464,8 @@ dr_files_list.sort()
 for class_index, class_name in enumerate(gt_classes):
     bounding_boxes = []
     for txt_file in dr_files_list:
+        if txt_file  in ".gitignore":
+            continue;
         #print(txt_file)
         # the first time it checks if all the corresponding ground-truth files exist
         file_id = txt_file.split(".txt",1)[0]
@@ -524,6 +528,7 @@ with open(results_files_path + "/results.txt", 'w') as results_file:
                 if len(ground_truth_img) == 0:
                     error("Error. Image not found with id: " + file_id)
                 elif len(ground_truth_img) > 1:
+                    print(dr_file)
                     error("Error. Multiple image with id: " + file_id)
                 else: # found image
                     #print(IMG_PATH + "/" + ground_truth_img[0])

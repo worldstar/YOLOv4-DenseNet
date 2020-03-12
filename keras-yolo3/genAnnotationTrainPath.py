@@ -7,7 +7,7 @@ def _main():
     path = sys.argv[1] #"./Data/Annotations/"
     imagePath = sys.argv[2]#"./Data/JPEGImages/"
     writePath = sys.argv[3]+"train.txt"#"./model_data/train.txt"
-    deputyFileName = "jpg"
+    deputyFileName = "png"
     # classes = ["bicycle","car","cat","dog","person"]
     fr = open(sys.argv[4] , 'r')#"model_data/voc_classes.txt"
     classes = fr.read().split("\n")
@@ -21,6 +21,9 @@ def _main():
         convertResult = convert_annotation((path+fileName),classes,imagePath,deputyFileName)
         fw.write(convertResult)
     fw.close()
+
+def dataUs(infos):
+    return infos.split(".")[0]
 
 def convert_annotation(path,classes,imagePath,deputyFileName): 
     try: 
@@ -49,10 +52,10 @@ def convert_annotation(path,classes,imagePath,deputyFileName):
         if(isClass):
             xmin , ymin , xmax , ymax = -1 , -1 , -1 , -1
             for xmlObj2 in xmlObj.iter('bndbox'):
-                xmin = xmlObj2.find('xmin').text.replace(" ", "").replace("\t", "").replace("\n", "").replace(" ", "").replace("\t", "").replace("\n", "")
-                ymin = xmlObj2.find('ymin').text.replace(" ", "").replace("\t", "").replace("\n", "")
-                xmax = xmlObj2.find('xmax').text.replace(" ", "").replace("\t", "").replace("\n", "")
-                ymax = xmlObj2.find('ymax').text.replace(" ", "").replace("\t", "").replace("\n", "")
+                xmin = int(dataUs(xmlObj2.find('xmin').text.replace(" ", "").replace("\t", "").replace("\n", "").replace(" ", "").replace("\t", "").replace("\n", "")))
+                ymin = int(dataUs(xmlObj2.find('ymin').text.replace(" ", "").replace("\t", "").replace("\n", "")))
+                xmax = int(dataUs(xmlObj2.find('xmax').text.replace(" ", "").replace("\t", "").replace("\n", "")))
+                ymax = int(dataUs(xmlObj2.find('ymax').text.replace(" ", "").replace("\t", "").replace("\n", "")))
             result += " %s,%s,%s,%s,%d"%(xmin,ymin,xmax,ymax,classNum)
     if(hasClass):
         FileName = os.path.basename(path)

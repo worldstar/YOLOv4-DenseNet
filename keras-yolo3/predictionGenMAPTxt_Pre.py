@@ -28,7 +28,10 @@ def detect_img(yolo):
     path = "Data/JPEGImages2/*.jpg"
     outdir = "Data/SegmentationClass"
     for jpgfile in glob.glob(path):
-        fw = open("mAPTxt_Pre/"+os.path.basename(jpgfile).split('.')[0]+".txt", "w")
+        s = '.'
+        Tfilename = os.path.basename(jpgfile).split('.')
+        Tfilename.pop()
+        fw = open("mAPTxt_Pre/"+s.join(Tfilename)+".txt", "w")
         img = Image.open(jpgfile)
         img,noFound,strJsonResult = yolo.detect_image(img)
         # if(noFound == False):
@@ -82,7 +85,7 @@ def detect_video(yolo, video_path, output_path=""):
 
 class YOLO(object):
     _defaults = {
-        "model_path": 'model/trained_weights.h5',
+        "model_path": 'model/20200312500epochs_yolov3andDensenet.h5',
         "anchors_path": 'model_data/yolo_anchors.txt',
         "classes_path": 'model_data/voc_classes.txt',
         "score" : 0.01,#0.5
@@ -131,8 +134,8 @@ class YOLO(object):
         try:
             self.yolo_model = load_model(model_path, compile=False)
         except:
-            self.yolo_model = yolo_body(Input(shape=(416, 416, 3)), num_anchors//3, num_classes)
-            #self.yolo_model = densenet_body(Input(shape=(416, 416, 3)), num_anchors//3, num_classes)
+            #self.yolo_model = yolo_body(Input(shape=(416, 416, 3)), num_anchors//3, num_classes)
+            self.yolo_model = densenet_body(Input(shape=(None, None, 3)), num_anchors//3, num_classes)
             # self.yolo_model = tiny_yolo_body(Input(shape=(None,None,3)), num_anchors//2, num_classes) \
             #     if is_tiny_version else yolo_body(Input(shape=(None,None,3)), num_anchors//3, num_classes)
             #print('載入權重')

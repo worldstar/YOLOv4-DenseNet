@@ -41,6 +41,9 @@ class YOLO_Kmeans:
         accuracy = np.mean([np.max(self.iou(boxes, clusters), axis=1)])
         return accuracy
 
+    def dataUs(self,infos):
+        return infos.split(".")[0]
+
     def kmeans(self, boxes, k, dist=np.median):
         box_number = boxes.shape[0]
         distances = np.empty((box_number, k))
@@ -81,10 +84,10 @@ class YOLO_Kmeans:
             infos = line.split(" ")
             length = len(infos)
             for i in range(1, length):
-                width = int(infos[i].split(",")[2]) - \
-                    int(infos[i].split(",")[0])
-                height = int(infos[i].split(",")[3]) - \
-                    int(infos[i].split(",")[1])
+                width = int(self.dataUs(infos[i].split(",")[2])) - \
+                    int(self.dataUs(infos[i].split(",")[0]))
+                height = int(self.dataUs(infos[i].split(",")[3])) - \
+                    int(self.dataUs(infos[i].split(",")[1]))
                 dataSet.append([width, height])
         result = np.array(dataSet)
         f.close()

@@ -11,7 +11,12 @@ def _main():
     fr.close()
 
     for fileName in os.listdir(path):
-        fw = open("mAPTxt/"+os.path.basename(fileName).split('.')[0]+".txt", "w")
+        if fileName  in ".gitignore":
+            continue;
+        s = '.'
+        Tfilename = os.path.basename(fileName).split('.')
+        Tfilename.pop()
+        fw = open("mAPTxt/"+s.join(Tfilename)+".txt", "w")
         convertResult = convert_annotation((path+fileName),classes,imagePath)
         fw.write(convertResult)
         fw.close()
