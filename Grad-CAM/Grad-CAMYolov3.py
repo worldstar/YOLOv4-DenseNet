@@ -17,10 +17,10 @@ import os
 from matplotlib import pyplot as plt
 from os import walk
 
-image_Paths   = "TestImage/"
-model_path    = 'model/Temp.h5'
-anchors_paths = 'model_data/yolo_anchors.txt'
-classes_paths = 'model_data/voc_classes.txt'
+image_Paths   = sys.argv[1]
+model_path    = sys.argv[2]#'model/20200312100epochs_yolov3.h5'
+anchors_paths = sys.argv[3]#'model_data/yolo_anchors.txt'
+classes_paths = sys.argv[4]#'model_data/voc_classes.txt'
 
 def get_class():
     classes_path = os.path.expanduser(classes_paths)
@@ -178,7 +178,7 @@ def gradcam(model, x):
     # 預測分類的輸出向量
     #model.summary()
     # print(model.output[3])
-    pred_output = model.output[2][0][0][:,pred_class]
+    pred_output = model.output[2][0][:,pred_class]
     
     # 最後一層 convolution layer 輸出的 feature map
     # ResNet 的最後一層 convolution layer
@@ -242,6 +242,8 @@ model.summary()
 
 f = []
 for (dirpath, dirnames, filenames) in walk(image_Paths):
+    if filenames[0]  in ".gitignore":
+        continue;
     f.extend(filenames)
     break
 
