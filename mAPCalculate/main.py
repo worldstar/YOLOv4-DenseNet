@@ -8,6 +8,7 @@ import argparse
 import math
 import cv2
 
+from sklearn.metrics import confusion_matrix
 import numpy as np
 
 MINOVERLAP = 0.5 # default value (defined in the PASCAL VOC2012 challenge)
@@ -44,7 +45,8 @@ if args.set_class_iou is not None:
 
 # make sure that the cwd() is the location of the python script (so that every path makes sense)
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
-
+GT_PATHarray = []
+DR_PATHarray = []
 GT_PATH = os.path.join(os.getcwd(), 'input', 'mAPTxt')
 DR_PATH = os.path.join(os.getcwd(), 'input', 'mAPTxt_Pre')
 # if there are no images then no animation can be shown
@@ -77,7 +79,86 @@ if not args.no_plot:
         print("\"matplotlib\" not found, please install it to get the resulting plots.")
         args.no_plot = True
 
+def plot_confusion_matrix2(cm,
+                          target_names,
+                          title='Confusion matrix',
+                          cmap=None,
+                          normalize=False):
+    """
+    given a sklearn confusion matrix (cm), make a nice plot
 
+    Arguments
+    ---------
+    cm:           confusion matrix from sklearn.metrics.confusion_matrix
+
+    target_names: given classification classes such as [0, 1, 2]
+                  the class names, for example: ['high', 'medium', 'low']
+
+    title:        the text to display at the top of the matrix
+
+    cmap:         the gradient of the values displayed from matplotlib.pyplot.cm
+                  see http://matplotlib.org/examples/color/colormaps_reference.html
+                  plt.get_cmap('jet') or plt.cm.Blues
+
+    normalize:    If False, plot the raw numbers
+                  If True, plot the proportions
+
+    Usage
+    -----
+    plot_confusion_matrix(cm           = cm,                  # confusion matrix created by
+                                                              # sklearn.metrics.confusion_matrix
+                          normalize    = True,                # show proportions
+                          target_names = y_labels_vals,       # list of names of the classes
+                          title        = best_estimator_name) # title of graph
+
+    Citiation
+    ---------
+    http://scikit-learn.org/stable/auto_examples/model_selection/plot_confusion_matrix.html
+    
+    confusion_matrix
+
+    """
+    import matplotlib.pyplot as plt
+    import numpy as np
+    import itertools
+
+    accuracy = np.trace(cm) / float(np.sum(cm))
+    misclass = 1 - accuracy
+
+    if cmap is None:
+        cmap = plt.get_cmap('Blues')
+
+    plt.figure(figsize=(8, 6))
+    plt.imshow(cm, interpolation='nearest', cmap=cmap)
+    plt.title(title)
+    plt.colorbar()
+
+    if target_names is not None:
+        tick_marks = np.arange(len(target_names))
+        plt.xticks(tick_marks, target_names, rotation=45)
+        plt.yticks(tick_marks, target_names)
+
+    if normalize:
+        cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+
+
+    thresh = cm.max() / 1.5 if normalize else cm.max() / 2
+    for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
+        if normalize:
+            plt.text(j, i, "{:0.4f}".format(cm[i, j]),
+                     horizontalalignment="center",
+                     color="white" if cm[i, j] > thresh else "black")
+        else:
+            plt.text(j, i, "{:,}".format(cm[i, j]),
+                     horizontalalignment="center",
+                     color="white" if cm[i, j] > thresh else "black")
+
+
+    plt.tight_layout()
+    plt.ylabel('True label')
+    plt.xlabel('Predicted label\naccuracy={:0.4f}; misclass={:0.4f}'.format(accuracy, misclass))
+    plt.show()
+    
 def log_average_miss_rate(precision, fp_cumsum, num_images):
     """
         log-average miss rate:
@@ -255,7 +336,7 @@ def draw_plot_func(dictionary, n_classes, window_title, plot_title, x_label, out
         """
         fp_sorted = []
         tp_sorted = []
-        for key in sorted_keys:
+        for key in sorted_keys:        
             fp_sorted.append(dictionary[key] - true_p_bar[key])
             tp_sorted.append(true_p_bar[key])
         plt.barh(range(n_classes), fp_sorted, align='center', color='crimson', label='False Positive')
@@ -416,7 +497,7 @@ for txt_file in ground_truth_files_list:
                         # if class didn't exist yet
                         counter_images_per_class[class_name] = 1
                     already_seen_classes.append(class_name)
-
+    GT_PATHarray.append(class_name)
 
     # dump bounding_boxes into a ".json" file
     with open(TEMP_FILES_PATH + "/" + file_id + "_ground_truth.json", 'w') as outfile:
@@ -489,12 +570,43 @@ for class_index, class_name in enumerate(gt_classes):
                 #print("match")
                 bbox = left + " " + top + " " + right + " " +bottom
                 bounding_boxes.append({"confidence":confidence, "file_id":file_id, "bbox":bbox})
-                #print(bounding_boxes)
+            #print(bounding_boxes)
     # sort detection-results by decreasing confidence
     bounding_boxes.sort(key=lambda x:float(x['confidence']), reverse=True)
     with open(TEMP_FILES_PATH + "/" + class_name + "_dr.json", 'w') as outfile:
         json.dump(bounding_boxes, outfile)
 
+for txt_file in dr_files_list:
+    if txt_file  in ".gitignore":
+        continue;
+    lines_list = file_lines_to_list(txt_file)
+    for line in lines_list:
+        class_name, left, top, right, bottom, _difficult = line.split()
+        DR_PATHarray.append(class_name)
+        break;
+    if len(lines_list) == 0 :
+        DR_PATHarray.append('Normal')
+
+label = np.asarray(GT_PATHarray)
+pred = np.asarray(DR_PATHarray)
+cnf_matrix = confusion_matrix(label, pred)
+cnf_matrix
+from sklearn.metrics import precision_recall_fscore_support as score
+
+precision, recall, fscore, support = score(label, pred)
+
+
+print('precision: {}'.format(precision))
+print('recall: {}'.format(recall))
+print('fscore: {}'.format(fscore))
+print('support: {}'.format(support))
+
+from sklearn.metrics import precision_score
+precision_score(label, pred, average="macro") 
+#lot_confusion_matrix2(cm = cnf_matrix , target_names=["Normal", "VSDType1", "VSDType2", "VSDType4"],normalize=True)
+import scikitplot as skplt
+skplt.metrics.plot_confusion_matrix(label, pred, normalize=False)
+plt.show()
 """
  Calculate the AP for each class
 """
