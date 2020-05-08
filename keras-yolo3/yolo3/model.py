@@ -6,10 +6,11 @@ import numpy as np
 import tensorflow as tf
 from keras import backend as K
 from keras.layers import Conv2D, Add, ZeroPadding2D, UpSampling2D, Concatenate, MaxPooling2D
-from keras.layers.advanced_activations import LeakyReLU,Celu
+from keras.layers.advanced_activations import LeakyReLU
 from keras.layers.normalization import BatchNormalization
 from keras.models import Model
 from keras.regularizers import l2
+from yolo3.mish  import Mish
 
 from yolo3.utils import compose
 
@@ -342,8 +343,7 @@ def box_iou(b1, b2):
     iou = intersect_area / (b1_area + b2_area - intersect_area)
 
     return iou
-
-
+    
 def yolo_loss(args, anchors, num_classes, ignore_thresh=.5, print_loss=False):
     '''Return yolo_loss tensor
 
@@ -374,12 +374,13 @@ def yolo_loss(args, anchors, num_classes, ignore_thresh=.5, print_loss=False):
         object_mask = y_true[l][..., 4:5]
         true_class_probs = y_true[l][..., 5:]
 
-        grid, raw_pred, pred_xy, pred_wh = yolo_head(yolo_outputs[l],
-             anchors[anchor_mask[l]], num_classes, input_shape, calc_loss=True)
+        grid, raw_pred, pred_xy, pred_wh = yolo_head(yolo_outputs[l],anchors[anchor_mask[l]], num_classes, input_shape, calc_loss=True)
         pred_box = K.concatenate([pred_xy, pred_wh])
 
         # Darknet raw box to calculate loss.
         raw_true_xy = y_true[l][..., :2]*grid_shapes[l][::-1] - grid
+        #print(raw_true_xy)
+
         raw_true_wh = K.log(y_true[l][..., 2:4] / anchors[anchor_mask[l]] * input_shape[::-1])
         raw_true_wh = K.switch(object_mask, raw_true_wh, K.zeros_like(raw_true_wh)) # avoid log(0)=-inf
         box_loss_scale = 2 - y_true[l][...,2:3]*y_true[l][...,3:4]
@@ -399,10 +400,18 @@ def yolo_loss(args, anchors, num_classes, ignore_thresh=.5, print_loss=False):
 
         # K.binary_crossentropy is helpful to avoid exp overflow.
         xy_loss = object_mask * box_loss_scale * K.binary_crossentropy(raw_true_xy, raw_pred[...,0:2], from_logits=True)
+        ##原本 square
         wh_loss = object_mask * box_loss_scale * 0.5 * K.square(raw_true_wh-raw_pred[...,2:4])
+        ##更改後 huber_loss
+        #wh_loss = object_mask * box_loss_scale * 0.5 * huber_loss(raw_true_wh,raw_pred[...,2:4])
+
         confidence_loss = object_mask * K.binary_crossentropy(object_mask, raw_pred[...,4:5], from_logits=True)+ \
             (1-object_mask) * K.binary_crossentropy(object_mask, raw_pred[...,4:5], from_logits=True) * ignore_mask
+
+        ##原本 binary_crossentropy
         class_loss = object_mask * K.binary_crossentropy(true_class_probs, raw_pred[...,5:], from_logits=True)
+        ##更改後 focal_loss
+        #class_loss = object_mask * focal_loss(true_class_probs, raw_pred[...,5:])
 
         xy_loss = K.sum(xy_loss) / mf
         wh_loss = K.sum(wh_loss) / mf
@@ -412,3 +421,27 @@ def yolo_loss(args, anchors, num_classes, ignore_thresh=.5, print_loss=False):
         if print_loss:
             loss = tf.Print(loss, [loss, xy_loss, wh_loss, confidence_loss, class_loss, K.sum(ignore_mask)], message='loss: ')
     return loss
+
+def huber_loss(y_true, y_pred, delta=1.0):
+    error = y_pred - y_true
+    abs_error = K.abs(error)
+    quadratic = K.minimum(abs_error, delta)
+    linear = abs_error - quadratic
+    return 0.5 * K.square(quadratic) + delta * linear
+
+def focal_loss(y_true, y_pred,gamma=2., alpha=.25):
+    """
+    :param y_true: A tensor of the same shape as `y_pred`
+    :param y_pred:  A tensor resulting from a sigmoid
+    :return: Output tensor.
+    """
+    pt_1 = tf.where(tf.equal(y_true, 1), y_pred, tf.ones_like(y_pred))
+    pt_0 = tf.where(tf.equal(y_true, 0), y_pred, tf.zeros_like(y_pred))
+
+    epsilon = K.epsilon()
+    # clip to prevent NaN's and Inf's
+    pt_1 = K.clip(pt_1, epsilon, 1. - epsilon)
+    pt_0 = K.clip(pt_0, epsilon, 1. - epsilon)
+
+    return -K.mean(alpha * K.pow(1. - pt_1, gamma) * K.log(pt_1)) \
+           -K.mean((1 - alpha) * K.pow(pt_0, gamma) * K.log(1. - pt_0))

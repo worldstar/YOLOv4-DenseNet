@@ -26,3 +26,6 @@ keras-yolo3/model_data/voc_classes.txt
 keras-yolo3/model_data/train.txt
 keras-yolo3/model_data/voc_classes.txt
 keras-yolo3/model_data/yolo_anchors.txt
+genAnnotationAutoML/autoML_ConvertAnnotations.csv
+frcnn-from-scratch-with-keras/config.pickle
+keras-yolo3/~$Densenet&Yolov3報告.xlsx
