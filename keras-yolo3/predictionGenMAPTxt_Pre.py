@@ -25,7 +25,7 @@ def _main():
     detect_img(YOLO())
 
 def detect_img(yolo):
-    path = "Data/JPEGImages2/*.jpg"
+    path = "Data/JPEGImages2/*.png"
     outdir = "Data/SegmentationClass"
     for jpgfile in glob.glob(path):
         s = '.'
@@ -85,11 +85,11 @@ def detect_video(yolo, video_path, output_path=""):
 
 class YOLO(object):
     _defaults = {
-        "model_path": 'model/20200312500epochs_yolov3andDensenet.h5',
+        "model_path": 'logs/20200422_Y_Adam&1e-4_huberloss&alpha=1v1/ep1000.h5',
         "anchors_path": 'model_data/yolo_anchors.txt',
         "classes_path": 'model_data/voc_classes.txt',
-        "score" : 0.01,#0.5
-        "iou" : 0.1 ,#0.5
+        "score" : 0.5,#0.5
+        "iou" : 0.5 ,#0.5
         "model_image_size" : (416, 416),
         "gpu_num" : 1,
     }
