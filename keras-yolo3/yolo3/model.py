@@ -5,15 +5,44 @@ from functools import wraps
 import numpy as np
 import tensorflow as tf
 from keras import backend as K
-from keras.layers import Conv2D, Add, ZeroPadding2D, UpSampling2D, Concatenate, MaxPooling2D
+from keras.layers import Conv2D, Add, ZeroPadding2D, UpSampling2D, Concatenate, MaxPooling2D,LSTM,ConvLSTM2D,Subtract,Lambda
 from keras.layers.advanced_activations import LeakyReLU
 from keras.layers.normalization import BatchNormalization
 from keras.models import Model
 from keras.regularizers import l2
-from yolo3.mish  import Mish
-
 from yolo3.utils import compose
 
+from keras.engine.base_layer import Layer
+from yolo3.se    import squeeze_excite_block
+
+class Mish(Layer):
+    '''
+    Mish Activation Function.
+    .. math::
+        mish(x) = x * tanh(softplus(x)) = x * tanh(ln(1 + e^{x}))
+    Shape:
+        - Input: Arbitrary. Use the keyword argument `input_shape`
+        (tuple of integers, does not include the samples axis)
+        when using this layer as the first layer in a model.
+        - Output: Same shape as the input.
+    Examples:
+        >>> X_input = Input(input_shape)
+        >>> X = Mish()(X_input)
+    '''
+
+    def __init__(self, **kwargs):
+        super(Mish, self).__init__(**kwargs)
+        self.supports_masking = True
+
+    def call(self, inputs):
+        return inputs * K.tanh(K.softplus(inputs))
+
+    def get_config(self):
+        config = super(Mish, self).get_config()
+        return config
+
+    def compute_output_shape(self, input_shape):
+        return input_shape
 
 @wraps(Conv2D)
 def DarknetConv2D(*args, **kwargs):
@@ -30,11 +59,18 @@ def DarknetConv2D_BN_Leaky(*args, **kwargs):
     return compose(
         DarknetConv2D(*args, **no_bias_kwargs),
         BatchNormalization(),
-        #Celu(alpha=0.7)
-        LeakyReLU(alpha=0.1)
-        )
+        LeakyReLU(alpha=0.1))
 
-def resblock_body(x, num_filters, num_blocks):
+def DarknetConv2D_BN_Mish(*args, **kwargs):
+    """Darknet Convolution2D followed by BatchNormalization and LeakyReLU."""
+    no_bias_kwargs = {'use_bias': False}
+    no_bias_kwargs.update(kwargs)
+    return compose(
+        DarknetConv2D(*args, **no_bias_kwargs),
+        BatchNormalization(),
+        Mish())
+
+def resblock_body(x, num_filters, num_blocks,ModelType, all_narrow=True):
     '''A series of resblocks starting with a downsampling Convolution2D'''
     # Darknet uses left and top padding instead of 'same' mode
     x = ZeroPadding2D(((1,0),(1,0)))(x)
@@ -44,16 +80,20 @@ def resblock_body(x, num_filters, num_blocks):
                 DarknetConv2D_BN_Leaky(num_filters//2, (1,1)),
                 DarknetConv2D_BN_Leaky(num_filters, (3,3)))(x)
         x = Add()([x,y])
+    
+    if ModelType == "SE-YOLOV3":
+        x = squeeze_excite_block(x)
+
     return x
 
-def darknet_body(x):
+def darknet_body(x,ModelType):
     '''Darknent body having 52 Convolution2D layers'''
     x = DarknetConv2D_BN_Leaky(32, (3,3))(x)
-    x = resblock_body(x, 64, 1)
-    x = resblock_body(x, 128, 2)
-    x = resblock_body(x, 256, 8)
-    x = resblock_body(x, 512, 8)
-    x = resblock_body(x, 1024, 4)
+    x = resblock_body(x, 64, 1,ModelType,False)
+    x = resblock_body(x, 128, 2,ModelType)
+    x = resblock_body(x, 256, 8,ModelType)
+    x = resblock_body(x, 512, 8,ModelType)
+    x = resblock_body(x, 1024, 4,ModelType)
     return x
 
 def make_last_layers(x, num_filters, out_filters):
@@ -70,9 +110,13 @@ def make_last_layers(x, num_filters, out_filters):
     return x, y
 
 
-def yolo_body(inputs, num_anchors, num_classes):
+def yolo_body(inputs, num_anchors, num_classes,ModelType = "YOLOV3"):
     """Create YOLO_V3 model CNN body in Keras."""
-    darknet = Model(inputs, darknet_body(inputs))
+    darknet = Model(inputs, darknet_body(inputs,ModelType))
+    # ConvLSTM2D(filters=256, kernel_size=(3, 3),
+    #                    input_shape=inputs,
+    #                    padding='same', return_sequences=True, data_format='channels_last')
+
     x, y1 = make_last_layers(darknet.output, 512, num_anchors*(num_classes+5))
 
     x = compose(
@@ -89,45 +133,11 @@ def yolo_body(inputs, num_anchors, num_classes):
 
     return Model(inputs, [y1,y2,y3])
 
-def tiny_yolo_body(inputs, num_anchors, num_classes):
-    '''Create Tiny YOLO_v3 model CNN body in keras.'''
-    x1 = compose(
-            DarknetConv2D_BN_Leaky(16, (3,3)),
-            MaxPooling2D(pool_size=(2,2), strides=(2,2), padding='same'),
-            DarknetConv2D_BN_Leaky(32, (3,3)),
-            MaxPooling2D(pool_size=(2,2), strides=(2,2), padding='same'),
-            DarknetConv2D_BN_Leaky(64, (3,3)),
-            MaxPooling2D(pool_size=(2,2), strides=(2,2), padding='same'),
-            DarknetConv2D_BN_Leaky(128, (3,3)),
-            MaxPooling2D(pool_size=(2,2), strides=(2,2), padding='same'),
-            DarknetConv2D_BN_Leaky(256, (3,3)))(inputs)
-    x2 = compose(
-            MaxPooling2D(pool_size=(2,2), strides=(2,2), padding='same'),
-            DarknetConv2D_BN_Leaky(512, (3,3)),
-            MaxPooling2D(pool_size=(2,2), strides=(1,1), padding='same'),
-            DarknetConv2D_BN_Leaky(1024, (3,3)),
-            DarknetConv2D_BN_Leaky(256, (1,1)))(x1)
-    y1 = compose(
-            DarknetConv2D_BN_Leaky(512, (3,3)),
-            DarknetConv2D(num_anchors*(num_classes+5), (1,1)))(x2)
-
-    x2 = compose(
-            DarknetConv2D_BN_Leaky(128, (1,1)),
-            UpSampling2D(2))(x2)
-    y2 = compose(
-            Concatenate(),
-            DarknetConv2D_BN_Leaky(256, (3,3)),
-            DarknetConv2D(num_anchors*(num_classes+5), (1,1)))([x2,x1])
-
-    return Model(inputs, [y1,y2])
-
-
 def yolo_head(feats, anchors, num_classes, input_shape, calc_loss=False):
     """Convert final layer features to bounding box parameters."""
     num_anchors = len(anchors)
     # Reshape to batch, height, width, num_anchors, box_params.
     anchors_tensor = K.reshape(K.constant(anchors), [1, 1, 1, num_anchors, 2])
-
     grid_shape = K.shape(feats)[1:3] # height, width
     grid_y = K.tile(K.reshape(K.arange(0, stop=grid_shape[0]), [-1, 1, 1, 1]),
         [1, grid_shape[1], 1, 1])
@@ -144,11 +154,12 @@ def yolo_head(feats, anchors, num_classes, input_shape, calc_loss=False):
     box_wh = K.exp(feats[..., 2:4]) * anchors_tensor / K.cast(input_shape[::-1], K.dtype(feats))
     box_confidence = K.sigmoid(feats[..., 4:5])
     box_class_probs = K.sigmoid(feats[..., 5:])
-
+    # print(feats[5:5][0][0][0][0].shape)
+    # print(num_classes,'test')
+    # return
     if calc_loss == True:
         return grid, feats, box_xy, box_wh
     return box_xy, box_wh, box_confidence, box_class_probs
-
 
 def yolo_correct_boxes(box_xy, box_wh, input_shape, image_shape):
     '''Get corrected boxes'''
@@ -175,7 +186,6 @@ def yolo_correct_boxes(box_xy, box_wh, input_shape, image_shape):
     boxes *= K.concatenate([image_shape, image_shape])
     return boxes
 
-
 def yolo_boxes_and_scores(feats, anchors, num_classes, input_shape, image_shape):
     '''Process Conv layer output'''
     box_xy, box_wh, box_confidence, box_class_probs = yolo_head(feats,
@@ -185,7 +195,6 @@ def yolo_boxes_and_scores(feats, anchors, num_classes, input_shape, image_shape)
     box_scores = box_confidence * box_class_probs
     box_scores = K.reshape(box_scores, [-1, num_classes])
     return boxes, box_scores
-
 
 def yolo_eval(yolo_outputs,
               anchors,
@@ -373,7 +382,9 @@ def yolo_loss(args, anchors, num_classes, ignore_thresh=.5, print_loss=False):
     for l in range(num_layers):
         object_mask = y_true[l][..., 4:5]
         true_class_probs = y_true[l][..., 5:]
-
+        # print(y_true[l][5:])
+        # print('______________')
+        # return
         grid, raw_pred, pred_xy, pred_wh = yolo_head(yolo_outputs[l],anchors[anchor_mask[l]], num_classes, input_shape, calc_loss=True)
         pred_box = K.concatenate([pred_xy, pred_wh])
 
@@ -401,15 +412,19 @@ def yolo_loss(args, anchors, num_classes, ignore_thresh=.5, print_loss=False):
         # K.binary_crossentropy is helpful to avoid exp overflow.
         xy_loss = object_mask * box_loss_scale * K.binary_crossentropy(raw_true_xy, raw_pred[...,0:2], from_logits=True)
         ##原本 square
-        wh_loss = object_mask * box_loss_scale * 0.5 * K.square(raw_true_wh-raw_pred[...,2:4])
+        #wh_loss = object_mask * box_loss_scale * 0.5 * K.square(raw_true_wh-raw_pred[...,2:4])
         ##更改後 huber_loss
-        #wh_loss = object_mask * box_loss_scale * 0.5 * huber_loss(raw_true_wh,raw_pred[...,2:4])
+        wh_loss = object_mask * box_loss_scale * 0.5 * huber_loss(raw_true_wh,raw_pred[...,2:4])
 
         confidence_loss = object_mask * K.binary_crossentropy(object_mask, raw_pred[...,4:5], from_logits=True)+ \
             (1-object_mask) * K.binary_crossentropy(object_mask, raw_pred[...,4:5], from_logits=True) * ignore_mask
 
         ##原本 binary_crossentropy
         class_loss = object_mask * K.binary_crossentropy(true_class_probs, raw_pred[...,5:], from_logits=True)
+        # subtracted = object_mask * Lambda(squared_differences)([y_true[l][..., 5:5], raw_pred[...,5:5]])
+        # print(subtracted)
+ 
+        # class_loss2 = object_mask * K.binary_crossentropy(true_class_probs, raw_pred[...,5:], from_logits=True)
         ##更改後 focal_loss
         #class_loss = object_mask * focal_loss(true_class_probs, raw_pred[...,5:])
 
@@ -417,8 +432,15 @@ def yolo_loss(args, anchors, num_classes, ignore_thresh=.5, print_loss=False):
         wh_loss = K.sum(wh_loss) / mf
         confidence_loss = K.sum(confidence_loss) / mf
         class_loss = K.sum(class_loss) / mf
+        # subtracted = K.sum(subtracted) / mf
+        # print(subtracted)
+        #print(class_loss,xy_loss)
+        #print('__________________預測矩陣和原本矩陣相減轉為絕對值')
+        #loss += xy_loss + wh_loss + confidence_loss + class_loss
+        #loss  += subtracted
         loss += xy_loss + wh_loss + confidence_loss + class_loss
         if print_loss:
+            #loss = tf.Print(loss, [subtracted], message='loss: ')
             loss = tf.Print(loss, [loss, xy_loss, wh_loss, confidence_loss, class_loss, K.sum(ignore_mask)], message='loss: ')
     return loss
 
@@ -445,3 +467,7 @@ def focal_loss(y_true, y_pred,gamma=2., alpha=.25):
 
     return -K.mean(alpha * K.pow(1. - pt_1, gamma) * K.log(pt_1)) \
            -K.mean((1 - alpha) * K.pow(pt_0, gamma) * K.log(1. - pt_0))
+
+def squared_differences(pair_of_tensors):
+    x, y = pair_of_tensors
+    return K.square(x - y)
