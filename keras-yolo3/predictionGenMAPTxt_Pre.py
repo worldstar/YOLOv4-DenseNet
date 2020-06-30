@@ -14,24 +14,34 @@ from keras.models import load_model
 from keras.layers import Input
 from PIL import Image, ImageFont, ImageDraw
 
-from yolo3.model import yolo_eval, yolo_body, tiny_yolo_body
+from yolo3.model import yolo_eval, yolo_body
 from yolo3.utils import letterbox_image
 from keras.utils import multi_gpu_model
 from yolo3.model_densenet import densenet_body
+import sys
+from pathlib import Path
+from yolo3.model_se_densenet import se_densenet_body
 
 os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+
+log_dir         = sys.argv[1]#'logs/20200421_Y&D_Adam&1e-4_focalloss&gamma=2.^alpha=.25/'
+filename        = sys.argv[2]
+modeltype       = sys.argv[3]
 
 def _main():
     detect_img(YOLO())
 
 def detect_img(yolo):
-    path = "Data/JPEGImages2/*.png"
+    path   = "Data/JPEGImages2/*.png"
     outdir = "Data/SegmentationClass"
+    SPath  = "mAPTxt_Pre/"+log_dir+filename+"/"
+    Path(SPath).mkdir(parents=True, exist_ok=True)
+
     for jpgfile in glob.glob(path):
         s = '.'
         Tfilename = os.path.basename(jpgfile).split('.')
         Tfilename.pop()
-        fw = open("mAPTxt_Pre/"+s.join(Tfilename)+".txt", "w")
+        fw = open(SPath+s.join(Tfilename)+".txt", "w")
         img = Image.open(jpgfile)
         img,noFound,strJsonResult = yolo.detect_image(img)
         # if(noFound == False):
@@ -85,7 +95,7 @@ def detect_video(yolo, video_path, output_path=""):
 
 class YOLO(object):
     _defaults = {
-        "model_path": 'logs/20200422_Y_Adam&1e-4_huberloss&alpha=1v1/ep1000.h5',
+        "model_path": log_dir+filename+".h5",
         "anchors_path": 'model_data/yolo_anchors.txt',
         "classes_path": 'model_data/voc_classes.txt',
         "score" : 0.5,#0.5
@@ -126,7 +136,7 @@ class YOLO(object):
     def generate(self):
         model_path = os.path.expanduser(self.model_path)
         assert model_path.endswith('.h5'), 'Keras model or weights must be a .h5 file.'
-
+        image_input = Input(shape=(None, None, 3))
         # Load model, or construct model and load weights.
         num_anchors = len(self.anchors)
         num_classes = len(self.class_names)
@@ -134,8 +144,20 @@ class YOLO(object):
         try:
             self.yolo_model = load_model(model_path, compile=False)
         except:
-            #self.yolo_model = yolo_body(Input(shape=(416, 416, 3)), num_anchors//3, num_classes)
-            self.yolo_model = densenet_body(Input(shape=(None, None, 3)), num_anchors//3, num_classes)
+
+            if modeltype == "YOLOV3":
+                self.yolo_model = yolo_body(image_input, num_anchors//3, num_classes)
+                
+            if modeltype == "YOLOV3Densenet":
+                self.yolo_model = densenet_body(image_input, num_anchors//3, num_classes)
+
+            if modeltype == "YOLOV3SE-Densenet":
+                self.yolo_model = se_densenet_body(image_input, num_anchors//3, num_classes)
+
+            if modeltype == "SE-YOLOV3":
+                self.yolo_model = yolo_body(image_input, num_anchors//3, num_classes,"SE-YOLOV3")
+
+                #self.yolo_model = yolo_body(Input(shape=(416, 416, 3)), num_anchors//3, num_classes)
             # self.yolo_model = tiny_yolo_body(Input(shape=(None,None,3)), num_anchors//2, num_classes) \
             #     if is_tiny_version else yolo_body(Input(shape=(None,None,3)), num_anchors//3, num_classes)
             #print('載入權重')
