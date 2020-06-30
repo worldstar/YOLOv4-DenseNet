@@ -39,3 +39,8 @@ keras-yolo3/model_data/train.txt
 keras-yolo3/model_data/voc_classes.txt
 keras-yolo3/model_data/yolo_anchors.txt
 *.bat
+genAnnotationAutoML/genAnnotationClasses.py
+genAnnotationAutoML/genAnnotationAutoML.py
+keras-yolo3/model_data/train.txt
+keras-yolo3/model_data/voc_classes.txt
+keras-yolo3/model_data/yolo_anchors.txt
