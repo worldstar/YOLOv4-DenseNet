@@ -13,6 +13,10 @@ import numpy as np
 
 MINOVERLAP = 0.5 # default value (defined in the PASCAL VOC2012 challenge)
 
+# log_dir         = sys.argv[1]#'logs/20200421_Y&D_Adam&1e-4_focalloss&gamma=2.^alpha=.25/'
+# filename        = sys.argv[2]
+# pltshow         = sys.argv[3]#"On","Off"
+
 parser = argparse.ArgumentParser()
 parser.add_argument('-na', '--no-animation', help="no animation is shown.", action="store_true")
 parser.add_argument('-np', '--no-plot', help="no plot is shown.", action="store_true")
@@ -21,6 +25,11 @@ parser.add_argument('-q', '--quiet', help="minimalistic console output.", action
 parser.add_argument('-i', '--ignore', nargs='+', type=str, help="ignore a list of classes.")
 # argparse receiving list of classes with specific IoU (e.g., python main.py --set-class-iou person 0.7)
 parser.add_argument('--set-class-iou', nargs='+', type=str, help="set IoU for a specific class.")
+
+parser.add_argument('-log_dir',type=str)
+parser.add_argument('-filename',type=str)
+parser.add_argument('-pltshow',type=str)
+
 args = parser.parse_args()
 
 '''
@@ -48,7 +57,7 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 GT_PATHarray = []
 DR_PATHarray = []
 GT_PATH = os.path.join(os.getcwd(), 'input', 'mAPTxt')
-DR_PATH = os.path.join(os.getcwd(), 'input', 'mAPTxt_Pre')
+DR_PATH = os.path.join(os.getcwd(), 'input', 'mAPTxt_Pre',args.log_dir,args.filename)
 # if there are no images then no animation can be shown
 IMG_PATH = os.path.join(os.getcwd(), 'input', 'JPEGImages2')
 if os.path.exists(IMG_PATH): 
@@ -157,7 +166,8 @@ def plot_confusion_matrix2(cm,
     plt.tight_layout()
     plt.ylabel('True label')
     plt.xlabel('Predicted label\naccuracy={:0.4f}; misclass={:0.4f}'.format(accuracy, misclass))
-    plt.show()
+    if args.pltshow == "On":
+        plt.show()
     
 def log_average_miss_rate(precision, fp_cumsum, num_images):
     """
@@ -418,7 +428,7 @@ def draw_plot_func(dictionary, n_classes, window_title, plot_title, x_label, out
 TEMP_FILES_PATH = ".temp_files"
 if not os.path.exists(TEMP_FILES_PATH): # if it doesn't exist already
     os.makedirs(TEMP_FILES_PATH)
-results_files_path = "results"
+results_files_path = "results/"+args.log_dir+"/"+args.filename
 if os.path.exists(results_files_path): # if it exist already
     # reset the results directory
     shutil.rmtree(results_files_path)
@@ -590,23 +600,31 @@ for txt_file in dr_files_list:
 label = np.asarray(GT_PATHarray)
 pred = np.asarray(DR_PATHarray)
 cnf_matrix = confusion_matrix(label, pred)
-cnf_matrix
+print(pred)
 from sklearn.metrics import precision_recall_fscore_support as score
-
 precision, recall, fscore, support = score(label, pred)
 
+Tstr = ""
+Tstr +='precision: {}'.format(precision)+'\n'
+Tstr +='recall: {}'.format(recall)+'\n'
+Tstr +='fscore: {}'.format(fscore)+'\n'
+Tstr +='support: {}'.format(support)+'\n'
 
-print('precision: {}'.format(precision))
-print('recall: {}'.format(recall))
-print('fscore: {}'.format(fscore))
-print('support: {}'.format(support))
+Tstr +='precision Average : {}'.format(np.sum(precision)/(len(precision)-1))+'\n'
+Tstr +='recall Average : {}'.format(np.sum(recall)/(len(recall)-1))+'\n'
+Tstr +='fscore Average : {}'.format(np.sum(fscore)/(len(fscore)-1))
+
+with open(results_files_path + "/precision_recall_fscore_support.txt", 'w') as temp_file:
+    temp_file.write(Tstr)
 
 from sklearn.metrics import precision_score
 precision_score(label, pred, average="macro") 
-#lot_confusion_matrix2(cm = cnf_matrix , target_names=["Normal", "VSDType1", "VSDType2", "VSDType4"],normalize=True)
+#plot_confusion_matrix2(cm = cnf_matrix , target_names=["Normal", "VSDType1", "VSDType2", "VSDType4","ASDType2","XiphoidLongAxis","ParasternalShortAxis","XiphoidShortAxis"],normalize=True)
+#plot_confusion_matrix2(cm = cnf_matrix , target_names=["Normal", "VSDType2", "VSDType1", "VSDType4"],normalize=True)
 import scikitplot as skplt
 skplt.metrics.plot_confusion_matrix(label, pred, normalize=False)
-plt.show()
+if args.pltshow == "On":
+    plt.show()
 """
  Calculate the AP for each class
 """
@@ -980,7 +998,7 @@ if draw_plot:
     plot_title = "mAP = {0:.2f}%".format(mAP*100)
     x_label = "Average Precision"
     output_path = results_files_path + "/mAP.png"
-    to_show = True
+    to_show = False
     plot_color = 'royalblue'
     draw_plot_func(
         ap_dictionary,
