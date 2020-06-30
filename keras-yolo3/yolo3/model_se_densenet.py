@@ -17,7 +17,7 @@ from keras.regularizers import l2
 from yolo3.model import DarknetConv2D_BN_Leaky,make_last_layers
 from yolo3.utils import compose
 from yolo3.se    import squeeze_excite_block
-from yolo3.mish  import Mish
+from yolo3.customactivation  import Mish
 
 def __conv_block(ip, nb_filter, bottleneck=False, dropout_rate=None, weight_decay=1e-4):
     ''' Apply BatchNorm, Relu, 3x3 Conv2D, optional bottleneck block and dropout

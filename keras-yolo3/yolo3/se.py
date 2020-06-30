@@ -1,6 +1,6 @@
 from keras.layers import GlobalAveragePooling2D, Reshape, Dense, multiply, add, Permute, Conv2D
 from keras import backend as K
-from yolov3.customactivation import swish , Mish
+from yolo3.customactivation import swish , Mish
 from keras.utils.generic_utils import get_custom_objects
 from keras.layers import Activation
 
