@@ -47,7 +47,7 @@ def _main():
 def train(model=None, annotation_path=None, input_shape=None, anchors=None, num_classes=None,
         log_dir='logs/',valSplit=None,monitor=None,epoch=None,batchSize=None,stepMultiple=None,getRandomData=True):
     
-    model.compile(optimizer=Adam(lr=0.001), 
+    model.compile(optimizer=Adam(lr=0.0001), 
                   loss={'yolo_loss': lambda y_true, y_pred: y_pred},
                   metrics=['accuracy'])
         
