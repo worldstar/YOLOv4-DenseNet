@@ -11,7 +11,8 @@ from keras.optimizers import Adam
 from keras.callbacks import TensorBoard, ModelCheckpoint, ReduceLROnPlateau, EarlyStopping
 
 from yolo3.model import preprocess_true_boxes, yolo_body, yolo_loss
-from yolo3.utils import get_random_data
+from yolo3.model_yolov4 import yolo_bodyV4,yolov4_loss
+from yolo3.utils import get_random_data,get_random_data_with_Mosaic
 from yolo3.model_densenet import densenet_body
 from yolo3.model_se_densenet import se_densenet_body
 import sys
@@ -20,19 +21,32 @@ from distutils.util import strtobool
 modeltype       = sys.argv[11]
 
 def _main():
+    #【讀取】annotation位置
     annotation_path = sys.argv[1]#'model_data/train.txt'
+    #【讀取】evaluations位置
     val_path        = sys.argv[2]#'model_data/val.txt'
+    #【存放】模型位置
     log_dir         = sys.argv[3]#'logs/20200421_Y&D_Adam&1e-4_focalloss&gamma=2.^alpha=.25/'
+    #【讀取】classes位置
     classes_path    = sys.argv[4]#'model_data/voc_classes.txt'
+    #【讀取】anchors位置
     anchors_path    = sys.argv[5]#'model_data/yolo_anchors.txt'
+    #檔案名稱變更用
     load_file       = sys.argv[6]#'500'
     load_pretrained = strtobool(sys.argv[7])# True、False
+    #迴圈次數
     epoch           = int(sys.argv[8])#500
+    #batch_size大小，每次輸入多少資料
     batch_size      = int(sys.argv[9])#4
+    #0.n為用於驗證 其餘用於訓練
     val_split       = float(sys.argv[10])#0.2
+    #取得 class_names 類別
     class_names     = get_classes(classes_path)
+    #取得 class_names 數量
     num_classes     = len(class_names)
+    #取得 anchor
     anchors         = get_anchors(anchors_path)
+    mosaic = True
     input_shape     = (416,416) # multiple of 32, hw
     is_tiny_version = len(anchors)==6 # default setting
     model = create_model(input_shape, anchors, num_classes,freeze_body=2,
@@ -88,9 +102,9 @@ def _main():
         #     initial_epoch=0,
         #     callbacks=[logging, checkpoint])
         #For 測試用
-        model.fit_generator(data_generator_wrapper(lines[:num_train], batch_size, input_shape, anchors, num_classes),
+        model.fit_generator(data_generator_wrapper(lines[:num_train], batch_size, input_shape, anchors, num_classes, mosaic=mosaic),
             steps_per_epoch=max(1, num_train//batch_size),
-            validation_data=data_generator_wrapper(lines[num_train:], batch_size, input_shape, anchors, num_classes),
+            validation_data=data_generator_wrapper(lines[num_train:], batch_size, input_shape, anchors, num_classes, mosaic=False),
             validation_steps=max(1, num_val//batch_size),
             epochs=epoch,
             initial_epoch=0,
@@ -130,6 +144,8 @@ def create_model(input_shape, anchors, num_classes, load_pretrained=True, freeze
     # return
     if modeltype == "YOLOV3":
         model_body = yolo_body(image_input, num_anchors//3, num_classes)
+    if modeltype == "YOLOV4":
+        model_body = yolo_bodyV4(image_input, num_anchors//3, num_classes)
     if modeltype == "YOLOV3Densenet":
         model_body = densenet_body(image_input, num_anchors//3, num_classes)
     if modeltype == "YOLOV3SE-Densenet":
@@ -166,7 +182,7 @@ def create_model(input_shape, anchors, num_classes, load_pretrained=True, freeze
                 num = 424
                 for i in range(num): model_body.layers[i].trainable = False
                 print('Freeze the first {} layers of total {} layers.'.format(num, len(model_body.layers)))
-    model_loss = Lambda(yolo_loss, output_shape=(1,), name='yolo_loss',
+    model_loss = Lambda(yolov4_loss, output_shape=(1,), name='yolo_loss',
         arguments={'anchors': anchors, 'num_classes': num_classes, 'ignore_thresh': 0.5})(
         [*model_body.output, *y_true])
     model = Model([model_body.input, *y_true], model_loss)
@@ -175,29 +191,39 @@ def create_model(input_shape, anchors, num_classes, load_pretrained=True, freeze
 
     return model
 
-def data_generator(annotation_lines, batch_size, input_shape, anchors, num_classes):
+def data_generator(annotation_lines, batch_size, input_shape, anchors, num_classes, mosaic=False):
     '''data generator for fit_generator'''
     n = len(annotation_lines)
     i = 0
+    flag = True
     while True:
         image_data = []
         box_data = []
         for b in range(batch_size):
             if i==0:
                 np.random.shuffle(annotation_lines)
-            image, box = get_random_data(annotation_lines[i], input_shape, random=True)
+            if mosaic:
+                if flag and (i+4) < n:
+                    image, box = get_random_data_with_Mosaic(annotation_lines[i:i+4], input_shape)
+                    i = (i+1) % n
+                else:
+                    image, box = get_random_data(annotation_lines[i], input_shape)
+                    i = (i+1) % n
+                flag = bool(1-flag)
+            else:
+                image, box = get_random_data(annotation_lines[i], input_shape)
+                i = (i+1) % n
             image_data.append(image)
             box_data.append(box)
-            i = (i+1) % n
         image_data = np.array(image_data)
         box_data = np.array(box_data)
         y_true = preprocess_true_boxes(box_data, input_shape, anchors, num_classes)
         yield [image_data, *y_true], np.zeros(batch_size)
 
-def data_generator_wrapper(annotation_lines, batch_size, input_shape, anchors, num_classes):
+def data_generator_wrapper(annotation_lines, batch_size, input_shape, anchors, num_classes, mosaic=False):
     n = len(annotation_lines)
     if n==0 or batch_size<=0: return None
-    return data_generator(annotation_lines, batch_size, input_shape, anchors, num_classes)
+    return data_generator(annotation_lines, batch_size, input_shape, anchors, num_classes,mosaic)
 
 if __name__ == '__main__':
     _main()

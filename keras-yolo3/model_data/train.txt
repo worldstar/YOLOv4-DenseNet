@@ -1,104 +1,1098 @@
-./Data/JPEGImages/20000010015_I001.jpg 1124,435,2674,1638,0
-./Data/JPEGImages/20000010015_I002.jpg 302,462,1893,1721,0
-./Data/JPEGImages/20000010015_I003.jpg 300,467,1886,1721,0
-./Data/JPEGImages/20000010017_I001.jpg 1070,476,2702,1549,1
-./Data/JPEGImages/20000010017_I002.jpg 1004,467,2614,1502,1
-./Data/JPEGImages/20000010019_I001.jpg 388,500,2028,1646,2
-./Data/JPEGImages/20000010019_I002.jpg 337,483,2016,1665,2
-./Data/JPEGImages/20000010020_I001.jpg 1018,395,2632,1646,3
-./Data/JPEGImages/20000010020_I002.jpg 1014,386,2641,1628,3
-./Data/JPEGImages/20000010022_I001.jpg 1062,349,2707,1628,4
-./Data/JPEGImages/20000010022_I002.jpg 1095,351,2741,1635,4
-./Data/JPEGImages/20010010184_I001.jpg 1200,588,2688,1521,5
-./Data/JPEGImages/20010010184_I002.jpg 1230,574,2628,1393,5
-./Data/JPEGImages/20010010187_I001.jpg 1134,779,2739,1239,6
-./Data/JPEGImages/20010010187_I002.jpg 1204,715,2704,1300,6
-./Data/JPEGImages/20010010198_I001.jpg 937,562,2739,1567,7
-./Data/JPEGImages/20010010198_I002.jpg 930,549,2692,1623,7
-./Data/JPEGImages/20010010199_I001.jpg 1153,518,2697,1469,8
-./Data/JPEGImages/20010010199_I002.jpg 1162,528,2695,1437,8
-./Data/JPEGImages/20010010201_I001.jpg 937,525,2714,1581,9
-./Data/JPEGImages/20010010201_I002.jpg 895,455,2611,1528,9
-./Data/JPEGImages/20010010202_I001.jpg 953,507,2611,1525,10
-./Data/JPEGImages/20010010202_I002.jpg 995,454,2653,1537,10
-./Data/JPEGImages/20020040291_I001.jpg 453,304,2125,1683,11
-./Data/JPEGImages/20020040291_I002.jpg 400,307,2072,1702,11
-./Data/JPEGImages/20020040294_I001.jpg 360,490,1921,1618,12
-./Data/JPEGImages/20020040294_I002.jpg 337,455,1881,1576,12
-./Data/JPEGImages/20020080276_I001.jpg 479,860,2646,1200,13
-./Data/JPEGImages/20020080276_I002.jpg 453,859,2664,1246,13
-./Data/JPEGImages/20020080277_I001.jpg 271,790,2738,1208,14
-./Data/JPEGImages/20020080277_I002.jpg 298,793,2781,1235,14
-./Data/JPEGImages/20020080278_I001.jpg 421,837,1662,1232,15
-./Data/JPEGImages/20020080278_I002.jpg 397,809,1625,1190,15
-./Data/JPEGImages/20030010817_I001.jpg 960,449,2718,1628,16
-./Data/JPEGImages/20030010817_I002.jpg 914,428,2653,1632,16
-./Data/JPEGImages/200300108270001_I001.jpg 530,504,2486,1446,18
-./Data/JPEGImages/200300108270001_I002.jpg 465,531,2417,1471,18
-./Data/JPEGImages/200300108270001_I003.jpg 491,967,2383,1539,18
-./Data/JPEGImages/200300108270001_I004.jpg 494,1029,2430,1539,18
-./Data/JPEGImages/200300108270002_I001.jpg 774,511,2095,560,19
-./Data/JPEGImages/200300108270002_I002.jpg 836,562,2139,614,19
-./Data/JPEGImages/20030010827_I001.jpg 377,368,2544,1397,21
-./Data/JPEGImages/20030010827_I002.jpg 135,692,2675,1362,21
-./Data/JPEGImages/20030010827_I003.jpg 202,2111,2266,3194,21
-./Data/JPEGImages/20030010827_I004.jpg 380,880,3073,2029,21
-./Data/JPEGImages/20030200029_A001.jpg 229,512,742,665,22
-./Data/JPEGImages/20030200029_A002.jpg 208,330,848,724,22
-./Data/JPEGImages/20030200029_A003.jpg 185,311,861,723,22
-./Data/JPEGImages/20030200036_A001.jpg 211,276,918,657,24
-./Data/JPEGImages/20030200036_A002.jpg 141,528,912,680,24
-./Data/JPEGImages/20030200036_A003.jpg 239,258,938,642,24
-./Data/JPEGImages/20030200039_A001.jpg 190,240,794,745,25
-./Data/JPEGImages/20030200039_A002.jpg 144,241,759,743,25
-./Data/JPEGImages/20030200039_A003.jpg 201,246,810,722,25
-./Data/JPEGImages/20030200039_A004.jpg 220,214,827,711,25
-./Data/JPEGImages/20030200039_A005.jpg 426,171,819,732,25
-./Data/JPEGImages/20030200039_A006.jpg 496,93,872,638,25
-./Data/JPEGImages/20030200071_A001.jpg 215,255,844,712,26
-./Data/JPEGImages/20030200071_A002.jpg 284,213,868,679,26
-./Data/JPEGImages/20030200071_A003.jpg 164,522,981,684,26
-./Data/JPEGImages/20030200072_A001.jpg 305,178,964,753,27
-./Data/JPEGImages/20030200072_A002.jpg 321,181,1008,719,27
-./Data/JPEGImages/20030200072_A003.jpg 306,402,963,772,27
-./Data/JPEGImages/20030200073_A001.jpg 367,156,986,717,28
-./Data/JPEGImages/20030200073_A002.jpg 351,138,977,694,28
-./Data/JPEGImages/20030200073_A003.jpg 299,401,1033,738,28
-./Data/JPEGImages/20030200074_A001.jpg 263,402,989,752,29
-./Data/JPEGImages/20030200074_A002.jpg 315,170,1022,741,29
-./Data/JPEGImages/20030200074_A003.jpg 320,136,1008,710,29
-./Data/JPEGImages/20030200075_A001.jpg 363,156,965,734,30
-./Data/JPEGImages/20030200075_A002.jpg 331,163,977,716,30
-./Data/JPEGImages/20030200075_A003.jpg 288,414,994,760,30
-./Data/JPEGImages/20040281169_I001.jpg 386,1051,1573,2639,31
-./Data/JPEGImages/20040281169_I002.jpg 491,1054,1661,2617,31
-./Data/JPEGImages/20040281169_I003.jpg 822,1065,1106,2668,31
-./Data/JPEGImages/20040281169_I004.jpg 936,1035,1183,2664,31
-./Data/JPEGImages/20040281169_I005.jpg 1577,732,2796,1873,31
-./Data/JPEGImages/20040281169_I006.jpg 1029,720,2848,1810,31
-./Data/JPEGImages/20040281184_I001.jpg 345,979,1552,2626,32
-./Data/JPEGImages/20040281184_I002.jpg 368,978,1561,2616,32
-./Data/JPEGImages/20040281184_I003.jpg 854,951,1071,2646,32
-./Data/JPEGImages/20040281184_I004.jpg 891,945,1129,2665,32
-./Data/JPEGImages/20040281184_I005.jpg 1187,790,2881,1967,32
-./Data/JPEGImages/20040281184_I006.jpg 662,704,2364,1939,32
-./Data/JPEGImages/20060090022_I001.jpg 191,642,1741,1345,33
-./Data/JPEGImages/20060090022_I002.jpg 168,664,1708,1317,33
-./Data/JPEGImages/20060090022_I003.jpg 1071,1077,2596,1450,33
-./Data/JPEGImages/20060090027_I001.jpg 186,597,1796,1587,34
-./Data/JPEGImages/20060090027_I002.jpg 193,650,1806,1585,34
-./Data/JPEGImages/20060090027_I003.jpg 296,757,1826,1230,34
-./Data/JPEGImages/20120230018_A001.jpg 714,107,1354,948,35
-./Data/JPEGImages/20120230018_A002.jpg 223,581,1862,1039,35
-./Data/JPEGImages/20120230018_A003.jpg 138,689,2060,1043,35
-./Data/JPEGImages/20120230018_A004.jpg 728,49,1370,933,35
-./Data/JPEGImages/20120230018_I001.jpg 563,252,2364,2698,35
-./Data/JPEGImages/20120230018_I002.jpg 519,280,2310,2753,35
-./Data/JPEGImages/20120230018_I003.jpg 742,993,3747,1782,35
-./Data/JPEGImages/20120230018_I004.jpg 1180,1409,4080,1960,35
-./Data/JPEGImages/20120230018_I005.jpg 418,909,3987,1896,35
-./Data/JPEGImages/20120230018_I006.jpg 246,1460,3128,1994,35
-./Data/JPEGImages/20120230018_I007.jpg 819,853,2616,2031,35
-./Data/JPEGImages/20120230018_I008.jpg 1531,824,3357,2149,35
-./Data/JPEGImages/20120230018_I009.jpg 1545,596,3599,1894,35
-./Data/JPEGImages/20120230018_I010.jpg 276,225,885,587,35
+./Data/JPEGImages/03ad8ec729fc42fcf749c8029d9db3c2-_1_1-00004.png 198,135,345,285,0
+./Data/JPEGImages/03ad8ec729fc42fcf749c8029d9db3c2-_1_1-00005.png 215,137,346,282,0
+./Data/JPEGImages/03ad8ec729fc42fcf749c8029d9db3c2-_1_1-00013.png 201,139,310,281,0
+./Data/JPEGImages/03ad8ec729fc42fcf749c8029d9db3c2-_1_1-00014.png 218,129,345,290,0
+./Data/JPEGImages/03ad8ec729fc42fcf749c8029d9db3c2-_1_1-00016.png 218,135,352,285,0
+./Data/JPEGImages/03ad8ec729fc42fcf749c8029d9db3c2-_1_1-00022-difficult.png 229,225,321,312,0
+./Data/JPEGImages/03ad8ec729fc42fcf749c8029d9db3c2-_1_1-00024.png 198,125,328,296,0
+./Data/JPEGImages/03ad8ec729fc42fcf749c8029d9db3c2-_1_1-00025.png 212,135,352,303,0
+./Data/JPEGImages/03ad8ec729fc42fcf749c8029d9db3c2-_1_1-00026.png 207,135,339,279,0
+./Data/JPEGImages/03ad8ec729fc42fcf749c8029d9db3c2-_1_2-00002.png 219,199,348,315,0
+./Data/JPEGImages/03ad8ec729fc42fcf749c8029d9db3c2-_1_2-00003.png 220,152,358,295,0
+./Data/JPEGImages/03ad8ec729fc42fcf749c8029d9db3c2-_1_2-00004.png 227,138,371,293,0
+./Data/JPEGImages/03ad8ec729fc42fcf749c8029d9db3c2-_1_2-00005.png 227,142,353,272,0
+./Data/JPEGImages/03ad8ec729fc42fcf749c8029d9db3c2-_1_2-00012.png 225,152,341,280,0
+./Data/JPEGImages/03ad8ec729fc42fcf749c8029d9db3c2-_1_2-00013.png 230,133,362,286,0
+./Data/JPEGImages/03ad8ec729fc42fcf749c8029d9db3c2-_1_2-00014.png 232,143,363,285,0
+./Data/JPEGImages/03ad8ec729fc42fcf749c8029d9db3c2-_1_2-00022.png 219,137,329,271,0
+./Data/JPEGImages/03ad8ec729fc42fcf749c8029d9db3c2-_1_2-00023.png 223,139,377,298,0
+./Data/JPEGImages/03ad8ec729fc42fcf749c8029d9db3c2-_1_2-00024.png 227,140,375,276,0
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video1.avi-0.png 180,122,521,473,1
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video1.avi-1.png 288,270,404,358,2 133,89,536,466,1
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video1.avi-10.png 288,270,404,358,2 162,108,522,450,1
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video1.avi-11.png 248,201,437,367,2 145,100,521,457,1
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video1.avi-12.png 276,214,421,364,2 156,106,530,453,1
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video1.avi-13.png 284,222,418,380,2 146,105,524,450,1
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video1.avi-16.png 272,246,417,372,2 162,101,523,447,1
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video1.avi-17.png 311,275,371,342,2 148,98,519,448,1
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video1.avi-2.png 286,253,441,368,2 162,89,520,459,1
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video1.avi-3.png 286,253,433,370,2 156,95,523,449,1
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video1.avi-4.png 284,229,428,369,2 142,83,519,445,1
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video1.avi-5.png 292,205,428,369,2 156,93,516,464,1
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video1.avi-6.png 266,207,430,368,2 152,101,531,442,1
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video1.avi-7.png 299,253,440,372,2 160,96,538,439,1
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video3.avi-10.png 271,258,406,403,2 177,111,535,452,1
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video3.avi-11.png 263,266,410,407,2 172,92,531,461,1
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video3.avi-12.png 269,259,416,410,2 175,100,549,474,1
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video5.avi-0.png 238,240,383,386,2 85,59,546,493,3
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video5.avi-1.png 269,269,439,373,2 102,76,539,486,3
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video5.avi-10.png 267,244,432,376,2 106,71,543,488,3
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video5.avi-11.png 261,225,416,375,2 103,74,532,490,3
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video5.avi-12.png 248,241,442,424,2 107,65,532,494,3
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video5.avi-13.png 248,241,449,420,2 100,74,536,492,3
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video5.avi-14.png 248,241,449,420,2 101,58,554,491,3
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video5.avi-15.png 248,241,449,420,2 95,86,527,491,3
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video5.avi-16.png 245,240,446,420,2 103,85,536,493,3
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video5.avi-17.png 253,264,446,420,2 97,70,532,488,3
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video5.avi-18.png 253,264,446,420,2 83,69,523,490,3
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video5.avi-2.png 253,264,446,420,2 67,78,522,490,3
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video5.avi-3.png 253,264,446,420,2 70,75,537,487,3
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video5.avi-4.png 253,264,446,420,2 99,80,522,492,3
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video5.avi-5.png 258,249,446,420,2 94,73,521,492,3
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video5.avi-6.png 258,249,446,420,2 72,76,524,492,3
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video5.avi-7.png 258,249,446,420,2 102,88,525,491,3
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video5.avi-8.png 258,249,446,420,2 107,71,518,485,3
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video5.avi-9.png 258,249,446,420,2 98,67,505,491,3
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video6.avi-17.png 274,247,406,399,2 181,107,489,449,1
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video6.avi-18.png 280,246,419,383,2 174,120,465,434,1
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video6.avi-3.png 265,250,386,388,2 170,111,460,442,1
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video6.avi-5.png 265,250,418,380,2 151,115,465,444,1
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video6.avi-6.png 261,242,418,380,2 172,102,488,431,1
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video7.avi-0.png 228,270,425,443,2 85,77,556,480,4
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video7.avi-1.png 235,270,420,440,2 70,68,591,487,4
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video7.avi-10.png 251,285,437,451,2
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video7.avi-14.png 234,266,456,446,2
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video7.avi-15.png 234,266,437,409,2 60,72,552,484,4
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video7.avi-16.png 259,277,430,411,2 65,57,552,487,4
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video7.avi-2.png 237,281,439,413,2 102,69,543,476,4
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video7.avi-3.png 239,272,439,408,2 99,71,552,485,4
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video7.avi-4.png 239,272,439,408,2 96,61,544,488,4
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video7.avi-5.png 231,272,357,414,2 115,52,518,491,4
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video7.avi-6.png 231,272,399,409,2 120,78,523,486,4
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video7.avi-7.png 231,272,399,409,2 113,71,542,485,4
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video8.avi-10.png 246,249,357,362,2 148,83,540,452,4
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video8.avi-11.png 257,236,406,359,2 143,76,552,445,4
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video8.avi-12.png 257,236,399,360,2 92,59,559,437,4
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video8.avi-13.png 263,216,432,349,2 169,87,525,436,4
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video8.avi-2.png 205,237,319,350,2 157,102,531,445,4
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video8.avi-3.png 205,237,334,361,2 163,84,531,461,4
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video8.avi-4.png 224,222,346,362,2 165,78,510,445,4
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video8.avi-5.png 223,212,346,362,2 192,71,517,469,4
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video8.avi-6.png 223,212,346,362,2 166,69,518,458,4
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video8.avi-7.png 228,229,346,362,2 171,74,504,457,4
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video9.avi-10.png 252,290,424,440,2 139,84,518,486,4
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video9.avi-11.png 234,276,424,440,2 100,67,503,490,4
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video9.avi-12.png 235,274,425,445,2 87,66,481,484,4
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video9.avi-13.png 235,274,425,445,2 97,72,502,492,4
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video9.avi-14.png 237,295,425,445,2 101,66,499,493,4
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video9.avi-15.png 237,295,425,445,2 85,89,502,490,4
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video9.avi-16.png 241,299,425,445,2 103,84,509,493,4
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video9.avi-2.png 237,295,425,445,2 101,75,491,491,4
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video9.avi-3.png 242,281,430,431,2 109,77,482,486,4
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video9.avi-4.png 242,281,430,431,2 106,104,490,492,4
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video9.avi-5.png 242,281,430,431,2 100,77,497,493,4
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video9.avi-6.png 242,281,430,431,2 87,66,487,489,4
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video9.avi-7.png 250,294,430,431,2 86,61,489,491,4
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video9.avi-8.png 237,296,410,435,2 83,68,494,493,4
+./Data/JPEGImages/10758631__ZmNpwqptaWhk-video9.avi-9.png 236,299,410,435,2 96,86,496,491,4
+./Data/JPEGImages/11166715__ZmRjwqtramZo-video4.avi-0.png 287,252,396,417,2 189,104,528,457,1
+./Data/JPEGImages/11166715__ZmRjwqtramZo-video4.avi-1.png 287,252,396,417,2 167,93,526,473,1
+./Data/JPEGImages/11166715__ZmRjwqtramZo-video4.avi-2.png 287,252,396,417,2 156,127,521,471,1
+./Data/JPEGImages/11166715__ZmRjwqtramZo-video5.avi-0.png 262,260,404,431,2 173,91,508,473,1
+./Data/JPEGImages/11166715__ZmRjwqtramZo-video5.avi-1.png 278,227,391,403,2 150,124,503,461,1
+./Data/JPEGImages/11166715__ZmRjwqtramZo-video5.avi-2.png 268,234,381,410,2 165,127,520,474,1
+./Data/JPEGImages/11166715__ZmRjwqtramZo-video6.avi-0.png 287,260,420,403,2 154,97,518,479,1
+./Data/JPEGImages/11166715__ZmRjwqtramZo-video6.avi-1.png 277,233,420,403,2 189,102,514,485,1
+./Data/JPEGImages/11166715__ZmRjwqtramZo-video6.avi-2.png 297,269,421,403,2 170,120,509,491,1
+./Data/JPEGImages/11166715__ZmRjwqtramZo-video8.avi-1.png 263,285,370,372,2 120,99,519,429,4
+./Data/JPEGImages/11166715__ZmRjwqtramZo-video8.avi-10.png 224,247,347,392,2 122,85,523,419,4
+./Data/JPEGImages/11166715__ZmRjwqtramZo-video8.avi-11.png 237,266,357,384,2 112,91,524,408,4
+./Data/JPEGImages/11166715__ZmRjwqtramZo-video8.avi-2.png 203,253,353,389,2 127,85,525,425,4
+./Data/JPEGImages/11166715__ZmRjwqtramZo-video8.avi-3.png 206,246,343,392,2 127,97,530,406,4
+./Data/JPEGImages/11166715__ZmRjwqtramZo-video8.avi-4.png 215,244,332,394,2 136,95,521,403,4
+./Data/JPEGImages/11166715__ZmRjwqtramZo-video8.avi-9.png 228,245,370,390,2 133,81,522,410,4
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video1.avi-0.png 226,294,341,432,2 99,69,515,475,4
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video1.avi-1.png 217,305,384,440,2 114,67,495,489,4
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video1.avi-2.png 211,297,370,435,2 111,57,524,486,4
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video1.avi-3.png 204,273,389,447,2 106,69,524,491,4
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video1.avi-4.png 195,267,348,445,2 95,65,512,493,4
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video1.avi-5.png 195,267,377,451,2 95,68,527,492,4
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video1.avi-6.png 199,251,377,451,2 107,74,530,492,4
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video1.avi-7.png 195,252,377,451,2 79,88,537,490,4
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video1.avi-8.png 198,250,343,428,2 83,87,521,492,4
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video1.avi-9.png 198,250,343,428,2 72,86,500,488,4
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video14.avi-10.png 206,262,417,439,2 121,92,505,492,4
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video14.avi-11.png 231,314,408,421,2 114,55,494,488,4
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video14.avi-12.png 240,305,383,442,2 103,65,510,490,4
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video14.avi-13.png 237,304,379,441,2 107,59,514,491,4
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video14.avi-14.png 240,309,379,441,2 121,76,503,488,4
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video14.avi-18.png 240,309,379,441,2 97,67,490,490,4
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video14.avi-4.png 226,272,376,436,2 119,74,493,487,4
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video14.avi-5.png 220,264,361,436,2 117,64,497,491,4
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video14.avi-6.png 220,264,361,436,2 94,84,487,492,4
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video14.avi-7.png 222,262,361,436,2 143,84,499,492,4
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video14.avi-8.png 222,262,361,436,2 111,67,492,492,4
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video14.avi-9.png 222,262,361,436,2 95,65,485,490,4
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video16.avi-10.png 264,261,383,391,2 140,74,551,494,3
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video5.avi-10.png 263,312,377,469,2 133,76,478,492,4
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video5.avi-11.png 274,317,388,475,2 137,63,475,492,4
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video5.avi-12.png 274,317,388,475,2 112,71,491,491,4
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video5.avi-13.png 274,317,388,475,2 108,68,483,489,4
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video5.avi-14.png 274,317,388,475,2 118,67,507,486,4
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video5.avi-15.png 274,317,388,475,2 128,66,522,491,4
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video5.avi-16.png 274,317,388,475,2 119,57,512,493,4
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video5.avi-17.png 274,317,388,475,2 62,67,506,490,4
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video5.avi-18.png 271,292,388,475,2 141,75,510,490,4
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video5.avi-19.png 271,292,388,475,2 66,65,532,486,4
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video5.avi-20.png 269,283,388,475,2 135,68,501,492,4
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video5.avi-21.png 269,283,391,461,2 141,76,492,489,4
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video5.avi-22.png 256,277,382,456,2 93,68,513,476,4
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video5.avi-23.png 255,280,397,460,2 107,83,535,484,4
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video5.avi-24.png 260,308,397,460,2 87,75,531,488,4
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video5.avi-25.png 260,308,397,460,2 113,75,530,490,4
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video5.avi-26.png 260,308,397,460,2 118,63,517,491,4
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video5.avi-27.png 271,320,397,460,2 136,68,508,492,4
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video5.avi-28.png 283,326,401,450,2 86,67,538,489,4
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video5.avi-7.png 245,321,346,464,2 100,76,521,491,4
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video5.avi-8.png 257,308,365,454,2 106,76,497,490,4
+./Data/JPEGImages/11220352__ZmRkwqdlZmpl-video5.avi-9.png 252,306,360,453,2 109,69,501,493,4
+./Data/JPEGImages/11696030__ZmRowq5rY2hj-video5.avi-0.png 206,265,348,403,2 55,66,517,475,3
+./Data/JPEGImages/11696030__ZmRowq5rY2hj-video5.avi-1.png 207,247,303,392,2 99,82,471,482,3
+./Data/JPEGImages/11696030__ZmRowq5rY2hj-video5.avi-2.png 228,295,358,403,2 80,91,466,488,3
+./Data/JPEGImages/11696030__ZmRowq5rY2hj-video5.avi-3.png 188,236,320,398,2 96,81,448,488,3
+./Data/JPEGImages/11696030__ZmRowq5rY2hj-video5.avi-4.png 169,236,359,400,2 77,78,433,488,3
+./Data/JPEGImages/11696030__ZmRowq5rY2hj-video5.avi-5.png 162,248,366,389,2 92,63,452,490,3
+./Data/JPEGImages/11696030__ZmRowq5rY2hj-video5.avi-6.png 209,269,384,392,2 59,73,447,488,3
+./Data/JPEGImages/11696030__ZmRowq5rY2hj-video5.avi-7.png 179,262,380,379,2 78,78,453,491,3
+./Data/JPEGImages/11696030__ZmRowq5rY2hj-video5.avi-8.png 169,261,400,393,2 56,81,463,489,3
+./Data/JPEGImages/11961981__ZmRrwqtmbG1k-video29.avi-0.png 246,142,358,305,0 143,76,530,401,3
+./Data/JPEGImages/11961981__ZmRrwqtmbG1k-video29.avi-10.png 191,125,318,346,0 106,73,503,407,3
+./Data/JPEGImages/11961981__ZmRrwqtmbG1k-video29.avi-11.png 192,125,307,340,0 95,81,535,392,3
+./Data/JPEGImages/11961981__ZmRrwqtmbG1k-video29.avi-12.png 250,147,363,293,0 110,80,535,391,3
+./Data/JPEGImages/11961981__ZmRrwqtmbG1k-video29.avi-13.png 245,131,366,289,0 86,75,546,416,3
+./Data/JPEGImages/11961981__ZmRrwqtmbG1k-video29.avi-14.png 250,136,367,288,0 81,80,532,427,3
+./Data/JPEGImages/11961981__ZmRrwqtmbG1k-video29.avi-15.png 254,138,369,273,0 204,232,294,356,0 86,82,540,405,3
+./Data/JPEGImages/11961981__ZmRrwqtmbG1k-video29.avi-16.png 265,165,366,266,0 211,214,294,375,0 70,82,559,411,3
+./Data/JPEGImages/11961981__ZmRrwqtmbG1k-video29.avi-17.png 275,145,371,273,0 207,189,294,368,0 90,80,524,415,3
+./Data/JPEGImages/11961981__ZmRrwqtmbG1k-video29.avi-18.png 207,225,314,372,0 87,79,539,421,3
+./Data/JPEGImages/11961981__ZmRrwqtmbG1k-video29.avi-19.png 209,151,311,291,0 99,83,526,494,3
+./Data/JPEGImages/11961981__ZmRrwqtmbG1k-video29.avi-2.png 249,127,363,261,0 104,85,512,433,3
+./Data/JPEGImages/11961981__ZmRrwqtmbG1k-video29.avi-20.png 219,135,340,281,0 84,66,503,438,3
+./Data/JPEGImages/11961981__ZmRrwqtmbG1k-video29.avi-21.png 218,130,354,286,0 79,75,515,433,3
+./Data/JPEGImages/11961981__ZmRrwqtmbG1k-video29.avi-3.png 256,125,374,291,0 84,72,506,442,3
+./Data/JPEGImages/11961981__ZmRrwqtmbG1k-video29.avi-4.png 265,138,373,286,0 123,72,510,442,3
+./Data/JPEGImages/11961981__ZmRrwqtmbG1k-video29.avi-5.png 273,138,370,281,0 116,78,501,441,3
+./Data/JPEGImages/11961981__ZmRrwqtmbG1k-video29.avi-6.png 243,191,301,296,0 210,245,239,307,0 97,73,534,438,3
+./Data/JPEGImages/11961981__ZmRrwqtmbG1k-video29.avi-9.png 197,141,307,317,0 96,82,507,494,3
+./Data/JPEGImages/12014538__B(12).png 212,163,399,354,5
+./Data/JPEGImages/12014538__B(18).png 210,150,405,339,5
+./Data/JPEGImages/12014538__B(25).png 238,86,424,260,5
+./Data/JPEGImages/12014538__ZmViwqZpaGhr-video1.avi-16.png 267,119,432,298,0 79,55,557,454,3
+./Data/JPEGImages/12014538__ZmViwqZpaGhr-video1.avi-22.png 301,129,444,290,0 95,55,563,452,3
+./Data/JPEGImages/12014538__ZmViwqZpaGhr-video1.avi-4.png 271,132,438,290,0 91,61,553,462,3
+./Data/JPEGImages/12014538__ZmViwqZpaGhr-video1.avi-40.png 271,132,438,290,0 100,64,554,458,3
+./Data/JPEGImages/12014538__ZmViwqZpaGhr-video1.avi-48.png 235,127,430,313,0 93,52,577,451,3
+./Data/JPEGImages/12014538__ZmViwqZpaGhr-video1.avi-5.png 258,136,443,284,0 93,59,555,466,3
+./Data/JPEGImages/12014538__ZmViwqZpaGhr-video1.avi-52.png 278,126,445,290,0 105,55,551,453,3
+./Data/JPEGImages/12014538__ZmViwqZpaGhr-video1.avi-54.png 240,127,433,302,0 95,60,555,452,3
+./Data/JPEGImages/12014538__ZmViwqZpaGhr-video4.avi-111.png 240,163,413,340,0 126,69,533,440,3
+./Data/JPEGImages/12014538__ZmViwqZpaGhr-video4.avi-112.png 243,163,394,336,0 123,65,519,439,3
+./Data/JPEGImages/12014538__ZmViwqZpaGhr-video4.avi-113.png 244,159,387,332,0 121,70,540,451,3
+./Data/JPEGImages/12014538__ZmViwqZpaGhr-video4.avi-114.png 251,163,384,332,0 114,57,523,494,3
+./Data/JPEGImages/12014538__ZmViwqZpaGhr-video4.avi-115.png 252,177,384,332,0 135,64,537,446,3
+./Data/JPEGImages/12014538__ZmViwqZpaGhr-video4.avi-137.png 239,138,402,341,0 107,72,542,494,3
+./Data/JPEGImages/12014538__ZmViwqZpaGhr-video4.avi-138.png 239,162,393,337,0 104,78,550,493,3
+./Data/JPEGImages/12014538__ZmViwqZpaGhr-video4.avi-141.png 210,175,397,327,0 109,60,526,494,3
+./Data/JPEGImages/12014538__ZmViwqZpaGhr-video4.avi-150.png 248,143,408,332,0 136,61,536,450,3
+./Data/JPEGImages/12014538__ZmViwqZpaGhr-video4.avi-151.png 248,146,404,333,0 107,60,538,494,3
+./Data/JPEGImages/12014538__ZmViwqZpaGhr-video4.avi-152.png 252,143,408,330,0 128,59,520,494,3
+./Data/JPEGImages/12014538__ZmViwqZpaGhr-video4.avi-162.png 241,148,400,333,0 122,63,535,488,3
+./Data/JPEGImages/12014538__ZmViwqZpaGhr-video4.avi-163.png 241,148,382,330,0 121,71,538,494,3
+./Data/JPEGImages/12014538__ZmViwqZpaGhr-video5.avi-18.png 268,105,416,257,0 135,64,504,487,3
+./Data/JPEGImages/12014538__ZmViwqZpaGhr-video5.avi-28.png 285,136,422,256,0 115,62,502,480,3
+./Data/JPEGImages/12014538__ZmViwqZpaGhr-video5.avi-29.png 248,125,422,256,0 126,66,522,489,3
+./Data/JPEGImages/12014538__ZmViwqZpaGhr-video5.avi-7.png 294,115,422,256,0 121,53,532,492,3
+./Data/JPEGImages/12020256__ZmViwqdlZWpp-video1.avi-11.png 134,306,330,464,2 41,80,515,490,4
+./Data/JPEGImages/12020256__ZmViwqdlZWpp-video1.avi-12.png 132,290,350,457,2 54,88,488,491,4
+./Data/JPEGImages/12020256__ZmViwqdlZWpp-video1.avi-13.png 133,275,351,441,2 66,71,528,492,4
+./Data/JPEGImages/12020256__ZmViwqdlZWpp-video1.avi-14.png 135,225,350,445,2 63,79,544,484,4
+./Data/JPEGImages/12020256__ZmViwqdlZWpp-video1.avi-15.png 144,222,354,436,2 57,96,538,487,4
+./Data/JPEGImages/12020256__ZmViwqdlZWpp-video1.avi-16.png 154,267,354,436,2 55,88,546,490,4
+./Data/JPEGImages/12020256__ZmViwqdlZWpp-video1.avi-2.png 152,287,338,427,2 82,68,520,491,4
+./Data/JPEGImages/12020256__ZmViwqdlZWpp-video1.avi-21.png 135,272,338,427,2 68,99,539,493,4
+./Data/JPEGImages/12020256__ZmViwqdlZWpp-video1.avi-23.png 159,260,338,427,2 63,103,560,492,4
+./Data/JPEGImages/12020256__ZmViwqdlZWpp-video1.avi-24.png 154,261,338,427,2 68,102,539,492,4
+./Data/JPEGImages/12020256__ZmViwqdlZWpp-video1.avi-25.png 154,261,338,427,2 43,86,508,492,4
+./Data/JPEGImages/12020256__ZmViwqdlZWpp-video1.avi-3.png 138,263,346,424,2 76,81,518,484,4
+./Data/JPEGImages/12020256__ZmViwqdlZWpp-video1.avi-4.png 138,263,346,424,2 30,88,508,491,4
+./Data/JPEGImages/12020256__ZmViwqdlZWpp-video1.avi-5.png 138,263,349,423,2 58,90,527,490,4
+./Data/JPEGImages/12020256__ZmViwqdlZWpp-video1.avi-6.png 142,248,346,424,2 69,70,499,490,4
+./Data/JPEGImages/12020256__ZmViwqdlZWpp-video1.avi-7.png 146,268,346,424,2 55,95,521,490,4
+./Data/JPEGImages/12022650__ZmViwqdnaWpj-video2.avi-10.png 176,223,407,459,2 107,73,545,493,3
+./Data/JPEGImages/12022650__ZmViwqdnaWpj-video2.avi-11.png 176,223,407,459,2 52,73,575,490,3
+./Data/JPEGImages/12022650__ZmViwqdnaWpj-video2.avi-23.png 176,223,427,448,2 82,59,550,493,3
+./Data/JPEGImages/12022650__ZmViwqdnaWpj-video2.avi-24.png 185,236,427,448,2 82,82,570,488,3
+./Data/JPEGImages/12022650__ZmViwqdnaWpj-video2.avi-37.png 176,236,418,448,2 77,76,562,492,3
+./Data/JPEGImages/12022650__ZmViwqdnaWpj-video2.avi-38.png 176,236,418,455,2 82,110,566,492,3
+./Data/JPEGImages/12022650__ZmViwqdnaWpj-video2.avi-39.png 176,236,418,455,2 72,93,566,492,3
+./Data/JPEGImages/12022650__ZmViwqdnaWpj-video2.avi-40.png 163,227,402,468,2 58,97,560,488,3
+./Data/JPEGImages/12022650__ZmViwqdnaWpj-video2.avi-42.png 163,227,402,468,2 96,84,562,492,3
+./Data/JPEGImages/12022650__ZmViwqdnaWpj-video2.avi-5.png 177,243,408,441,2 60,84,566,490,3
+./Data/JPEGImages/12022650__ZmViwqdnaWpj-video2.avi-52.png 191,240,428,446,2 41,73,573,493,3
+./Data/JPEGImages/12022650__ZmViwqdnaWpj-video2.avi-53.png 191,240,428,453,2 54,90,574,492,3
+./Data/JPEGImages/12022650__ZmViwqdnaWpj-video2.avi-68.png 191,235,412,460,2 83,71,573,488,3
+./Data/JPEGImages/12022650__ZmViwqdnaWpj-video2.avi-69.png 191,235,412,460,2 82,98,564,492,3
+./Data/JPEGImages/12022650__ZmViwqdnaWpj-video2.avi-7.png 191,235,403,449,2 83,78,574,490,3
+./Data/JPEGImages/12022650__ZmViwqdnaWpj-video2.avi-70.png 201,232,408,459,2 89,80,572,492,3
+./Data/JPEGImages/12022650__ZmViwqdnaWpj-video2.avi-71.png 196,223,407,461,2 99,82,568,493,3
+./Data/JPEGImages/12022650__ZmViwqdnaWpj-video2.avi-72.png 172,233,407,461,2 97,90,535,486,3
+./Data/JPEGImages/12022650__ZmViwqdnaWpj-video2.avi-8.png 172,233,407,461,2 97,90,550,489,3
+./Data/JPEGImages/12022650__ZmViwqdnaWpj-video2.avi-9.png 172,233,407,461,2 89,98,560,492,3
+./Data/JPEGImages/12022650__ZmViwqdnaWpj-video4.avi-21.png 190,231,413,436,2 40,69,575,489,3
+./Data/JPEGImages/12022650__ZmViwqdnaWpj-video4.avi-22.png 190,231,413,436,2 75,94,574,493,3
+./Data/JPEGImages/12022650__ZmViwqdnaWpj-video4.avi-23.png 190,231,413,436,2 80,78,576,493,3
+./Data/JPEGImages/12022650__ZmViwqdnaWpj-video4.avi-33.png 193,239,410,438,2 59,63,574,493,3
+./Data/JPEGImages/12022650__ZmViwqdnaWpj-video4.avi-34.png 179,234,400,440,2 60,78,571,492,3
+./Data/JPEGImages/12022650__ZmViwqdnaWpj-video4.avi-35.png 168,229,400,446,2 75,94,572,492,3
+./Data/JPEGImages/12022650__ZmViwqdnaWpj-video4.avi-36.png 168,229,400,446,2 71,88,571,490,3
+./Data/JPEGImages/12022650__ZmViwqdnaWpj-video4.avi-61.png 196,247,400,446,2 91,70,562,491,3
+./Data/JPEGImages/12022650__ZmViwqdnaWpj-video4.avi-62.png 194,247,403,459,2 74,72,573,490,3
+./Data/JPEGImages/12022650__ZmViwqdnaWpj-video4.avi-63.png 189,232,403,452,2 78,67,572,490,3
+./Data/JPEGImages/12022650__ZmViwqdnaWpj-video4.avi-64.png 189,232,400,457,2 76,78,575,492,3
+./Data/JPEGImages/12022650__ZmViwqdnaWpj-video4.avi-67.png 185,216,400,457,2 75,82,578,491,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video1.avi-0.png 183,246,468,377,2 86,75,571,492,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video1.avi-1.png 180,244,481,377,2 84,49,575,490,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video1.avi-11.png 173,236,480,378,2 88,58,558,480,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video1.avi-12.png 162,209,486,381,2 132,71,569,493,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video1.avi-13.png 162,209,486,381,2 103,55,543,488,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video1.avi-14.png 178,207,502,379,2 128,67,535,482,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video1.avi-15.png 177,221,486,381,2 82,69,514,485,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video1.avi-16.png 175,231,484,382,2 129,72,550,488,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video1.avi-2.png 175,231,484,382,2 107,69,553,482,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video1.avi-3.png 165,213,484,382,2 99,65,545,481,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video1.avi-4.png 173,214,508,387,2 111,73,541,492,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video1.avi-5.png 181,215,493,383,2 93,62,548,488,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video1.avi-6.png 181,215,493,383,2 101,59,549,492,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video1.avi-7.png 178,229,493,383,2 120,69,564,492,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video1.avi-8.png 204,234,474,375,2 109,65,556,488,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video2.avi-0.png 216,190,453,362,2 103,75,543,488,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video2.avi-1.png 195,187,474,360,2 122,62,532,448,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video2.avi-10.png 195,187,474,360,2 124,78,538,455,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video2.avi-11.png 224,176,428,365,2 121,73,538,483,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video2.avi-12.png 233,170,422,362,2 108,74,516,476,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video2.avi-13.png 228,166,436,357,2 108,74,522,432,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video2.avi-14.png 228,166,436,357,2 116,70,544,428,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video2.avi-15.png 228,166,436,357,2 119,58,541,434,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video2.avi-2.png 195,176,450,366,2 105,69,543,459,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video2.avi-3.png 194,174,449,364,2 124,78,518,432,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video2.avi-4.png 208,176,441,362,2 106,78,552,429,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video2.avi-5.png 223,176,423,351,2 89,56,512,449,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video2.avi-6.png 223,176,431,344,2 82,59,523,426,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video2.avi-7.png 223,176,440,352,2 108,61,507,473,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video2.avi-9.png 296,182,468,352,2 113,73,548,468,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video3.avi-0.png 226,185,429,397,2 101,93,533,491,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video3.avi-10.png 215,204,429,397,2 120,69,518,445,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video3.avi-12.png 223,220,429,397,2 134,59,507,455,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video3.avi-13.png 216,209,426,397,2 66,66,539,466,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video3.avi-17.png 209,204,422,403,2 128,65,564,431,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video3.avi-18.png 207,200,425,404,2 107,57,549,475,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video3.avi-19.png 207,200,425,404,2 45,60,550,488,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video3.avi-21.png 221,205,404,398,2 113,64,563,487,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video3.avi-22.png 225,202,418,396,2 135,69,538,426,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video3.avi-23.png 229,228,400,401,2 97,74,557,455,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video3.avi-24.png 178,265,413,395,2 111,75,557,465,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video3.avi-25.png 174,259,436,400,2 104,73,562,488,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video3.avi-26.png 212,194,452,404,2 132,67,557,484,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video3.avi-27.png 219,198,433,410,2 114,64,568,490,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video3.avi-28.png 219,198,433,410,2 60,69,558,471,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video3.avi-29.png 219,198,405,402,2 72,69,567,476,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video3.avi-35.png 173,257,459,391,2 119,68,568,478,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video3.avi-36.png 147,235,457,400,2 91,77,574,485,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video3.avi-37.png 149,215,456,391,2 143,68,546,475,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video3.avi-38.png 218,190,442,401,2 54,69,566,480,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video3.avi-7.png 210,186,435,397,2 82,84,549,492,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video3.avi-8.png 217,201,433,399,2 112,79,557,465,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video3.avi-9.png 210,197,426,395,2 103,65,553,492,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video4.avi-0.png 224,184,424,359,2 158,75,555,490,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video6.avi-0.png 209,200,439,388,2 119,78,544,488,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video6.avi-1.png 207,206,436,394,2 95,69,567,488,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video7.avi-10.png 167,226,480,383,2 109,81,538,410,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video7.avi-12.png 181,258,480,383,2 118,67,520,424,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video7.avi-13.png 181,258,480,383,2 107,66,541,444,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video7.avi-18.png 210,187,442,384,2 126,69,491,426,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video7.avi-19.png 210,187,445,401,2 116,56,535,463,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video7.avi-20.png 209,177,441,401,2 103,68,523,473,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video7.avi-21.png 209,171,414,405,2 109,83,536,476,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video7.avi-25.png 197,256,453,393,2 83,69,518,472,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video7.avi-26.png 197,256,453,393,2 114,76,528,435,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video7.avi-4.png 252,166,453,393,2 106,60,525,487,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video7.avi-5.png 236,170,443,395,2 147,119,501,436,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video7.avi-6.png 226,170,453,393,2 162,59,539,488,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video7.avi-7.png 225,166,450,403,2 133,107,544,431,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video7.avi-8.png 225,166,450,403,2 97,51,527,451,3
+./Data/JPEGImages/12038618__ZmViwqhtaWZr-video7.avi-9.png 225,166,450,403,2 97,60,542,451,3
+./Data/JPEGImages/12113176__ZmVjwqZoZGxp-video1.avi-1.png 264,110,407,291,5 112,62,548,494,3
+./Data/JPEGImages/12113176__ZmVjwqZoZGxp-video1.avi-6.png 271,105,390,279,5 134,59,543,494,3
+./Data/JPEGImages/12113176__ZmVjwqZoZGxp-video2.avi-12.png 270,115,401,288,5 112,55,545,494,3
+./Data/JPEGImages/12113176__ZmVjwqZoZGxp-video2.avi-2.png 270,115,401,288,5 122,61,562,494,3
+./Data/JPEGImages/12113176__ZmVjwqZoZGxp-video2.avi-22.png 270,115,401,288,5 106,56,531,404,3
+./Data/JPEGImages/12113176__ZmVjwqZoZGxp-video3.avi-1.png 279,118,410,273,5 91,53,577,408,3
+./Data/JPEGImages/12113176__ZmVjwqZoZGxp-video3.avi-10.png 288,107,425,267,5 117,58,589,413,3
+./Data/JPEGImages/12113176__ZmVjwqZoZGxp-video3.avi-11.png 288,107,416,274,5 114,61,570,423,3
+./Data/JPEGImages/12113176__ZmVjwqZoZGxp-video3.avi-21.png 288,107,407,262,5 97,60,584,405,3
+./Data/JPEGImages/12113176__ZmVjwqZoZGxp-video3.avi-22.png 285,110,404,265,5 124,62,568,494,3
+./Data/JPEGImages/12128891__ZmVjwqdta25k-video1.avi-0.png 266,141,405,351,0 184,69,616,471,3
+./Data/JPEGImages/12128891__ZmVjwqdta25k-video1.avi-1.png 266,141,406,359,0 154,65,619,475,3
+./Data/JPEGImages/12128891__ZmVjwqdta25k-video1.avi-10.png 247,167,406,331,0 110,79,628,461,3
+./Data/JPEGImages/12128891__ZmVjwqdta25k-video1.avi-11.png 250,144,412,343,0 103,78,608,458,3
+./Data/JPEGImages/12128891__ZmVjwqdta25k-video1.avi-12.png 272,162,406,354,0 109,76,609,454,3
+./Data/JPEGImages/12128891__ZmVjwqdta25k-video1.avi-13.png 277,202,406,354,0 90,85,606,465,3
+./Data/JPEGImages/12128891__ZmVjwqdta25k-video1.avi-14.png 268,211,404,361,0 109,70,610,462,3
+./Data/JPEGImages/12128891__ZmVjwqdta25k-video1.avi-15.png 250,122,405,356,0 118,75,611,455,3
+./Data/JPEGImages/12128891__ZmVjwqdta25k-video1.avi-16.png 252,140,405,355,0 102,71,608,453,3
+./Data/JPEGImages/12128891__ZmVjwqdta25k-video1.avi-17.png 261,140,421,343,0 98,88,607,469,3
+./Data/JPEGImages/12128891__ZmVjwqdta25k-video1.avi-18.png 251,153,410,329,0 116,71,610,454,3
+./Data/JPEGImages/12128891__ZmVjwqdta25k-video1.avi-2.png 265,218,410,356,0 117,68,611,459,3
+./Data/JPEGImages/12128891__ZmVjwqdta25k-video1.avi-22.png 267,145,414,332,0 116,70,612,459,3
+./Data/JPEGImages/12128891__ZmVjwqdta25k-video1.avi-23.png 239,171,409,341,0 107,72,609,452,3
+./Data/JPEGImages/12128891__ZmVjwqdta25k-video1.avi-24.png 279,184,413,353,0 134,77,610,455,3
+./Data/JPEGImages/12128891__ZmVjwqdta25k-video1.avi-3.png 252,122,404,350,0 123,76,612,467,3
+./Data/JPEGImages/12128891__ZmVjwqdta25k-video1.avi-4.png 257,143,404,350,0 104,70,614,468,3
+./Data/JPEGImages/12128891__ZmVjwqdta25k-video1.avi-5.png 255,139,412,339,0 99,70,610,461,3
+./Data/JPEGImages/12128891__ZmVjwqdta25k-video1.avi-6.png 265,146,431,325,0 120,75,606,468,3
+./Data/JPEGImages/12128891__ZmVjwqdta25k-video1.avi-9.png 251,146,414,322,0 115,68,608,463,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video2.avi-0.png 210,220,409,384,2 85,76,554,484,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video2.avi-1.png 210,220,409,384,2 114,75,536,488,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video2.avi-10.png 210,220,401,380,2 116,76,545,490,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video2.avi-11.png 210,220,401,380,2 110,75,541,492,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video2.avi-12.png 210,220,401,380,2 133,74,538,488,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video2.avi-13.png 210,220,401,380,2 107,77,536,490,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video2.avi-14.png 210,220,401,380,2 128,69,545,488,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video2.avi-15.png 213,210,401,380,2 122,59,537,488,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video2.avi-16.png 211,207,401,380,2 121,69,531,489,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video2.avi-17.png 233,203,401,380,2 101,76,551,491,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video2.avi-18.png 235,196,401,380,2 118,79,553,488,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video2.avi-19.png 230,189,396,373,2 109,71,524,491,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video2.avi-2.png 220,204,410,369,2
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video2.avi-20.png 220,204,391,374,2 116,67,528,485,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video2.avi-21.png 214,205,404,374,2 123,64,498,488,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video2.avi-22.png 214,205,404,374,2 84,81,536,488,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video2.avi-23.png 214,205,404,374,2 98,82,528,490,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video2.avi-24.png 214,205,404,374,2 120,82,541,486,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video2.avi-3.png 222,200,386,375,2 55,90,527,490,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video2.avi-4.png 231,204,397,375,2 63,72,555,490,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video2.avi-5.png 229,198,404,374,2 55,57,565,489,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video2.avi-6.png 230,198,401,364,2 64,78,525,488,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video2.avi-7.png 228,189,399,355,2 93,81,537,493,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video2.avi-8.png 221,191,396,360,2 116,78,548,480,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video2.avi-9.png 222,207,397,368,2 99,73,528,486,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video4.avi-0.png 215,188,424,370,2 133,74,526,484,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video4.avi-1.png 221,190,422,367,2 119,73,528,487,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video4.avi-10.png 219,197,411,366,2 98,78,535,490,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video4.avi-11.png 219,197,411,366,2 85,73,528,486,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video4.avi-12.png 219,197,411,366,2 101,76,524,490,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video4.avi-13.png 219,197,411,366,2 103,60,529,491,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video4.avi-14.png 219,197,411,366,2 91,69,541,488,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video4.avi-15.png 219,197,411,366,2 80,68,545,489,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video4.avi-16.png 219,197,411,366,2 89,77,545,490,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video4.avi-17.png 219,197,411,366,2 89,67,535,480,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video4.avi-18.png 219,197,411,366,2 123,69,534,485,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video4.avi-19.png 219,197,411,366,2 97,67,522,487,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video4.avi-2.png 248,212,414,372,2 113,65,538,488,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video4.avi-20.png 246,202,416,377,2 91,67,543,486,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video4.avi-21.png 210,202,409,372,2 84,87,557,492,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video4.avi-22.png 214,212,407,372,2 84,71,562,489,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video4.avi-23.png 214,212,407,372,2 83,80,541,483,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video4.avi-24.png 208,212,407,372,2 90,86,555,490,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video4.avi-3.png 253,203,413,368,2 110,70,551,490,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video4.avi-4.png 248,197,412,369,2 85,69,530,487,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video4.avi-5.png 248,197,412,369,2 88,95,545,488,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video4.avi-6.png 248,197,412,369,2 89,73,545,488,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video4.avi-7.png 248,197,412,369,2 117,86,522,483,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video4.avi-8.png 248,197,412,369,2 134,80,538,487,3
+./Data/JPEGImages/12166664__ZmVjwqtraWtn-video4.avi-9.png 213,201,413,369,2 101,65,537,485,3
+./Data/JPEGImages/12185863__ZmVjwq1qa2tm-video1.avi-10.png 189,123,331,296,5 48,56,567,445,3
+./Data/JPEGImages/12185863__ZmVjwq1qa2tm-video1.avi-11.png 195,142,336,289,5 38,63,559,445,3
+./Data/JPEGImages/12185863__ZmVjwq1qa2tm-video1.avi-2.png 197,121,332,266,5 34,73,557,430,3
+./Data/JPEGImages/12185863__ZmVjwq1qa2tm-video1.avi-3.png 204,122,304,255,5 46,76,559,436,3
+./Data/JPEGImages/12185863__ZmVjwq1qa2tm-video1.avi-4.png 202,157,317,276,5 53,73,570,429,3
+./Data/JPEGImages/12185863__ZmVjwq1qa2tm-video1.avi-5.png 179,123,310,292,5 52,68,560,429,3
+./Data/JPEGImages/12185863__ZmVjwq1qa2tm-video1.avi-6.png 197,131,329,283,5 37,65,557,440,3
+./Data/JPEGImages/12185863__ZmVjwq1qa2tm-video1.avi-7.png 203,142,357,281,5 53,64,570,439,3
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_1-00001.png 302,136,374,237,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_1-00002.png 299,185,349,250,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_1-00006.png 284,163,366,234,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_1-00013.png 315,141,379,239,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_1-00014.png 305,123,385,256,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_1-00016.png 312,152,373,249,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_1-00017.png 306,163,370,235,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_1-00018.png 286,107,408,255,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_1-00020.png 315,147,401,254,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_1-00021.png 309,160,395,232,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_1-00028.png 312,133,374,253,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_1-00029.png 307,119,378,253,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_1-00030.png 295,161,369,258,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_1-00032-difficult.png 306,113,309,115,5 306,113,388,258,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_2-00001.png 257,129,365,279,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_2-00002.png 251,130,365,289,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_2-00004.png 279,149,369,260,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_2-00007.png 273,114,375,256,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_2-00009.png 289,131,390,244,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_2-00013.png 278,160,362,223,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_2-00014.png 291,138,359,258,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_2-00016.png 281,138,369,257,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_2-00017.png 273,161,355,262,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_2-00018.png 266,163,357,274,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_2-00020.png 256,159,335,256,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_2-00030.png 289,125,366,230,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_2-00032.png 289,132,362,239,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_2-00033.png 278,125,361,259,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_2-00034.png 260,126,360,275,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_2-00036.png 238,115,385,272,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_2-00038.png 285,139,355,249,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_2-00039.png 286,113,389,255,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_2-00040.png 285,101,382,232,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_2-00046-difficult.png 267,135,365,238,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_2-00047-difficult.png 282,146,353,239,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_2-00048.png 268,123,355,246,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_3-00001.png 252,152,363,286,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_3-00002.png 232,159,353,284,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_3-00003.png 257,170,345,259,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_3-00013.png 260,133,345,259,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_3-00014.png 259,135,368,259,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_3-00015.png 253,152,342,255,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_3-00017.png 265,116,363,272,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_3-00023.png 265,129,362,234,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_3-00024.png 276,133,377,239,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_3-00025.png 262,130,372,251,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_3-00026.png 248,138,365,272,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_3-00027.png 235,123,361,279,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_3-00028.png 262,161,348,262,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_3-00030.png 262,113,365,254,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_3-00031.png 268,156,373,260,5
+./Data/JPEGImages/1546fea49902ee2dbc640573d57a6d1d-_1_3-00034.png 279,143,372,249,5
+./Data/JPEGImages/16485668__Zmlmwq1qaWtr-video4.avi-21.png 138,84,323,234,0 42,1,557,436,3
+./Data/JPEGImages/16485668__Zmlmwq1qaWtr-video4.avi-22.png 283,95,386,245,0 117,70,559,404,3
+./Data/JPEGImages/16485668__Zmlmwq1qaWtr-video4.avi-23.png 283,95,386,245,0 117,70,559,404,3
+./Data/JPEGImages/16485668__Zmlmwq1qaWtr-video4.avi-28.png 283,95,386,245,0 117,70,559,404,3
+./Data/JPEGImages/16485668__Zmlmwq1qaWtr-video4.avi-29.png 283,95,386,245,0 117,70,559,404,3
+./Data/JPEGImages/16485668__Zmlmwq1qaWtr-video4.avi-35.png 283,95,386,245,0 117,70,559,404,3
+./Data/JPEGImages/16485668__Zmlmwq1qaWtr-video4.avi-36.png 283,95,386,245,0 117,70,559,404,3
+./Data/JPEGImages/17282018__Zmpkwq1nY2Zr-video5.avi-10.png 119,30,334,205,0 0,0,554,434,3
+./Data/JPEGImages/17282018__Zmpkwq1nY2Zr-video5.avi-2.png 119,30,334,205,0 0,0,554,434,3
+./Data/JPEGImages/17282018__Zmpkwq1nY2Zr-video5.avi-3.png 119,30,334,205,0 0,0,554,434,3
+./Data/JPEGImages/17523056__ZmpnwqdoY2pp-video1.avi-23.png 138,84,323,234,0 42,1,557,436,3
+./Data/JPEGImages/17523056__ZmpnwqdoY2pp-video3.avi-11.png 123,36,294,177,0 17,2,580,433,3
+./Data/JPEGImages/17523056__ZmpnwqdoY2pp-video3.avi-14.png 123,36,294,177,0 17,2,580,433,3
+./Data/JPEGImages/17523056__ZmpnwqdoY2pp-video3.avi-15.png 123,36,294,177,0 17,2,580,433,3
+./Data/JPEGImages/17523056__ZmpnwqdoY2pp-video3.avi-20.png 123,36,294,177,0 17,2,580,433,3
+./Data/JPEGImages/17523056__ZmpnwqdoY2pp-video3.avi-24.png 123,36,294,177,0 17,2,580,433,3
+./Data/JPEGImages/17523056__ZmpnwqdoY2pp-video3.avi-27.png 123,36,294,177,0 17,2,580,433,3
+./Data/JPEGImages/17523056__ZmpnwqdoY2pp-video3.avi-28.png 123,36,294,177,0 17,2,580,433,3
+./Data/JPEGImages/17523056__ZmpnwqdoY2pp-video3.avi-3.png 123,36,294,177,0 17,2,580,433,3
+./Data/JPEGImages/17547976__ZmpnwqlsbGxp-video8.avi-1.png 138,84,323,234,0 46,0,552,433,3
+./Data/JPEGImages/17547976__ZmpnwqlsbGxp-video8.avi-4.png 155,41,335,245,0 0,1,547,440,3
+./Data/JPEGImages/17757765__Zmppwqpsamto-video1.avi-6.png 218,30,381,208,0 32,2,553,438,3
+./Data/JPEGImages/17757765__Zmppwqpsamto-video1.avi-7.png 232,31,381,208,0 36,1,549,435,3
+./Data/JPEGImages/17757765__Zmppwqpsamto-video1.avi-9.png 230,27,374,217,0 30,0,554,434,3
+./Data/JPEGImages/3978823__aGxpwq1tZWg=-video5.avi-0.png 228,112,361,236,0 103,68,525,368,3
+./Data/JPEGImages/3978823__aGxpwq1tZWg=-video5.avi-29.png 225,111,380,228,0 107,68,524,362,3
+./Data/JPEGImages/3f4ef12fdefbe5bc03f4e339a467fb4a-Type2-00005.png 182,198,334,343,0
+./Data/JPEGImages/3f4ef12fdefbe5bc03f4e339a467fb4a-Type2-00007.png 176,132,329,328,0
+./Data/JPEGImages/3f4ef12fdefbe5bc03f4e339a467fb4a-Type2-00009.png 207,208,317,296,0
+./Data/JPEGImages/54_17641304_video5__ZmpowqlmZmVn-video5.avi-0.png 244,216,387,342,2 106,0,555,434,1
+./Data/JPEGImages/54_17641304_video5__ZmpowqlmZmVn-video5.avi-1.png 244,216,387,342,2 106,2,553,434,1
+./Data/JPEGImages/54_17641304_video5__ZmpowqlmZmVn-video5.avi-10.png 244,216,387,342,2 106,2,553,434,1
+./Data/JPEGImages/54_17641304_video5__ZmpowqlmZmVn-video5.avi-11.png 244,216,387,342,2 106,2,553,434,1
+./Data/JPEGImages/54_17641304_video5__ZmpowqlmZmVn-video5.avi-12.png 244,216,387,342,2 106,2,553,434,1
+./Data/JPEGImages/54_17641304_video5__ZmpowqlmZmVn-video5.avi-13.png 244,216,387,342,2 106,2,553,434,1
+./Data/JPEGImages/54_17641304_video5__ZmpowqlmZmVn-video5.avi-14.png 244,216,387,342,2 106,2,553,434,1
+./Data/JPEGImages/54_17641304_video5__ZmpowqlmZmVn-video5.avi-15.png 244,216,387,342,2 106,2,553,434,1
+./Data/JPEGImages/54_17641304_video5__ZmpowqlmZmVn-video5.avi-16.png 244,216,387,342,2 106,2,553,434,1
+./Data/JPEGImages/54_17641304_video5__ZmpowqlmZmVn-video5.avi-17.png 244,216,387,342,2 106,2,553,434,1
+./Data/JPEGImages/54_17641304_video5__ZmpowqlmZmVn-video5.avi-18.png 244,216,387,342,2 106,2,553,434,1
+./Data/JPEGImages/54_17641304_video5__ZmpowqlmZmVn-video5.avi-19.png 244,216,387,342,2 106,2,553,434,1
+./Data/JPEGImages/54_17641304_video5__ZmpowqlmZmVn-video5.avi-2.png 244,216,387,342,2 106,2,553,434,1
+./Data/JPEGImages/54_17641304_video5__ZmpowqlmZmVn-video5.avi-20.png 244,216,387,342,2 106,2,553,434,1
+./Data/JPEGImages/54_17641304_video5__ZmpowqlmZmVn-video5.avi-21.png 244,216,387,342,2 106,2,553,434,1
+./Data/JPEGImages/54_17641304_video5__ZmpowqlmZmVn-video5.avi-22.png 244,216,387,342,2 106,2,553,434,1
+./Data/JPEGImages/54_17641304_video5__ZmpowqlmZmVn-video5.avi-23.png 244,216,387,342,2 106,2,553,434,1
+./Data/JPEGImages/54_17641304_video5__ZmpowqlmZmVn-video5.avi-24.png 244,216,387,342,2 106,2,553,434,1
+./Data/JPEGImages/54_17641304_video5__ZmpowqlmZmVn-video5.avi-25.png 244,216,387,342,2 106,2,553,434,1
+./Data/JPEGImages/54_17641304_video5__ZmpowqlmZmVn-video5.avi-26.png 244,216,387,342,2 106,2,553,434,1
+./Data/JPEGImages/54_17641304_video5__ZmpowqlmZmVn-video5.avi-27.png 244,216,387,342,2 106,2,553,434,1
+./Data/JPEGImages/54_17641304_video5__ZmpowqlmZmVn-video5.avi-28.png 244,216,387,342,2 106,2,553,434,1
+./Data/JPEGImages/54_17641304_video5__ZmpowqlmZmVn-video5.avi-29.png 244,216,387,342,2 106,2,553,434,1
+./Data/JPEGImages/54_17641304_video5__ZmpowqlmZmVn-video5.avi-3.png 244,216,387,342,2 106,2,553,434,1
+./Data/JPEGImages/54_17641304_video5__ZmpowqlmZmVn-video5.avi-30.png 244,216,387,342,2 106,2,553,434,1
+./Data/JPEGImages/54_17641304_video5__ZmpowqlmZmVn-video5.avi-31.png 244,216,387,342,2 106,2,553,434,1
+./Data/JPEGImages/54_17641304_video5__ZmpowqlmZmVn-video5.avi-32.png 244,216,387,342,2 106,2,553,434,1
+./Data/JPEGImages/54_17641304_video5__ZmpowqlmZmVn-video5.avi-33.png 244,216,387,342,2 106,2,553,434,1
+./Data/JPEGImages/54_17641304_video5__ZmpowqlmZmVn-video5.avi-34.png 244,216,387,342,2 106,2,553,434,1
+./Data/JPEGImages/54_17641304_video5__ZmpowqlmZmVn-video5.avi-35.png 244,216,387,342,2 106,2,553,434,1
+./Data/JPEGImages/54_17641304_video5__ZmpowqlmZmVn-video5.avi-36.png 244,216,387,342,2 106,2,553,434,1
+./Data/JPEGImages/54_17641304_video5__ZmpowqlmZmVn-video5.avi-37.png 244,216,387,342,2 106,2,553,434,1
+./Data/JPEGImages/54_17641304_video5__ZmpowqlmZmVn-video5.avi-4.png 244,216,387,342,2 106,2,553,434,1
+./Data/JPEGImages/54_17641304_video5__ZmpowqlmZmVn-video5.avi-5.png 244,216,387,342,2 106,2,553,434,1
+./Data/JPEGImages/54_17641304_video5__ZmpowqlmZmVn-video5.avi-6.png 244,216,387,342,2 106,2,553,434,1
+./Data/JPEGImages/54_17641304_video5__ZmpowqlmZmVn-video5.avi-7.png 244,216,387,342,2 106,2,553,434,1
+./Data/JPEGImages/54_17641304_video5__ZmpowqlmZmVn-video5.avi-8.png 244,216,387,342,2 106,2,553,434,1
+./Data/JPEGImages/54_17641304_video5__ZmpowqlmZmVn-video5.avi-9.png 244,216,387,342,2 106,2,553,434,1
+./Data/JPEGImages/55_14141549_video1__(1).png 194,160,389,287,2 102,0,507,429,4
+./Data/JPEGImages/55_14141549_video1__(11).png 181,229,389,365,2 67,1,537,435,4
+./Data/JPEGImages/55_14141549_video1__(14).png 181,229,389,365,2 67,1,537,435,4
+./Data/JPEGImages/55_14141549_video1__(15).png 181,229,389,365,2 67,1,537,435,4
+./Data/JPEGImages/55_14141549_video1__(16).png 181,229,389,365,2 67,1,537,435,4
+./Data/JPEGImages/55_14141549_video1__(17).png 181,229,389,365,2 67,1,537,435,4
+./Data/JPEGImages/55_14141549_video1__(18).png 181,229,389,365,2 67,1,537,435,4
+./Data/JPEGImages/55_14141549_video1__(20).png 181,229,389,365,2 67,1,537,435,4
+./Data/JPEGImages/55_14141549_video1__(21).png 181,229,389,365,2 67,1,537,435,4
+./Data/JPEGImages/55_14141549_video1__(22)_diff.png 181,229,389,365,2 67,1,537,435,4
+./Data/JPEGImages/55_14141549_video1__(23)_diff.png 181,229,389,365,2 67,1,537,435,4
+./Data/JPEGImages/55_14141549_video1__(26).png 181,229,389,365,2 67,1,537,435,4
+./Data/JPEGImages/55_14141549_video1__(27).png 181,229,389,365,2 67,1,537,435,4
+./Data/JPEGImages/55_14141549_video1__(28).png 181,229,389,365,2 67,1,537,435,4
+./Data/JPEGImages/55_14141549_video1__(29).png 181,229,389,365,2 67,1,537,435,4
+./Data/JPEGImages/55_14141549_video1__(31).png 181,229,389,365,2 67,1,537,435,4
+./Data/JPEGImages/55_14141549_video1__(33)_diff.png 181,229,389,365,2 67,1,537,435,4
+./Data/JPEGImages/55_14141549_video1__(4).png 181,229,389,365,2 67,1,537,435,4
+./Data/JPEGImages/55_14141549_video1__(5).png 181,229,389,365,2 67,1,537,435,4
+./Data/JPEGImages/55_14141549_video1__(6).png 181,229,389,365,2 67,1,537,435,4
+./Data/JPEGImages/55_14141549_video1__(7).png 181,229,389,365,2 67,1,537,435,4
+./Data/JPEGImages/57_14141549_video3_diff__(13).png 194,160,389,287,2 102,0,507,429,4
+./Data/JPEGImages/57_14141549_video3_diff__(14).png 194,160,389,287,2 102,0,507,429,4
+./Data/JPEGImages/57_14141549_video3_diff__(15).png 194,160,389,287,2 102,0,507,429,4
+./Data/JPEGImages/57_14141549_video3_diff__(16).png 194,160,389,287,2 102,0,507,429,4
+./Data/JPEGImages/57_14141549_video3_diff__(17).png 194,160,389,287,2 102,0,507,429,4
+./Data/JPEGImages/57_14141549_video3_diff__(19).png 194,160,389,287,2 102,0,507,429,4
+./Data/JPEGImages/57_14141549_video3_diff__(22).png 194,160,389,287,2 102,0,507,429,4
+./Data/JPEGImages/57_14141549_video3_diff__(23).png 194,160,389,287,2 102,0,507,429,4
+./Data/JPEGImages/57_14141549_video3_diff__(24).png 194,160,389,287,2 102,0,507,429,4
+./Data/JPEGImages/57_14141549_video3_diff__(25).png 194,160,389,287,2 102,0,507,429,4
+./Data/JPEGImages/57_14141549_video3_diff__(29).png 194,160,389,287,2 102,0,507,429,4
+./Data/JPEGImages/57_14141549_video3_diff__(4).png 194,160,389,287,2 102,0,507,429,4
+./Data/JPEGImages/59_14141549_video4__ZmdjwqlmaGls-video4.avi-0.png 206,198,324,299,2 110,0,552,418,1
+./Data/JPEGImages/59_14141549_video4__ZmdjwqlmaGls-video4.avi-1.png 206,198,324,299,2 110,0,552,418,1
+./Data/JPEGImages/59_14141549_video4__ZmdjwqlmaGls-video4.avi-10.png 206,198,324,299,2 110,0,552,418,1
+./Data/JPEGImages/59_14141549_video4__ZmdjwqlmaGls-video4.avi-11.png 206,198,324,299,2 110,0,552,418,1
+./Data/JPEGImages/59_14141549_video4__ZmdjwqlmaGls-video4.avi-12.png 206,198,324,299,2 110,0,552,418,1
+./Data/JPEGImages/59_14141549_video4__ZmdjwqlmaGls-video4.avi-13.png 206,198,324,299,2 110,0,552,418,1
+./Data/JPEGImages/59_14141549_video4__ZmdjwqlmaGls-video4.avi-14.png 206,198,324,299,2 110,0,552,418,1
+./Data/JPEGImages/59_14141549_video4__ZmdjwqlmaGls-video4.avi-15.png 206,198,324,299,2 110,0,552,418,1
+./Data/JPEGImages/59_14141549_video4__ZmdjwqlmaGls-video4.avi-16.png 206,198,324,299,2 110,0,552,418,1
+./Data/JPEGImages/59_14141549_video4__ZmdjwqlmaGls-video4.avi-17.png 206,198,324,299,2 110,0,552,418,1
+./Data/JPEGImages/59_14141549_video4__ZmdjwqlmaGls-video4.avi-18.png 206,198,324,299,2 110,0,552,418,1
+./Data/JPEGImages/59_14141549_video4__ZmdjwqlmaGls-video4.avi-19.png 206,198,324,299,2 110,0,552,418,1
+./Data/JPEGImages/59_14141549_video4__ZmdjwqlmaGls-video4.avi-2.png 206,198,324,299,2 110,0,552,418,1
+./Data/JPEGImages/59_14141549_video4__ZmdjwqlmaGls-video4.avi-20.png 206,198,324,299,2 110,0,552,418,1
+./Data/JPEGImages/59_14141549_video4__ZmdjwqlmaGls-video4.avi-21.png 206,198,324,299,2 110,0,552,418,1
+./Data/JPEGImages/59_14141549_video4__ZmdjwqlmaGls-video4.avi-22.png 206,198,324,299,2 110,0,552,418,1
+./Data/JPEGImages/59_14141549_video4__ZmdjwqlmaGls-video4.avi-23.png 206,198,324,299,2 110,0,552,418,1
+./Data/JPEGImages/59_14141549_video4__ZmdjwqlmaGls-video4.avi-24.png 206,198,324,299,2 110,0,552,418,1
+./Data/JPEGImages/59_14141549_video4__ZmdjwqlmaGls-video4.avi-25.png 206,198,324,299,2 110,0,552,418,1
+./Data/JPEGImages/59_14141549_video4__ZmdjwqlmaGls-video4.avi-26.png 206,198,324,299,2 110,0,552,418,1
+./Data/JPEGImages/59_14141549_video4__ZmdjwqlmaGls-video4.avi-27.png 206,198,324,299,2 110,0,552,418,1
+./Data/JPEGImages/59_14141549_video4__ZmdjwqlmaGls-video4.avi-28.png 206,198,324,299,2 110,0,552,418,1
+./Data/JPEGImages/59_14141549_video4__ZmdjwqlmaGls-video4.avi-29.png 206,198,324,299,2 110,0,552,418,1
+./Data/JPEGImages/59_14141549_video4__ZmdjwqlmaGls-video4.avi-3.png 206,198,324,299,2 110,0,552,418,1
+./Data/JPEGImages/59_14141549_video4__ZmdjwqlmaGls-video4.avi-30.png 206,198,324,299,2 110,0,552,418,1
+./Data/JPEGImages/59_14141549_video4__ZmdjwqlmaGls-video4.avi-31.png 206,198,324,299,2 110,0,552,418,1
+./Data/JPEGImages/59_14141549_video4__ZmdjwqlmaGls-video4.avi-4.png 206,198,324,299,2 110,0,552,418,1
+./Data/JPEGImages/59_14141549_video4__ZmdjwqlmaGls-video4.avi-5.png 206,198,324,299,2 110,0,552,418,1
+./Data/JPEGImages/59_14141549_video4__ZmdjwqlmaGls-video4.avi-6.png 206,198,324,299,2 110,0,552,418,1
+./Data/JPEGImages/59_14141549_video4__ZmdjwqlmaGls-video4.avi-7.png 206,198,324,299,2 110,0,552,418,1
+./Data/JPEGImages/59_14141549_video4__ZmdjwqlmaGls-video4.avi-8.png 206,198,324,299,2 110,0,552,418,1
+./Data/JPEGImages/59_14141549_video4__ZmdjwqlmaGls-video4.avi-9.png 206,198,324,299,2 110,0,552,418,1
+./Data/JPEGImages/63_15556395_video6__ZmhnwqprZm5o-video6.avi-0.png 251,253,410,358,2 59,5,554,441,6
+./Data/JPEGImages/63_15556395_video6__ZmhnwqprZm5o-video6.avi-1.png 251,253,410,358,2 59,5,554,441,6
+./Data/JPEGImages/63_15556395_video6__ZmhnwqprZm5o-video6.avi-10.png 251,253,410,358,2 59,5,554,441,6
+./Data/JPEGImages/63_15556395_video6__ZmhnwqprZm5o-video6.avi-11.png 251,253,410,358,2 59,5,554,441,6
+./Data/JPEGImages/63_15556395_video6__ZmhnwqprZm5o-video6.avi-12.png 251,253,410,358,2 59,5,554,441,6
+./Data/JPEGImages/63_15556395_video6__ZmhnwqprZm5o-video6.avi-13.png 251,253,410,358,2 59,5,554,441,6
+./Data/JPEGImages/63_15556395_video6__ZmhnwqprZm5o-video6.avi-2.png 251,253,410,358,2 59,5,554,441,6
+./Data/JPEGImages/63_15556395_video6__ZmhnwqprZm5o-video6.avi-3.png 251,253,410,358,2 59,5,554,441,6
+./Data/JPEGImages/63_15556395_video6__ZmhnwqprZm5o-video6.avi-4.png 251,253,410,358,2 59,5,554,441,6
+./Data/JPEGImages/63_15556395_video6__ZmhnwqprZm5o-video6.avi-5.png 251,253,410,358,2 59,5,554,441,6
+./Data/JPEGImages/63_15556395_video6__ZmhnwqprZm5o-video6.avi-6.png 251,253,410,358,2 59,5,554,441,6
+./Data/JPEGImages/63_15556395_video6__ZmhnwqprZm5o-video6.avi-7.png 251,253,410,358,2 59,5,554,441,6
+./Data/JPEGImages/63_15556395_video6__ZmhnwqprZm5o-video6.avi-8.png 251,253,410,358,2 59,5,554,441,6
+./Data/JPEGImages/63_15556395_video6__ZmhnwqprZm5o-video6.avi-9.png 251,253,410,358,2 59,5,554,441,6
+./Data/JPEGImages/69_15556395_video8__(10).png 196,189,364,329,2 0,0,549,441,4
+./Data/JPEGImages/69_15556395_video8__(11).png 196,189,364,329,2 0,0,549,441,4
+./Data/JPEGImages/69_15556395_video8__(12).png 196,189,364,329,2 0,0,549,441,4
+./Data/JPEGImages/69_15556395_video8__(13).png 196,189,364,329,2 0,0,549,441,4
+./Data/JPEGImages/69_15556395_video8__(3).png 196,189,364,329,2 0,0,549,441,4
+./Data/JPEGImages/69_15556395_video8__(4).png 196,189,364,329,2 0,0,549,441,4
+./Data/JPEGImages/69_15556395_video8__(6).png 196,189,364,329,2 0,0,549,441,4
+./Data/JPEGImages/69_15556395_video8__(7).png 196,189,364,329,2 0,0,549,441,4
+./Data/JPEGImages/69_15556395_video8__(8).png 196,189,364,329,2 0,0,549,441,4
+./Data/JPEGImages/69_15556395_video8__(9).png 196,189,364,329,2 0,0,549,441,4
+./Data/JPEGImages/70_15556395_video7__(1).png 157,176,351,336,2 28,0,553,437,4
+./Data/JPEGImages/70_15556395_video7__(10).png 157,176,351,336,2 28,0,553,437,4
+./Data/JPEGImages/70_15556395_video7__(11).png 157,176,351,336,2 28,0,553,437,4
+./Data/JPEGImages/70_15556395_video7__(12).png 157,176,351,336,2 28,0,553,437,4
+./Data/JPEGImages/70_15556395_video7__(13).png 157,176,351,336,2 28,0,553,437,4
+./Data/JPEGImages/70_15556395_video7__(2).png 157,176,351,336,2 28,0,553,437,4
+./Data/JPEGImages/70_15556395_video7__(3).png 157,176,351,336,2 28,0,553,437,4
+./Data/JPEGImages/70_15556395_video7__(4).png 157,176,351,336,2 28,0,553,437,4
+./Data/JPEGImages/70_15556395_video7__(5).png 157,176,351,336,2 28,0,553,437,4
+./Data/JPEGImages/70_15556395_video7__(6).png 157,176,351,336,2 28,0,553,437,4
+./Data/JPEGImages/70_15556395_video7__(7).png 157,176,351,336,2 28,0,553,437,4
+./Data/JPEGImages/70_15556395_video7__(8).png 157,176,351,336,2 28,0,553,437,4
+./Data/JPEGImages/70_15556395_video7__(9).png 157,176,351,336,2 28,0,553,437,4
+./Data/JPEGImages/71_17447437_video1__(10).png 210,153,322,292,2 100,62,446,370,4
+./Data/JPEGImages/71_17447437_video1__(19).png 210,153,322,292,2 100,62,446,370,4
+./Data/JPEGImages/71_17447437_video1__(2).png 210,153,322,292,2 100,62,446,370,4
+./Data/JPEGImages/71_17447437_video1__(20).png 210,153,322,292,2 100,62,446,370,4
+./Data/JPEGImages/71_17447437_video1__(22).png 210,153,322,292,2 100,62,446,370,4
+./Data/JPEGImages/71_17447437_video1__(23).png 210,153,322,292,2 100,62,446,370,4
+./Data/JPEGImages/71_17447437_video1__(25).png 210,153,322,292,2 100,62,446,370,4
+./Data/JPEGImages/71_17447437_video1__(26).png 210,153,322,292,2 100,62,446,370,4
+./Data/JPEGImages/71_17447437_video1__(27).png 210,153,322,292,2 100,62,446,370,4
+./Data/JPEGImages/71_17447437_video1__(3).png 210,153,322,292,2 100,62,446,370,4
+./Data/JPEGImages/71_17447437_video1__(31).png 210,153,322,292,2 100,62,446,370,4
+./Data/JPEGImages/71_17447437_video1__(32).png 210,153,322,292,2 100,62,446,370,4
+./Data/JPEGImages/71_17447437_video1__(33).png 210,153,322,292,2 100,62,446,370,4
+./Data/JPEGImages/71_17447437_video1__(42).png 210,153,322,292,2 100,62,446,370,4
+./Data/JPEGImages/71_17447437_video1__(43).png 210,153,322,292,2 100,62,446,370,4
+./Data/JPEGImages/71_17447437_video1__(44).png 210,153,322,292,2 100,62,446,370,4
+./Data/JPEGImages/71_17447437_video1__(45).png 210,153,322,292,2 100,62,446,370,4
+./Data/JPEGImages/71_17447437_video1__(47).png 210,153,322,292,2 100,62,446,370,4
+./Data/JPEGImages/71_17447437_video1__(50).png 210,153,322,292,2 100,62,446,370,4
+./Data/JPEGImages/71_17447437_video1__(8).png 210,153,322,292,2 100,62,446,370,4
+./Data/JPEGImages/71_17447437_video1__(9).png 210,153,322,292,2 100,62,446,370,4
+./Data/JPEGImages/92621d1736b3527f3c2b2a2f4233b8ba-Type2-00003.png 349,238,497,374,5
+./Data/JPEGImages/a123fa12f3e938609494f3a94bebe37f-_1_1-00003.png 308,234,382,329,5
+./Data/JPEGImages/a123fa12f3e938609494f3a94bebe37f-_1_1-00005.png 313,186,415,295,5
+./Data/JPEGImages/a123fa12f3e938609494f3a94bebe37f-_1_1-00007.png 321,195,428,294,5
+./Data/JPEGImages/a123fa12f3e938609494f3a94bebe37f-_1_1-00049.png 286,182,420,310,5
+./Data/JPEGImages/a123fa12f3e938609494f3a94bebe37f-_1_1-00051.png 320,185,415,292,5
+./Data/JPEGImages/a123fa12f3e938609494f3a94bebe37f-_1_2-00001.png 272,223,372,317,5
+./Data/JPEGImages/a123fa12f3e938609494f3a94bebe37f-_1_2-00007.png 306,172,442,263,5
+./Data/JPEGImages/a123fa12f3e938609494f3a94bebe37f-_1_2-00019.png 277,170,442,309,5
+./Data/JPEGImages/a123fa12f3e938609494f3a94bebe37f-_1_2-00021.png 284,169,412,285,5
+./Data/JPEGImages/a123fa12f3e938609494f3a94bebe37f-_1_2-00033.png 264,193,402,312,5
+./Data/JPEGImages/a123fa12f3e938609494f3a94bebe37f-_1_2-00035.png 279,172,435,275,5
+./Data/JPEGImages/a123fa12f3e938609494f3a94bebe37f-_1_2-00037.png 314,172,444,284,5
+./Data/JPEGImages/a123fa12f3e938609494f3a94bebe37f-_1_3-00003-difficult.png 280,202,408,312,5
+./Data/JPEGImages/a123fa12f3e938609494f3a94bebe37f-_1_3-00005.png 297,185,423,295,5
+./Data/JPEGImages/a123fa12f3e938609494f3a94bebe37f-_1_3-00007.png 302,181,412,268,5
+./Data/JPEGImages/a123fa12f3e938609494f3a94bebe37f-_1_3-00017.png 288,183,401,311,5
+./Data/JPEGImages/a123fa12f3e938609494f3a94bebe37f-_1_3-00019.png 295,187,427,309,5
+./Data/JPEGImages/a123fa12f3e938609494f3a94bebe37f-_1_3-00031.png 282,185,387,329,5
+./Data/JPEGImages/a123fa12f3e938609494f3a94bebe37f-_1_3-00033.png 291,174,434,297,5
+./Data/JPEGImages/B_17641304_video1__(10).png 200,180,331,312,2 71,0,515,435,4
+./Data/JPEGImages/B_17641304_video1__(14).png 200,180,331,312,2 69,0,519,430,4
+./Data/JPEGImages/B_17641304_video1__(15).png 200,180,331,312,2 73,2,524,429,4
+./Data/JPEGImages/B_17641304_video1__(22).png 200,180,331,312,2 69,-1,520,441,4
+./Data/JPEGImages/B_17641304_video1__(23).png 200,180,331,312,2 74,1,530,433,4
+./Data/JPEGImages/B_17641304_video1__(24).png 200,180,331,312,2 65,2,526,437,4
+./Data/JPEGImages/B_17641304_video1__(25).png 200,180,331,312,2 68,2,527,436,4
+./Data/JPEGImages/B_17641304_video1__(26).png 200,180,331,312,2 75,0,524,434,4
+./Data/JPEGImages/B_17641304_video1__(27).png 200,180,331,312,2 71,3,527,434,4
+./Data/JPEGImages/B_17641304_video1__(28).png 200,180,331,312,2 69,4,529,432,4
+./Data/JPEGImages/B_17641304_video1__(31).png 200,180,331,312,2 77,3,514,436,4
+./Data/JPEGImages/B_17641304_video1__(38).png 200,180,331,312,2 72,3,510,430,4
+./Data/JPEGImages/B_17641304_video1__(39).png 200,180,331,312,2 72,3,510,430,4
+./Data/JPEGImages/B_17641304_video1__(4).png 200,180,331,312,2 72,3,510,430,4
+./Data/JPEGImages/B_17641304_video1__(40).png 200,180,331,312,2 72,3,510,430,4
+./Data/JPEGImages/B_17641304_video1__(41).png 200,180,331,312,2 72,3,510,430,4
+./Data/JPEGImages/B_17641304_video1__(42).png 200,180,331,312,2 72,3,510,430,4
+./Data/JPEGImages/B_17641304_video1__(43).png 200,180,331,312,2 72,3,510,430,4
+./Data/JPEGImages/B_17641304_video1__(44).png 200,180,331,312,2 72,3,510,430,4
+./Data/JPEGImages/B_17641304_video1__(45).png 200,180,331,312,2 72,3,510,430,4
+./Data/JPEGImages/B_17641304_video1__(46).png 200,180,331,312,2 72,3,510,430,4
+./Data/JPEGImages/B_17641304_video1__(5).png 200,180,331,312,2 72,3,510,430,4
+./Data/JPEGImages/B_17641304_video1__(6).png 200,180,331,312,2 72,3,510,430,4
+./Data/JPEGImages/B_17641304_video1__(7).png 200,180,331,312,2 72,3,510,430,4
+./Data/JPEGImages/B_17641304_video1__(8).png 200,180,331,312,2 90,3,510,419,4
+./Data/JPEGImages/B_17641304_video1__(9).png 200,180,331,312,2 90,3,510,419,4
+./Data/JPEGImages/C_17641304_video3__(10).png 227,177,371,318,2 78,2,502,433,4
+./Data/JPEGImages/C_17641304_video3__(11).png 227,177,371,318,2 78,2,502,433,4
+./Data/JPEGImages/C_17641304_video3__(13).png 227,177,371,318,2 78,2,502,433,4
+./Data/JPEGImages/C_17641304_video3__(14).png 227,177,371,318,2 78,2,502,433,4
+./Data/JPEGImages/C_17641304_video3__(16).png 227,177,371,318,2 78,2,502,433,4
+./Data/JPEGImages/C_17641304_video3__(17).png 227,177,371,318,2 78,2,502,433,4
+./Data/JPEGImages/C_17641304_video3__(18).png 227,177,371,318,2 78,2,502,433,4
+./Data/JPEGImages/C_17641304_video3__(19).png 227,177,371,318,2 78,2,502,433,4
+./Data/JPEGImages/C_17641304_video3__(20).png 227,177,371,318,2 78,2,502,433,4
+./Data/JPEGImages/C_17641304_video3__(21).png 227,177,371,318,2 78,2,502,433,4
+./Data/JPEGImages/C_17641304_video3__(22).png 227,177,371,318,2 78,2,502,433,4
+./Data/JPEGImages/C_17641304_video3__(23).png 227,177,371,318,2 78,2,502,433,4
+./Data/JPEGImages/C_17641304_video3__(24).png 227,177,371,318,2 78,2,502,433,4
+./Data/JPEGImages/C_17641304_video3__(25).png 227,177,371,318,2 78,2,502,433,4
+./Data/JPEGImages/C_17641304_video3__(26).png 227,177,371,318,2 78,2,502,433,4
+./Data/JPEGImages/C_17641304_video3__(28).png 227,177,371,318,2 78,2,502,433,4
+./Data/JPEGImages/C_17641304_video3__(29).png 227,177,371,318,2 78,2,502,433,4
+./Data/JPEGImages/C_17641304_video3__(33).png 227,177,371,318,2 78,2,502,433,4
+./Data/JPEGImages/C_17641304_video3__(34).png 227,177,371,318,2 78,2,502,433,4
+./Data/JPEGImages/C_17641304_video3__(35).png 227,177,371,318,2 78,2,502,433,4
+./Data/JPEGImages/C_17641304_video3__(36).png 227,177,371,318,2 78,2,502,433,4
+./Data/JPEGImages/C_17641304_video3__(37).png 227,177,371,318,2 78,2,502,433,4
+./Data/JPEGImages/C_17641304_video3__(38).png 227,177,371,318,2 78,2,502,433,4
+./Data/JPEGImages/C_17641304_video3__(39).png 227,177,371,318,2 78,2,502,433,4
+./Data/JPEGImages/C_17641304_video3__(4).png 227,177,371,318,2 78,2,502,433,4
+./Data/JPEGImages/C_17641304_video3__(40).png 227,177,371,318,2 78,2,502,433,4
+./Data/JPEGImages/C_17641304_video3__(41).png 227,177,371,318,2 78,2,502,433,4
+./Data/JPEGImages/C_17641304_video3__(42).png 227,177,371,318,2 78,2,502,433,4
+./Data/JPEGImages/C_17641304_video3__(43).png 227,177,371,318,2 78,2,502,433,4
+./Data/JPEGImages/C_17641304_video3__(44).png 227,177,371,318,2 78,2,502,433,4
+./Data/JPEGImages/C_17641304_video3__(45).png 227,177,371,318,2 78,2,502,433,4
+./Data/JPEGImages/C_17641304_video3__(5).png 227,177,371,318,2 78,2,502,433,4
+./Data/JPEGImages/C_17641304_video3__(6).png 227,177,371,318,2 78,2,502,433,4
+./Data/JPEGImages/C_17641304_video3__(7).png 227,177,371,318,2 78,2,502,433,4
+./Data/JPEGImages/C_17641304_video3__(8).png 227,177,371,318,2 78,2,502,433,4
+./Data/JPEGImages/C_17641304_video3__(9).png 227,177,371,318,2 78,2,502,433,4
+./Data/JPEGImages/d0b8fe20e0849053cdffe067ea40c185-_1_1-00002.png 222,129,352,325,0
+./Data/JPEGImages/d0b8fe20e0849053cdffe067ea40c185-_1_1-00004.png 228,124,345,313,0
+./Data/JPEGImages/d0b8fe20e0849053cdffe067ea40c185-_1_1-00005.png 231,117,352,272,0
+./Data/JPEGImages/d0b8fe20e0849053cdffe067ea40c185-_1_1-00006.png 227,112,365,265,0
+./Data/JPEGImages/d0b8fe20e0849053cdffe067ea40c185-_1_1-00014.png 221,146,336,273,0
+./Data/JPEGImages/d0b8fe20e0849053cdffe067ea40c185-_1_1-00015-difficult.png 241,145,362,268,0
+./Data/JPEGImages/d0b8fe20e0849053cdffe067ea40c185-_1_1-00017.png 228,135,351,311,0
+./Data/JPEGImages/d0b8fe20e0849053cdffe067ea40c185-_1_1-00018.png 240,143,348,291,0
+./Data/JPEGImages/d0b8fe20e0849053cdffe067ea40c185-_1_1-00019.png 232,130,328,248,0
+./Data/JPEGImages/d0b8fe20e0849053cdffe067ea40c185-_1_1-00021.png 240,179,333,272,0
+./Data/JPEGImages/d0b8fe20e0849053cdffe067ea40c185-_1_1-00023.png 241,158,347,282,0
+./Data/JPEGImages/d0b8fe20e0849053cdffe067ea40c185-_1_1-00025.png 244,148,366,290,0
+./Data/JPEGImages/d0b8fe20e0849053cdffe067ea40c185-_1_1-00027.png 229,149,358,299,0
+./Data/JPEGImages/d0b8fe20e0849053cdffe067ea40c185-_1_1-00030.png 250,139,351,255,0
+./Data/JPEGImages/d0b8fe20e0849053cdffe067ea40c185-_1_1-00031.png 249,119,372,227,0
+./Data/JPEGImages/d0b8fe20e0849053cdffe067ea40c185-_1_2-00001.png 229,141,353,266,0
+./Data/JPEGImages/d0b8fe20e0849053cdffe067ea40c185-_1_2-00008.png 225,142,351,262,0
+./Data/JPEGImages/d0b8fe20e0849053cdffe067ea40c185-_1_2-00009.png 233,192,362,295,0
+./Data/JPEGImages/d0b8fe20e0849053cdffe067ea40c185-_1_2-00017.png 240,185,355,283,0
+./Data/JPEGImages/d0b8fe20e0849053cdffe067ea40c185-_1_2-00018.png 231,178,362,297,0
+./Data/JPEGImages/d0b8fe20e0849053cdffe067ea40c185-_1_2-00019.png 248,137,345,260,0
+./Data/JPEGImages/d0b8fe20e0849053cdffe067ea40c185-_1_2-00021.png 275,131,358,213,0
+./Data/JPEGImages/da300e3e19e213f975f49ece5b4b811b-Type2-00001.png 243,117,359,278,0
+./Data/JPEGImages/da300e3e19e213f975f49ece5b4b811b-Type2-00003.png 242,123,341,293,0
+./Data/JPEGImages/da300e3e19e213f975f49ece5b4b811b-Type2-00007.png 234,125,341,298,0
+./Data/JPEGImages/da300e3e19e213f975f49ece5b4b811b-Type2-00009.png 236,124,340,286,0
+./Data/JPEGImages/da300e3e19e213f975f49ece5b4b811b-Type2-00011.png 229,127,361,302,0
+./Data/JPEGImages/da300e3e19e213f975f49ece5b4b811b-Type2-00013.png 199,160,323,299,0
+./Data/JPEGImages/da300e3e19e213f975f49ece5b4b811b-Type2-00015.png 204,154,325,306,0
+./Data/JPEGImages/da300e3e19e213f975f49ece5b4b811b-Type2-00017.png 225,120,348,311,0
+./Data/JPEGImages/da300e3e19e213f975f49ece5b4b811b-Type2-00019.png 231,107,348,280,0
+./Data/JPEGImages/da300e3e19e213f975f49ece5b4b811b-Type2-00021.png 233,117,348,272,0
+./Data/JPEGImages/da300e3e19e213f975f49ece5b4b811b-Type2-00025.png 224,134,324,277,0
+./Data/JPEGImages/da300e3e19e213f975f49ece5b4b811b-Type2-00027.png 209,113,338,307,0
+./Data/JPEGImages/ICVSD-d0b8fe20e0849053cdffe067ea40c185-_1_2-00021.png 275,131,358,213,0
+./Data/JPEGImages/long-axixa123fa12f3e938609494f3a94bebe37f-_1_1-00003.png 308,234,382,329,5
+./Data/JPEGImages/ZmNjwqpnZmlr-video10.avi-1.png 254,107,294,146,7 312,143,342,174,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video10.avi-10.png 286,108,333,147,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video10.avi-2.png 267,101,300,133,7 309,138,344,176,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video10.avi-3.png 311,136,342,175,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video10.avi-5.png 314,116,347,154,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video10.avi-9.png 278,105,323,149,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video11.avi-1.png 273,114,295,142,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video11.avi-10.png 263,99,290,130,7 304,131,343,181,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video11.avi-11.png 307,135,346,188,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video11.avi-12.png 322,147,344,177,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video11.avi-16.png 274,113,307,142,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video11.avi-2.png 270,102,304,130,7 269,137,288,153,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video11.avi-3.png 309,128,345,173,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video11.avi-5-difficult.png 256,120,306,191,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video11.avi-8.png 251,110,297,152,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video11.avi-9.png 249,103,297,147,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video12.avi-0.png 146,154,281,250,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video12.avi-1.png 157,167,268,243,7 219,112,326,166,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video12.avi-10.png 143,160,274,252,7 306,111,343,150,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video12.avi-17.png 163,139,295,248,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video12.avi-4.png 310,92,360,220,7 236,129,308,216,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video12.avi-5.png 293,93,366,179,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video12.avi-9.png 138,170,262,219,7 210,110,328,164,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video13.avi-1.png 163,174,264,247,7 230,120,321,170,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video13.avi-10.png 241,133,307,189,7 308,107,352,166,7 146,181,239,246,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video13.avi-11.png 241,102,343,194,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video13.avi-2.png 258,106,352,188,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video13.avi-3.png 266,110,351,181,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video13.avi-4.png 253,95,360,181,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video13.avi-5.png 271,95,362,176,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video13.avi-6.png 250,100,358,224,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video13.avi-7.png 322,431,364,464,7 295,106,362,210,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video13.avi-9.png 160,170,232,283,7 225,112,338,198,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video14.avi-0.png 296,90,378,202,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video14.avi-1.png 228,134,294,175,7 145,166,247,251,7 305,98,357,176,7 314,137,388,231,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video14.avi-2.png 294,101,370,197,7 341,165,430,249,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video14.avi-5.png 164,177,268,279,7 247,133,369,212,7 351,135,436,221,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video14.avi-6.png 326,99,444,186,7 190,160,248,231,7 374,188,451,254,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video15.avi-0.png 333,96,407,193,7 164,164,287,243,7 266,119,329,208,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video15.avi-1.png 193,163,285,247,7 255,122,338,212,7 327,86,391,198,7 351,154,445,220,7 386,174,497,262,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video15.avi-2.png 328,110,393,205,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video15.avi-3.png 364,160,449,247,7 332,96,396,183,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video15.avi-4.png 405,165,464,247,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video19.avi-2.png 298,199,391,273,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video20.avi-1.png 281,190,422,319,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video20.avi-10.png 305,208,406,285,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video20.avi-2.png 289,198,410,310,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video20.avi-3.png 316,213,405,283,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video20.avi-8-difficult.png 204,217,275,291,7 238,166,325,250,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video20.avi-9.png 276,197,405,296,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video21.avi-1.png 297,203,413,285,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video21.avi-10.png 328,220,404,285,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video21.avi-11.png 304,202,418,301,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video21.avi-12.png 320,210,432,316,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video21.avi-13.png 330,229,412,305,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video21.avi-17-difficult.png 332,201,407,283,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video21.avi-2.png 270,194,422,325,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video21.avi-3.png 282,192,426,326,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video21.avi-4.png 297,201,418,303,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video21.avi-8.png 322,201,400,286,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video21.avi-9.png 320,205,401,288,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video22.avi-10.png 262,240,338,317,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video22.avi-11.png 282,261,360,356,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video28.avi-1.png 231,203,321,297,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video28.avi-18.png 234,207,335,284,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video28.avi-19.png 242,202,325,270,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video28.avi-2.png 224,196,328,288,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video28.avi-20.png 220,193,339,298,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video28.avi-21.png 230,192,337,291,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video28.avi-22.png 237,195,333,284,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video28.avi-3.png 225,214,318,295,7 310,162,403,241,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video28.avi-36.png 203,200,374,274,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video28.avi-37.png 230,209,353,275,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video28.avi-38.png 234,202,351,298,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video28.avi-39.png 220,199,350,291,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video28.avi-4.png 224,206,332,291,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video28.avi-40.png 232,191,358,301,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video28.avi-41.png 238,193,355,281,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video28.avi-5.png 222,206,341,292,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video28.avi-54.png 217,208,367,286,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video28.avi-55.png 210,204,330,288,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video28.avi-56.png 218,206,336,290,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video28.avi-57.png 212,202,358,303,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video28.avi-58.png 205,203,341,304,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video28.avi-71.png 214,193,351,295,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video28.avi-72.png 230,192,341,278,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video28.avi-73.png 227,193,361,304,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video28.avi-74.png 222,191,360,307,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video28.avi-75.png 224,191,383,308,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video28.avi-76.png 232,177,374,293,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video3.avi-10.png 241,134,297,195,7 301,122,368,203,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video3.avi-11.png 283,127,369,200,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video3.avi-13.png 267,82,383,202,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video3.avi-2.png 295,132,382,235,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video3.avi-4.png 247,97,386,185,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video3.avi-5.png 301,109,382,203,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video30.avi-15.png 257,111,303,166,7 305,109,367,216,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video30.avi-16.png 279,124,367,206,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video30.avi-2.png 266,96,368,215,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video30.avi-26.png 304,129,359,186,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video30.avi-27.png 286,117,374,198,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video30.avi-28.png 270,119,384,221,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video30.avi-29.png 269,110,364,208,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video30.avi-3.png 278,94,397,186,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video30.avi-30.png 276,107,353,174,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video30.avi-4.png 285,93,377,174,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video30.avi-40.png 291,122,357,188,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video30.avi-41.png 271,122,374,207,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video30.avi-42.png 270,124,362,200,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video30.avi-43.png 283,118,380,191,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video30.avi-5.png 358,152,424,229,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video30.avi-53.png 287,135,356,202,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video30.avi-54.png 274,119,362,215,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video30.avi-55.png 266,89,376,219,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video30.avi-65.png 286,116,373,206,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video30.avi-9.png 291,87,382,217,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video31.avi-18.png 281,127,335,199,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video31.avi-19.png 224,153,308,231,7 276,125,349,197,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video31.avi-2.png 281,126,355,205,7 230,174,287,279,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video31.avi-20.png 278,126,351,212,7 230,156,309,240,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video31.avi-21.png 230,156,305,220,7 278,139,347,200,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video31.avi-22.png 228,135,356,204,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video31.avi-23.png 262,145,341,200,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video31.avi-3.png 286,137,348,193,7 213,165,299,258,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video31.avi-36.png 283,139,362,207,7 216,166,307,258,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video31.avi-37.png 222,129,342,245,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video31.avi-38.png 228,157,311,241,7 280,126,349,193,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video31.avi-39.png 259,110,373,226,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video31.avi-4-difficult.png 280,125,348,191,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video31.avi-40.png 258,116,338,202,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video31.avi-53.png 278,116,368,227,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video31.avi-54.png 277,118,369,206,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video31.avi-55.png 282,110,365,224,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video31.avi-56.png 299,125,357,210,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video31.avi-69.png 288,129,374,223,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video31.avi-70.png 284,125,370,218,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video31.avi-71.png 288,139,374,218,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video31.avi-72.png 295,139,366,203,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video31.avi-73.png 272,135,343,202,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video32.avi-17.png 281,130,344,212,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video32.avi-18.png 276,136,360,202,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video32.avi-19.png 278,124,370,206,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video32.avi-20.png 280,132,377,203,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video32.avi-21.png 276,127,378,214,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video32.avi-54.png 272,131,371,206,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video32.avi-55.png 276,132,356,218,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video32.avi-56.png 286,139,361,202,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video32.avi-57.png 277,133,367,213,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video32.avi-73.png 267,125,370,217,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video32.avi-74.png 259,135,391,214,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video32.avi-75.png 289,128,378,197,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video32.avi-76.png 281,130,370,202,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video33.avi-19.png 287,140,361,197,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video33.avi-2.png 285,131,368,202,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video33.avi-20.png 287,132,374,202,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video33.avi-21.png 291,124,378,199,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video33.avi-3.png 289,129,388,202,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video33.avi-36.png 283,127,383,199,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video33.avi-37.png 297,127,391,217,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video33.avi-38.png 303,131,380,197,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video33.avi-4.png 288,129,387,206,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video33.avi-75.png 297,129,371,200,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video33.avi-76.png 301,135,373,191,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video33.avi-77.png 312,132,364,182,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video34.avi-1.png 275,119,348,177,7 342,104,403,167,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video34.avi-18.png 258,102,343,175,7 319,94,390,155,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video34.avi-19.png 272,77,374,189,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video34.avi-2.png 279,79,393,179,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video34.avi-20.png 279,91,385,172,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video34.avi-21.png 316,90,383,154,7 274,106,335,181,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video34.avi-3.png 328,88,414,160,7 286,97,357,189,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video34.avi-35.png 337,104,372,145,7 278,108,349,179,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video34.avi-36.png 328,97,388,162,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video34.avi-37.png 314,89,401,169,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video34.avi-38.png 315,93,407,176,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video34.avi-54.png 330,90,406,177,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video34.avi-55.png 317,92,399,165,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video34.avi-56.png 313,97,392,161,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video34.avi-71.png 324,102,385,154,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video34.avi-72.png 300,111,361,150,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video34.avi-73.png 303,92,395,162,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video34.avi-88.png 274,91,347,153,7 320,97,387,152,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video35.avi-21.png 316,80,379,137,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video35.avi-22.png 314,79,374,128,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video35.avi-56.png 279,77,343,149,7 312,99,383,160,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video35.avi-57.png 296,78,380,141,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video35.avi-58.png 283,68,366,144,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video35.avi-59.png 299,81,356,139,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video35.avi-60.png 290,72,352,137,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video35.avi-74.png 301,61,395,166,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video35.avi-75.png 301,64,378,164,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video35.avi-76.png 303,67,377,142,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video35.avi-77.png 281,70,373,149,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video35.avi-82.png 304,75,385,146,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video36.avi-1.png 328,179,422,270,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video36.avi-10.png 346,192,420,265,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video36.avi-11-difficult.png 353,199,423,258,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video36.avi-15-difficult.png 347,177,432,250,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video36.avi-16-difficult.png 342,186,455,259,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video36.avi-2.png 326,184,441,274,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video36.avi-26.png 358,179,440,247,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video36.avi-27.png 362,180,454,261,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video36.avi-28.png 356,181,447,250,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video36.avi-3.png 337,190,447,273,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video36.avi-37.png 349,181,452,254,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video36.avi-38.png 346,173,464,258,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video36.avi-39.png 354,171,445,252,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video36.avi-44.png 342,170,419,242,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video36.avi-46.png 334,156,422,234,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video36.avi-47.png 330,157,433,243,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video36.avi-49.png 334,164,435,251,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video36.avi-50.png 314,176,412,243,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video36.avi-59.png 351,170,430,249,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video36.avi-9.png 348,198,422,267,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video6.avi-1.png 255,115,328,181,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video6.avi-10.png 254,94,324,170,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video6.avi-11.png 263,95,332,165,7 299,408,366,478,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video6.avi-17.png 274,116,347,184,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video6.avi-2.png 249,97,324,171,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video6.avi-3.png 257,85,315,150,7 311,137,361,209,7 237,131,295,202,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video6.avi-6.png 233,88,356,229,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video6.avi-8.png 237,97,340,166,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video7.avi-0.png 245,90,335,167,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video7.avi-1.png 230,79,332,160,7 306,130,373,207,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video7.avi-10.png 274,106,382,183,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video7.avi-12.png 270,92,368,182,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video7.avi-2.png 233,83,328,154,7 279,395,361,461,7 280,129,370,208,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video7.avi-8.png 217,63,337,188,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video7.avi-9.png 241,80,312,152,7 286,123,368,199,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video8.avi-1.png 233,111,326,211,7 172,142,261,224,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video8.avi-10.png 274,117,358,202,7 217,149,308,229,7 311,398,351,412,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video8.avi-2.png 185,140,286,226,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video8.avi-9.png 203,110,334,218,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video9.avi-10.png 249,80,320,168,7 309,120,368,212,7 269,411,360,464,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video9.avi-8.png 251,100,319,193,7
+./Data/JPEGImages/ZmNjwqpnZmlr-video9.avi-9.png 250,87,323,179,7 293,134,376,206,7
+./Data/JPEGImages/ZmNmwq1lY2s=-video1.avi-0.png 230,186,341,268,0
+./Data/JPEGImages/ZmNmwq1lY2s=-video1.avi-1.png 257,212,326,264,0
+./Data/JPEGImages/ZmNmwq1lY2s=-video1.avi-10.png 237,189,323,289,0
+./Data/JPEGImages/ZmNmwq1lY2s=-video1.avi-11.png 221,186,329,268,0
+./Data/JPEGImages/ZmNmwq1lY2s=-video1.avi-12.png 244,116,320,259,0
+./Data/JPEGImages/ZmNmwq1lY2s=-video1.avi-14-difficult.png 239,110,350,218,0
+./Data/JPEGImages/ZmNmwq1lY2s=-video1.avi-15.png 254,162,324,250,0
+./Data/JPEGImages/ZmNmwq1lY2s=-video1.avi-16-difficult.png 249,177,301,244,0
+./Data/JPEGImages/ZmNmwq1lY2s=-video1.avi-17.png 239,139,325,252,0
+./Data/JPEGImages/ZmNmwq1lY2s=-video1.avi-18.png 241,123,319,242,0
+./Data/JPEGImages/ZmNmwq1lY2s=-video1.avi-19-difficult.png 249,195,307,256,0
+./Data/JPEGImages/ZmNmwq1lY2s=-video1.avi-2.png 249,134,326,263,0
+./Data/JPEGImages/ZmNmwq1lY2s=-video1.avi-20.png 250,184,318,276,0
+./Data/JPEGImages/ZmNmwq1lY2s=-video1.avi-21.png 243,179,336,267,0
+./Data/JPEGImages/ZmNmwq1lY2s=-video1.avi-22.png 241,183,332,272,0
+./Data/JPEGImages/ZmNmwq1lY2s=-video1.avi-3.png 268,162,330,263,0
+./Data/JPEGImages/ZmNmwq1lY2s=-video1.avi-4-difficult.png 272,192,330,262,0
+./Data/JPEGImages/ZmNmwq1lY2s=-video1.avi-5.png 248,158,326,266,0
+./Data/JPEGImages/ZmNmwq1lY2s=-video1.avi-6.png 256,137,307,245,0
+./Data/JPEGImages/ZmNmwq1lY2s=-video1.avi-7.png 237,143,310,252,0
+./Data/JPEGImages/ZmNmwq1lY2s=-video1.avi-8.png 237,140,305,257,0
+./Data/JPEGImages/ZmNmwq1lY2s=-video1.avi-9.png 238,191,310,263,0
+./Data/JPEGImages/ZmVjwqluZGxp-video2.avi-18-difficult.png 224,254,322,333,0
+./Data/JPEGImages/ZmVjwqluZGxp-video2.avi-19.png 255,164,357,302,0
+./Data/JPEGImages/ZmVjwqluZGxp-video2.avi-2.png 243,126,352,329,0
+./Data/JPEGImages/ZmVjwqluZGxp-video2.avi-20.png 250,137,372,291,0
+./Data/JPEGImages/ZmVjwqluZGxp-video2.avi-3.png 239,131,370,331,0
+./Data/JPEGImages/ZmVjwqluZGxp-video2.avi-34.png 236,213,380,366,0
+./Data/JPEGImages/ZmVjwqluZGxp-video2.avi-35.png 244,135,388,318,0
+./Data/JPEGImages/ZmVjwqluZGxp-video2.avi-36.png 249,117,391,322,0
+./Data/JPEGImages/ZmVjwqluZGxp-video2.avi-37.png 256,133,374,313,0
+./Data/JPEGImages/ZmVjwqluZGxp-video2.avi-38.png 254,129,373,293,0
+./Data/JPEGImages/ZmVjwqluZGxp-video2.avi-39.png 251,147,366,288,0
+./Data/JPEGImages/ZmVjwqluZGxp-video2.avi-4.png 235,122,367,323,0
+./Data/JPEGImages/ZmVjwqluZGxp-video2.avi-40-difficult.png 252,154,376,274,0
+./Data/JPEGImages/ZmVjwqluZGxp-video2.avi-41.png 268,139,355,254,0
+./Data/JPEGImages/ZmVjwqluZGxp-video2.avi-43.png 229,146,345,304,0
+./Data/JPEGImages/ZmVjwqluZGxp-video2.avi-49.png 233,209,343,357,0
+./Data/JPEGImages/ZmVjwqluZGxp-video2.avi-5.png 245,129,360,314,0
+./Data/JPEGImages/ZmVjwqluZGxp-video2.avi-50.png 238,130,383,325,0
+./Data/JPEGImages/ZmVjwqluZGxp-video2.avi-51.png 243,121,385,325,0
+./Data/JPEGImages/ZmVjwqluZGxp-video2.avi-52.png 235,130,391,323,0
+./Data/JPEGImages/ZmVjwqluZGxp-video2.avi-53.png 254,138,401,318,0
+./Data/JPEGImages/ZmVjwqluZGxp-video2.avi-54.png 249,125,384,303,0
+./Data/JPEGImages/ZmVjwqluZGxp-video2.avi-55.png 259,141,376,287,0
+./Data/JPEGImages/ZmVjwqluZGxp-video2.avi-56.png 258,140,381,275,0
+./Data/JPEGImages/ZmVjwqluZGxp-video2.avi-6.png 249,135,366,305,0
+./Data/JPEGImages/ZmVjwqluZGxp-video2.avi-7.png 251,136,368,299,0
+./Data/JPEGImages/ZmVjwqluZGxp-video2.avi-72.png 247,125,367,324,0
+./Data/JPEGImages/ZmVjwqluZGxp-video2.avi-73.png 248,132,365,330,0
+./Data/JPEGImages/ZmVjwqluZGxp-video2.avi-74.png 243,120,376,314,0
+./Data/JPEGImages/ZmVjwqluZGxp-video2.avi-75.png 239,126,371,315,0
+./Data/JPEGImages/ZmVjwqluZGxp-video2.avi-76.png 253,124,375,306,0
+./Data/JPEGImages/ZmVjwqluZGxp-video2.avi-77.png 248,133,381,292,0
+./Data/JPEGImages/ZmVjwqluZGxp-video2.avi-78.png 255,131,372,291,0
+./Data/JPEGImages/ZmVjwqluZGxp-video2.avi-8.png 250,141,358,295,0
+./Data/JPEGImages/ZmVjwqluZGxp-video2.avi-80.png 222,123,357,339,0
+./Data/JPEGImages/ZmVjwqluZGxp-video2.avi-88.png 224,218,363,313,0
+./Data/JPEGImages/ZmVjwqluZGxp-video2.avi-89.png 239,126,342,316,0
+./Data/JPEGImages/ZmVjwqluZGxp-video3.avi-0.png 214,135,364,314,0
+./Data/JPEGImages/ZmVjwqluZGxp-video3.avi-10.png 219,116,316,309,0
+./Data/JPEGImages/ZmVjwqluZGxp-video3.avi-11.png 203,149,336,319,0
+./Data/JPEGImages/ZmVjwqluZGxp-video3.avi-13.png 293,235,357,299,0
+./Data/JPEGImages/ZmVjwqluZGxp-video3.avi-14.png 246,133,369,322,0
+./Data/JPEGImages/ZmVjwqluZGxp-video3.avi-15.png 243,122,360,316,0
+./Data/JPEGImages/ZmVjwqluZGxp-video3.avi-17-difficult.png 272,146,365,275,0
+./Data/JPEGImages/ZmVjwqluZGxp-video3.avi-17.png 272,146,365,275,0
+./Data/JPEGImages/ZmVjwqluZGxp-video3.avi-20.png 197,155,339,352,0
+./Data/JPEGImages/ZmVjwqluZGxp-video3.avi-21.png 197,142,324,336,0
+./Data/JPEGImages/ZmVjwqluZGxp-video3.avi-24.png 212,123,346,347,0
+./Data/JPEGImages/ZmVjwqluZGxp-video3.avi-26.png 208,122,337,310,0
+./Data/JPEGImages/ZmVjwqluZGxp-video3.avi-27.png 201,126,344,305,0
+./Data/JPEGImages/ZmVjwqluZGxp-video3.avi-28.png 218,151,334,291,0
+./Data/JPEGImages/ZmVjwqluZGxp-video3.avi-29.png 193,127,338,292,0
+./Data/JPEGImages/ZmVjwqluZGxp-video3.avi-32.png 208,191,317,310,0
+./Data/JPEGImages/ZmVjwqluZGxp-video3.avi-38.png 211,191,319,283,0
+./Data/JPEGImages/ZmVjwqluZGxp-video3.avi-43.png 197,125,320,325,0
+./Data/JPEGImages/ZmVjwqluZGxp-video3.avi-44.png 179,118,318,317,0
+./Data/JPEGImages/ZmVjwqluZGxp-video3.avi-45.png 175,125,320,307,0
+./Data/JPEGImages/ZmVjwqluZGxp-video3.avi-46.png 214,137,336,297,0
+./Data/JPEGImages/ZmVjwqluZGxp-video3.avi-6.png 219,129,366,316,0

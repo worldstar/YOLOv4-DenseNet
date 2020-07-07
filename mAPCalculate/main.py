@@ -783,7 +783,8 @@ with open(results_files_path + "/results.txt", 'w') as results_file:
                 output_img_path = results_files_path + "/images/detections_one_by_one/" + class_name + "_detection" + str(idx) + ".jpg"
                 cv2.imwrite(output_img_path, img)
                 # save the image with all the objects drawn to it
-                cv2.imwrite(img_cumulative_path, img_cumulative)
+                if class_name == "VSDType4":
+                    cv2.imwrite(img_cumulative_path, img_cumulative)
 
         #print(tp)
         # compute precision/recall

@@ -14,13 +14,20 @@ from yolo3.utils import get_random_data
 import sys
 
 def _main():
+    #【存放】模型位置
     log_dir         = sys.argv[1]#'model/'
+    #【讀取】annotation位置
     annotation_path = sys.argv[2]#'model_data/train.txt'
+    #【讀取】classes位置
     classes_path    = sys.argv[3]#'model_data/voc_classes.txt'
+    #【讀取】anchors位置
     anchors_path    = sys.argv[4]#'model_data/yolo_anchors.txt'
+    #0.n為用於驗證 其餘用於訓練
     valSplit        = float(sys.argv[5])#0.2 #20% validation
     monitor         = 'val_loss'
+    #迴圈次數
     epoch           = int(sys.argv[6])#100
+    #batch_size大小，每次輸入多少資料
     batchSize       = int(sys.argv[7])#4
     stepMultiple    = int(sys.argv[8])#1
     getRandomData   = True 
