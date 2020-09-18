@@ -73,11 +73,9 @@ def DarknetConv2D_BN_Mish(*args, **kwargs):
         Mish())
 
 def resblock_body(x, num_filters, num_blocks, all_narrow=True):
-    '''A series of resblocks starting with a downsampling Convolution2D'''
-    # 進行寬高壓縮
     x  = ZeroPadding2D(((1,0),(1,0)))(x)
     x  = DarknetConv2D_BN_Mish(num_filters, (3,3), strides=(2,2))(x)
-
+    '''csp'''
     shortconv = DarknetConv2D_BN_Mish(num_filters//2 if all_narrow else num_filters, (1,1))(x)
 
     x  = DarknetConv2D_BN_Mish(num_filters//2 if all_narrow else num_filters, (1,1))(x)
@@ -107,7 +105,6 @@ def darknet_body(x):
     return feat1,feat2,feat3
 
 def make_five_convs(x, num_filters):
-    # 五次卷积
     x = DarknetConv2D_BN_Leaky(num_filters, (1,1))(x)
     x = DarknetConv2D_BN_Leaky(num_filters*2, (3,3))(x)
     x = DarknetConv2D_BN_Leaky(num_filters, (1,1))(x)
@@ -150,6 +147,7 @@ def yolo_bodyV4(inputs, num_anchors, num_classes):
     #26,26 output
     P3_downsample = ZeroPadding2D(((1,0),(1,0)))(P3)
     P3_downsample = DarknetConv2D_BN_Leaky(256, (3,3), strides=(2,2))(P3_downsample)
+    
     P4 = Concatenate()([P3_downsample, P4])
     P4 = make_five_convs(P4,256)
     
@@ -160,6 +158,7 @@ def yolo_bodyV4(inputs, num_anchors, num_classes):
     #13,13 output
     P4_downsample = ZeroPadding2D(((1,0),(1,0)))(P4)
     P4_downsample = DarknetConv2D_BN_Leaky(512, (3,3), strides=(2,2))(P4_downsample)
+
     P5 = Concatenate()([P4_downsample, P5])
     P5 = make_five_convs(P5,512)
     
