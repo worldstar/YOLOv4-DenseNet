@@ -7,6 +7,7 @@ import colorsys
 import os
 from timeit import default_timer as timer
 import glob
+import time
 
 import numpy as np
 from keras import backend as K
@@ -14,6 +15,7 @@ from keras.models import load_model
 from keras.layers import Input
 from PIL import Image, ImageFont, ImageDraw
 
+from yolo3.model_yolov4 import yolo_bodyV4,yolov4_loss,preprocess_true_boxes
 from yolo3.model import yolo_eval, yolo_body
 from yolo3.utils import letterbox_image
 from keras.utils import multi_gpu_model
@@ -35,21 +37,29 @@ def detect_img(yolo):
     path   = "Data/JPEGImages2/*.png"
     outdir = "Data/SegmentationClass"
     SPath  = "mAPTxt_Pre/"+log_dir+filename+"/"
+    FPSPath = "mAPTxt_Pre/"+log_dir+filename+"/"
     Path(SPath).mkdir(parents=True, exist_ok=True)
-
+    ttotal = 0
     for jpgfile in glob.glob(path):
         s = '.'
         Tfilename = os.path.basename(jpgfile).split('.')
         Tfilename.pop()
         fw = open(SPath+s.join(Tfilename)+".txt", "w")
         img = Image.open(jpgfile)
-        img,noFound,strJsonResult = yolo.detect_image(img)
+        img,noFound,strJsonResult,outtimers = yolo.detect_imageFPS(img)
+        # print(tEnd - tStart)
+        ttotal += outtimers
+        print(ttotal)
         # if(noFound == False):
         #     img.save(os.path.join(outdir, os.path.basename(jpgfile)))
         #     fw.write(strJsonResult)
-        img.save(os.path.join(outdir, os.path.basename(jpgfile)))
+        # img.save(os.path.join(outdir, os.path.basename(jpgfile)))
         fw.write(strJsonResult)
         fw.close()
+
+    with open(FPSPath + "FPS.txt", 'w') as temp_file:
+        temp_file.write("It cost %f /S" % (147/ttotal))
+
     yolo.close_session()
 
 def detect_video(yolo, video_path, output_path=""):
@@ -156,6 +166,18 @@ class YOLO(object):
 
             if modeltype == "SE-YOLOV3":
                 self.yolo_model = yolo_body(image_input, num_anchors//3, num_classes,"SE-YOLOV3")
+                
+            if modeltype == "YOLOV4":
+                self.yolo_model = yolo_bodyV4(image_input, num_anchors//3, num_classes)
+
+            if modeltype == "YOLOV3-SPP":
+                self.yolo_model = yolo_body(image_input, num_anchors//3, num_classes,SPP=True)
+                
+            if modeltype == "CSPYOLOV3Densenet":
+                self.yolo_model = densenet_body(image_input, num_anchors//3, num_classes,CSP = True)
+                
+            if modeltype == "CSPSPPYOLOV3Densenet":
+                self.yolo_model = densenet_body(image_input, num_anchors//3, num_classes,CSP = True,SPP = True)
 
                 #self.yolo_model = yolo_body(Input(shape=(416, 416, 3)), num_anchors//3, num_classes)
             # self.yolo_model = tiny_yolo_body(Input(shape=(None,None,3)), num_anchors//2, num_classes) \
@@ -263,7 +285,82 @@ class YOLO(object):
 
         end = timer()
         print(end - start)
-        return image,noFound,strJsonResult
+        timers = end - start
+        return image,noFound,strJsonResult,timers
+    def detect_imageFPS(self, image):
+        start = timer()
+        noFound = False
+        strJsonResult = ""
+        count = 1
+        if self.model_image_size != (None, None):
+            assert self.model_image_size[0]%32 == 0, 'Multiples of 32 required'
+            assert self.model_image_size[1]%32 == 0, 'Multiples of 32 required'
+            boxed_image = letterbox_image(image, tuple(reversed(self.model_image_size)))
+        else:
+            new_image_size = (image.width - (image.width % 32),
+                              image.height - (image.height % 32))
+            boxed_image = letterbox_image(image, new_image_size)
+        image_data = np.array(boxed_image, dtype='float32')
+
+        image_data /= 255.
+        image_data = np.expand_dims(image_data, 0)  # Add batch dimension.
+
+        out_boxes, out_scores, out_classes = self.sess.run(
+            [self.boxes, self.scores, self.classes],
+            feed_dict={
+                self.yolo_model.input: image_data,
+                self.input_image_shape: [image.size[1], image.size[0]],
+                K.learning_phase(): 0
+            })
+
+        if(len(out_boxes) == 0):
+            noFound = True
+        font = ImageFont.truetype(font='font/FiraMono-Medium.otf',
+                    size=np.floor(3e-2 * image.size[1] + 0.5).astype('int32'))
+        thickness = (image.size[0] + image.size[1]) // 300
+
+        for i, c in reversed(list(enumerate(out_classes))):
+            predicted_class = self.class_names[c]
+            box = out_boxes[i]
+            score = out_scores[i]
+
+            label = '{} {:.2f}'.format(predicted_class, score)
+            draw = ImageDraw.Draw(image)
+            label_size = draw.textsize(label, font)
+
+            top, left, bottom, right = box
+            top = max(0, np.floor(top + 0.5).astype('int32'))
+            left = max(0, np.floor(left + 0.5).astype('int32'))
+            bottom = min(image.size[1], np.floor(bottom + 0.5).astype('int32'))
+            right = min(image.size[0], np.floor(right + 0.5).astype('int32'))
+            strLabel = label.split(' ')
+            strJsonResult += '%s %s %s %s %s %s\n' %(strLabel[0],strLabel[1],left,top,right,bottom)
+            # if(count == len(out_boxes)):
+            #     strJsonResult += '{"x1": %d,"y1": %d,"x2": %d,"y2": %d,"class": "%s","prob": %s}' %(left,top,right,bottom,strLabel[0],strLabel[1])
+            # else:
+            #     strJsonResult += '{"x1": %d,"y1": %d,"x2": %d,"y2": %d,"class": "%s","prob": %s},' %(left,top,right,bottom,strLabel[0],strLabel[1])
+            #     count += 1
+
+            if top - label_size[1] >= 0:
+                text_origin = np.array([left, top - label_size[1]])
+            else:
+                text_origin = np.array([left, top + 1])
+
+            # My kingdom for a good redistributable image drawing library.
+            for i in range(thickness):
+                draw.rectangle(
+                    [left + i, top + i, right - i, bottom - i],
+                    outline=self.colors[c])
+            draw.rectangle(
+                [tuple(text_origin), tuple(text_origin + label_size)],
+                fill=self.colors[c])
+            draw.text(text_origin, label, fill=(0, 0, 0), font=font)
+            del draw
+
+        end = timer()
+        # print(end - start)
+        timers = end - start
+        return image,noFound,strJsonResult,timers
 
     def close_session(self):
         self.sess.close()
