@@ -7,6 +7,7 @@ import sys
 import argparse
 import math
 import cv2
+import time
 
 from sklearn.metrics import confusion_matrix
 import numpy as np
@@ -166,8 +167,8 @@ def plot_confusion_matrix2(cm,
     plt.tight_layout()
     plt.ylabel('True label')
     plt.xlabel('Predicted label\naccuracy={:0.4f}; misclass={:0.4f}'.format(accuracy, misclass))
-    if args.pltshow == "On":
-        plt.show()
+    #if args.pltshow == "On":
+    plt.show()
     
 def log_average_miss_rate(precision, fp_cumsum, num_images):
     """
@@ -389,7 +390,7 @@ def draw_plot_func(dictionary, n_classes, window_title, plot_title, x_label, out
     # set window title
     fig.canvas.set_window_title(window_title)
     # write classes in y axis
-    tick_font_size = 12
+    tick_font_size = 20
     plt.yticks(range(n_classes), sorted_keys, fontsize=tick_font_size)
     """
      Re-scale height accordingly
@@ -408,7 +409,7 @@ def draw_plot_func(dictionary, n_classes, window_title, plot_title, x_label, out
         fig.set_figheight(figure_height)
 
     # set plot title
-    plt.title(plot_title, fontsize=14)
+    plt.title(plot_title, fontsize=24)
     # set axis titles
     # plt.xlabel('classes')
     plt.xlabel(x_label, fontsize='large')
@@ -592,6 +593,7 @@ for txt_file in dr_files_list:
     lines_list = file_lines_to_list(txt_file)
     for line in lines_list:
         class_name, left, top, right, bottom, _difficult = line.split()
+        # if class_name != "Normal":
         DR_PATHarray.append(class_name)
         break;
     if len(lines_list) == 0 :
@@ -620,7 +622,7 @@ with open(results_files_path + "/precision_recall_fscore_support.txt", 'w') as t
 from sklearn.metrics import precision_score
 precision_score(label, pred, average="macro") 
 #plot_confusion_matrix2(cm = cnf_matrix , target_names=["Normal", "VSDType1", "VSDType2", "VSDType4","ASDType2","XiphoidLongAxis","ParasternalShortAxis","XiphoidShortAxis"],normalize=True)
-#plot_confusion_matrix2(cm = cnf_matrix , target_names=["Normal", "VSDType2", "VSDType1", "VSDType4"],normalize=True)
+# plot_confusion_matrix2(cm = cnf_matrix , target_names=["Normal", "VSDType2", "VSDType1", "VSDType4"],normalize=True)
 import scikitplot as skplt
 skplt.metrics.plot_confusion_matrix(label, pred, normalize=False)
 if args.pltshow == "On":
@@ -633,6 +635,7 @@ ap_dictionary = {}
 lamr_dictionary = {}
 # open file to store the results
 with open(results_files_path + "/results.txt", 'w') as results_file:
+    tStart = time.time()#計時開始
     results_file.write("# AP and precision/recall per class\n")
     count_true_positives = {}
     for class_index, class_name in enumerate(gt_classes):
@@ -783,8 +786,8 @@ with open(results_files_path + "/results.txt", 'w') as results_file:
                 output_img_path = results_files_path + "/images/detections_one_by_one/" + class_name + "_detection" + str(idx) + ".jpg"
                 cv2.imwrite(output_img_path, img)
                 # save the image with all the objects drawn to it
-                if class_name == "VSDType4":
-                    cv2.imwrite(img_cumulative_path, img_cumulative)
+                # if class_name == "VSDType4":
+                #     cv2.imwrite(img_cumulative_path, img_cumulative)
 
         #print(tp)
         # compute precision/recall
@@ -853,6 +856,7 @@ with open(results_files_path + "/results.txt", 'w') as results_file:
             # save the plot
             fig.savefig(results_files_path + "/classes/" + class_name + ".png")
             plt.cla() # clear axes for next plot
+    tEnd = time.time()#計時結束
 
     if show_animation:
         cv2.destroyAllWindows()
@@ -861,7 +865,11 @@ with open(results_files_path + "/results.txt", 'w') as results_file:
     mAP = sum_AP / n_classes
     text = "mAP = {0:.2f}%".format(mAP*100)
     results_file.write(text + "\n")
+
     print(text)
+
+with open(results_files_path + "/FPS.txt", 'w') as temp_file:
+    temp_file.write("It cost %f /S" % (147/(tEnd - tStart)))
 
 # remove the temp_files directory
 shutil.rmtree(TEMP_FILES_PATH)
