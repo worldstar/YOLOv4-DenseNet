@@ -48,7 +48,8 @@ python genAnnotationClasses.py <Folderpath> <writePath>
 - genAnnotationTrainPath.py 產生 train.txt 檔案(待訓練圖片完整路徑、anchorbox)
 ```
 範例: 
-python genAnnotationTrainPath.py ./Data/Annotations/ ./Data/JPEGImages/ ./model_data/ model_data/voc_classes.txt
+python genAnnotationTrainPath.py ./Data/Annotations/ ./Data/JPEGImages/ ./model_data/train.txt model_data/voc_classes.txt
+python genAnnotationTrainPath.py ./Dreadautomlfile/valxml/ ./Dreadautomlfile/val/ ./model_data/val.txt model_data/voc_classes.txt
 自定義:
 python genAnnotationTrainPath.py <path> <imagePath> <writePath> <voc_classesPath>
 ```
@@ -84,6 +85,9 @@ python train.py <log_dir> <annotation_path> <classes_path> <anchors_path> <valSp
 ## 預測
 
 1. 執行 [predictionGenMAPTxt_Pre.py](predictionGenMAPTxt_Pre.py) 預測並產生檔案至Data/SegmentationClass以及mAPTxt_pre
+
+python predictionGenMAPTxt_Pre.py logs/YOLOV320200730V1/ ep500 YOLOV3
+
 
 2. 執行 [genAnnotationMAPTxt.py](genAnnotationMAPTxt.py) 產生實際對應的檔案至mAPTxt
 
