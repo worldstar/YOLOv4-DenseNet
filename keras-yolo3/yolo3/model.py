@@ -96,28 +96,43 @@ def darknet_body(x,ModelType):
     x = resblock_body(x, 1024, 4,ModelType)
     return x
 
-def make_last_layers(x, num_filters, out_filters):
-    '''6 Conv2D_BN_Leaky layers followed by a Conv2D_linear layer'''
-    x = compose(
-            DarknetConv2D_BN_Leaky(num_filters, (1,1)),
-            DarknetConv2D_BN_Leaky(num_filters*2, (3,3)),
-            DarknetConv2D_BN_Leaky(num_filters, (1,1)),
-            DarknetConv2D_BN_Leaky(num_filters*2, (3,3)),
-            DarknetConv2D_BN_Leaky(num_filters, (1,1)))(x)
+def make_last_layers(x, num_filters, out_filters,spp= False):
+    if spp:
+
+        x = DarknetConv2D_BN_Leaky(num_filters, (1,1), strides=(1,1))(x)
+        x = DarknetConv2D_BN_Leaky(num_filters*2, (3,3), strides=(1,1))(x)
+        x = DarknetConv2D_BN_Leaky(num_filters, (1,1), strides=(1,1))(x)
+        
+        mp5 = MaxPooling2D(pool_size=(5,5), strides=(1,1), padding='same')(x)
+        mp9 = MaxPooling2D(pool_size=(9,9), strides=(1,1), padding='same')(x)
+        mp13 = MaxPooling2D(pool_size=(13,13), strides=(1,1), padding='same')(x)
+
+        x = Concatenate()([x, mp13, mp9, mp5])
+        x = DarknetConv2D_BN_Leaky(num_filters, (1,1))(x)
+        x = DarknetConv2D_BN_Leaky(num_filters*2, (3,3))(x)
+        x = DarknetConv2D_BN_Leaky(num_filters, (1,1))(x)       
+        
+    else:
+        x = compose(
+                DarknetConv2D_BN_Leaky(num_filters, (1,1)),
+                DarknetConv2D_BN_Leaky(num_filters*2, (3,3)),
+                DarknetConv2D_BN_Leaky(num_filters, (1,1)),
+                DarknetConv2D_BN_Leaky(num_filters*2, (3,3)),
+                DarknetConv2D_BN_Leaky(num_filters, (1,1)))(x)
     y = compose(
             DarknetConv2D_BN_Leaky(num_filters*2, (3,3)),
             DarknetConv2D(out_filters, (1,1)))(x)
     return x, y
 
-
-def yolo_body(inputs, num_anchors, num_classes,ModelType = "YOLOV3"):
+def yolo_body(inputs, num_anchors, num_classes,ModelType = "YOLOV3",SPP = False):
     """Create YOLO_V3 model CNN body in Keras."""
     darknet = Model(inputs, darknet_body(inputs,ModelType))
+
     # ConvLSTM2D(filters=256, kernel_size=(3, 3),
     #                    input_shape=inputs,
     #                    padding='same', return_sequences=True, data_format='channels_last')
 
-    x, y1 = make_last_layers(darknet.output, 512, num_anchors*(num_classes+5))
+    x, y1 = make_last_layers(darknet.output, 512, num_anchors*(num_classes+5),SPP)
 
     x = compose(
             DarknetConv2D_BN_Leaky(256, (1,1)),
@@ -412,9 +427,9 @@ def yolo_loss(args, anchors, num_classes, ignore_thresh=.5, print_loss=False):
         # K.binary_crossentropy is helpful to avoid exp overflow.
         xy_loss = object_mask * box_loss_scale * K.binary_crossentropy(raw_true_xy, raw_pred[...,0:2], from_logits=True)
         ##原本 square
-        #wh_loss = object_mask * box_loss_scale * 0.5 * K.square(raw_true_wh-raw_pred[...,2:4])
+        wh_loss = object_mask * box_loss_scale * 0.5 * K.square(raw_true_wh-raw_pred[...,2:4])
         ##更改後 huber_loss
-        wh_loss = object_mask * box_loss_scale * 0.5 * huber_loss(raw_true_wh,raw_pred[...,2:4])
+        #wh_loss = object_mask * box_loss_scale * 0.5 * huber_loss(raw_true_wh,raw_pred[...,2:4])
 
         confidence_loss = object_mask * K.binary_crossentropy(object_mask, raw_pred[...,4:5], from_logits=True)+ \
             (1-object_mask) * K.binary_crossentropy(object_mask, raw_pred[...,4:5], from_logits=True) * ignore_mask
