@@ -2,6 +2,7 @@ from __future__ import print_function
 from __future__ import absolute_import
 from __future__ import division
 
+from functools import wraps
 import keras.backend as K
 from keras.models import Model
 from keras.layers import Lambda
@@ -17,6 +18,14 @@ from keras.utils.vis_utils import plot_model
 #from subpixel import SubPixelUpscaling
 from yolo3.model import DarknetConv2D_BN_Leaky,make_last_layers
 from yolo3.utils import compose
+
+@wraps(Conv2D)
+def DarknetConv2D(*args, **kwargs):
+    """Wrapper to set Darknet parameters for Convolution2D."""
+    darknet_conv_kwargs = {'kernel_regularizer': l2(5e-4)}
+    darknet_conv_kwargs['padding'] = 'valid' if kwargs.get('strides')==(2,2) else 'same'
+    darknet_conv_kwargs.update(kwargs)
+    return Conv2D(*args, **darknet_conv_kwargs)
 
 def DensenetConv2D(ip,weight_decay,filters, kernel):
     """Wrapper to set Darknet parameters for Convolution2D."""
@@ -72,7 +81,6 @@ def __conv_block(ip, nb_filter, bottleneck=False, dropout_rate=None, weight_deca
         x = Dropout(dropout_rate)(x)
 
     return x
-
 
 def __dense_block(x, nb_layers, nb_filter, growth_rate, bottleneck=False, dropout_rate=None, weight_decay=1e-4,
                   grow_nb_filters=True, return_concat_list=False):
@@ -362,28 +370,177 @@ def __create_CSPdense_net(img_input, nb_classes=1000, include_top=True, depth=12
     x = myLRelu(x)
     return x
 
+def __create_CSPMishdense_net(img_input, nb_classes=1000, include_top=True, depth=121, nb_dense_block=4, growth_rate=32, nb_filter=64,
+                       nb_layers_per_block=[6, 12, 24, 16], bottleneck=True, reduction=0.5, dropout_rate=0.0, weight_decay=1e-4,
+                       subsample_initial_block=True, activation='softmax',all_narrow = True):
+
+    concat_axis = 1 if K.image_data_format() == 'channels_first' else -1
+
+    if reduction != 0.0:
+        assert reduction <= 1.0 and reduction > 0.0, 'reduction value must lie between 0.0 and 1.0'
+
+    # layers in each dense block
+    if type(nb_layers_per_block) is list or type(nb_layers_per_block) is tuple:
+        nb_layers = list(nb_layers_per_block)  # Convert tuple to list
+
+        assert len(nb_layers) == (nb_dense_block), 'If list, nb_layer is used as provided. ' \
+                                                   'Note that list size must be (nb_dense_block)'
+        final_nb_layer = nb_layers[-1]
+        nb_layers = nb_layers[:-1]
+    else:
+        if nb_layers_per_block == -1:
+            assert (depth - 4) % 3 == 0, 'Depth must be 3 N + 4 if nb_layers_per_block == -1'
+            count = int((depth - 4) / 3)
+
+            if bottleneck:
+                count = count // 2
+
+            nb_layers = [count for _ in range(nb_dense_block)]
+            final_nb_layer = count
+        else:
+            final_nb_layer = nb_layers_per_block
+            nb_layers = [nb_layers_per_block] * nb_dense_block
+
+    # compute initial nb_filter if -1, else accept users initial nb_filter
+    if nb_filter <= 0:
+        nb_filter = 2 * growth_rate
+
+    # compute compression factor
+    compression = 1.0 - reduction
+
+    # Initial convolution
+    if subsample_initial_block:
+        initial_kernel = (7, 7)
+        initial_strides = (2, 2)
+    else:
+        initial_kernel = (3, 3)
+        initial_strides = (1, 1)
+
+    x = Conv2D(nb_filter, initial_kernel, kernel_initializer='he_normal', padding='same',
+               strides=initial_strides, use_bias=False, kernel_regularizer=l2(weight_decay))(img_input)
+    #Base layer 
+    if subsample_initial_block:
+        x = BatchNormalization(axis=concat_axis, epsilon=1.1e-5)(x)
+        myLRelu = Lambda(lambda x: K.relu(x, 0.1))
+        x = myLRelu(x)
+        x = MaxPooling2D((3, 3), strides=(2, 2), padding='same')(x)
+
+    # Add dense blocks
+    for block_idx in range(nb_dense_block - 1):
+        shortconv = DensenetConv2D(x,weight_decay,nb_filter//2, (1,1))
+        x, nb_filter = __dense_block(x, nb_layers[block_idx], nb_filter, growth_rate//2, bottleneck=bottleneck,
+                                     dropout_rate=dropout_rate, weight_decay=weight_decay)
+        # add transition_block
+        x = __transition_block(x, nb_filter, compression=compression, weight_decay=weight_decay)
+        nb_filter = int(nb_filter * compression)
+        x = Concatenate()([x, shortconv])
+
+    # The last dense_block does not have a transition_block
+    x, nb_filter = __dense_block(x, final_nb_layer, nb_filter//2, growth_rate, bottleneck=bottleneck,
+                                 dropout_rate=dropout_rate, weight_decay=weight_decay)
+
+    x = BatchNormalization(axis=concat_axis, epsilon=1.1e-5)(x)
+    myLRelu=Lambda(lambda x: K.relu(x, 0.1))
+    x = myLRelu(x)
+    return x
+
+
 
 def densenet_body(img_input, num_anchors, num_classes,SPP = False,CSP = False):
     if CSP == True:
         x=__create_CSPdense_net(img_input)
+
+        densenet=Model(img_input,x)
+
+        x, y1 = make_last_layers(densenet.output, 512, num_anchors * (num_classes + 5),SPP)
+        
+        x = compose(
+            DarknetConv2D_BN_Leaky(512, (1, 1)),
+            UpSampling2D(2))(x)
+        x = Concatenate()([x, densenet.layers[308].output])
+
+        x, y2 = make_last_layers(x, 512, num_anchors * (num_classes + 5))
+
+        x = compose(
+            DarknetConv2D_BN_Leaky(256, (1, 1)),
+            UpSampling2D(2))(x)
+        x = Concatenate()([x, densenet.layers[136].output])
+        x, y3 = make_last_layers(x, 256, num_anchors * (num_classes + 5))
+
     if CSP == False:
         x=__create_dense_net(img_input)
+        densenet=Model(img_input,x)
+        
+        x, y1 = make_last_layers(densenet.output, 512, num_anchors * (num_classes + 5),SPP)
+        
+        x = compose(
+            DarknetConv2D_BN_Leaky(512, (1, 1)),
+            UpSampling2D(2))(x)
+        x = Concatenate()([x, densenet.layers[308].output])
 
-    densenet=Model(img_input,x)
-    
-    x, y1 = make_last_layers(densenet.output, 512, num_anchors * (num_classes + 5),SPP)
-    
-    x = compose(
-        DarknetConv2D_BN_Leaky(512, (1, 1)),
-        UpSampling2D(2))(x)
-    x = Concatenate()([x, densenet.layers[308].output])
+        x, y2 = make_last_layers(x, 512, num_anchors * (num_classes + 5))
 
-    x, y2 = make_last_layers(x, 512, num_anchors * (num_classes + 5))
-
-    x = compose(
-        DarknetConv2D_BN_Leaky(256, (1, 1)),
-        UpSampling2D(2))(x)
-    x = Concatenate()([x, densenet.layers[136].output])
-    x, y3 = make_last_layers(x, 256, num_anchors * (num_classes + 5))
+        x = compose(
+            DarknetConv2D_BN_Leaky(256, (1, 1)),
+            UpSampling2D(2))(x)
+        x = Concatenate()([x, densenet.layers[136].output])
+        x, y3 = make_last_layers(x, 256, num_anchors * (num_classes + 5))
 
     return Model(img_input, [y1,y2,y3])
+
+def yoloV4densenet_body(img_input, num_anchors, num_classes,SPP = False,CSP = False):
+    if CSP == True:
+        x=__create_CSPdense_net(img_input)
+        densenet=Model(img_input,x)
+
+        P5, y1 = make_last_layers(densenet.output, 512, num_anchors * (num_classes + 5),SPP)
+
+        P5_upsample = compose(DarknetConv2D_BN_Leaky(512, (1,1)), UpSampling2D(2))(P5)
+        
+        P4 = DarknetConv2D_BN_Leaky(512, (1,1))(densenet.layers[315].output)
+        P4 = Concatenate()([P4, P5_upsample])
+        P4 = make_five_convs(P4,512)
+
+        P4_upsample = compose(DarknetConv2D_BN_Leaky(256, (1,1)), UpSampling2D(2))(P4)
+        
+        P3 = DarknetConv2D_BN_Leaky(256, (1,1))(densenet.layers[138].output)
+        P3 = Concatenate()([P3, P4_upsample])
+        P3 = make_five_convs(P3,256)
+
+        P3_output = DarknetConv2D_BN_Leaky(256*2, (3,3))(P3)
+        P3_output = DarknetConv2D(num_anchors*(num_classes+5), (1,1))(P3_output)
+
+        #26,26 output
+        P3_downsample = ZeroPadding2D(((1,0),(1,0)))(P3)
+        P3_downsample = DarknetConv2D_BN_Leaky(512, (3,3), strides=(2,2))(P3_downsample)
+        
+        P4 = Concatenate()([P3_downsample, P4])
+        P4 = make_five_convs(P4,512)
+        
+        P4_output = DarknetConv2D_BN_Leaky(512*2, (3,3))(P4)
+        P4_output = DarknetConv2D(num_anchors*(num_classes+5), (1,1))(P4_output)
+        
+
+        #13,13 output
+        P4_downsample = ZeroPadding2D(((1,0),(1,0)))(P4)
+        P4_downsample = DarknetConv2D_BN_Leaky(512, (3,3), strides=(2,2))(P4_downsample)
+
+        P5 = Concatenate()([P4_downsample, P5])
+        P5 = make_five_convs(P5,512)
+        
+
+        P5_output = DarknetConv2D_BN_Leaky(512*2, (3,3))(P5)
+        P5_output = DarknetConv2D(num_anchors*(num_classes+5), (1,1))(P5_output)
+
+        return Model(img_input, [P5_output, P4_output, P3_output])
+
+def mish(x):
+    return x * K.tanh(K.softplus(x))
+
+def make_five_convs(x, num_filters):
+    x = DarknetConv2D_BN_Leaky(num_filters, (1,1))(x)
+    x = DarknetConv2D_BN_Leaky(num_filters*2, (3,3))(x)
+    x = DarknetConv2D_BN_Leaky(num_filters, (1,1))(x)
+    x = DarknetConv2D_BN_Leaky(num_filters*2, (3,3))(x)
+    x = DarknetConv2D_BN_Leaky(num_filters, (1,1))(x)
+    return x

@@ -72,36 +72,53 @@ def DarknetConv2D_BN_Mish(*args, **kwargs):
         BatchNormalization(),
         Mish())
 
-def resblock_body(x, num_filters, num_blocks, all_narrow=True):
-    x  = ZeroPadding2D(((1,0),(1,0)))(x)
-    x  = DarknetConv2D_BN_Mish(num_filters, (3,3), strides=(2,2))(x)
-    '''csp'''
-    shortconv = DarknetConv2D_BN_Mish(num_filters//2 if all_narrow else num_filters, (1,1))(x)
+def resblock_body(x, filters, num_blocks, all_narrow=True):
+    if all_narrow == True:
+        num_filters = filters // 2
+    else:
+        num_filters = filters
 
-    x  = DarknetConv2D_BN_Mish(num_filters//2 if all_narrow else num_filters, (1,1))(x)
+    x  = ZeroPadding2D(((1,0),(1,0)))(x)
+    x  = DarknetConv2D_BN_Mish(filters, (3,3), strides=(2,2))(x)
+
+    '''csp'''
+    x1 = DarknetConv2D_BN_Mish(num_filters, (1,1))(Lambda(y0)(x))
+
+    x2 = DarknetConv2D_BN_Mish(num_filters, (1,1))(Lambda(y1)(x))
 
     for i in range(num_blocks):
         y = compose(
-                DarknetConv2D_BN_Mish(num_filters//2, (1,1)),
-                DarknetConv2D_BN_Mish(num_filters//2 if all_narrow else num_filters, (3,3)))(x)
-        x = Add()([x,y])
+                DarknetConv2D_BN_Mish(filters//2, (1,1)),
+                DarknetConv2D_BN_Mish(num_filters, (3,3)))(x2)
+        x2 = Add()([x2,y])
 
-    x = DarknetConv2D_BN_Mish(num_filters//2 if all_narrow else num_filters, (1,1))(x)
-    x = Concatenate()([x, shortconv])
+    x2 = DarknetConv2D_BN_Mish(num_filters, (1,1))(x2)
+    x = Concatenate()([x2, x1])
 
-    return DarknetConv2D_BN_Mish(num_filters, (1,1))(x)
+    return DarknetConv2D_BN_Mish(filters, (1,1))(x)
+
+def y0(x):
+	n = x.shape[0]
+	return x[0:n//2, :, :, :]
+	
+def y1(x):
+	n = x.shape[0]
+	return x[n//2:n, :, :, :]
 
 def darknet_body(x):
-    '''Darknent body having 52 Convolution2D layers'''
+
     x = DarknetConv2D_BN_Mish(32, (3,3))(x)
+
     x = resblock_body(x, 64, 1, False)
     x = resblock_body(x, 128, 2)
+
     x = resblock_body(x, 256, 8)
     feat1 = x
     x = resblock_body(x, 512, 8)
     feat2 = x
     x = resblock_body(x, 1024, 4)
     feat3 = x
+
     return feat1,feat2,feat3
 
 def make_five_convs(x, num_filters):
@@ -114,6 +131,7 @@ def make_five_convs(x, num_filters):
 
 def yolo_bodyV4(inputs, num_anchors, num_classes):
     feat1,feat2,feat3 = darknet_body(inputs)
+
     # y1=(batch_size,13,13,3,85)
     P5 = DarknetConv2D_BN_Leaky(512, (1,1))(feat3)
     P5 = DarknetConv2D_BN_Leaky(1024, (3,3))(P5)
@@ -189,9 +207,7 @@ def yolo_head(feats, anchors, num_classes, input_shape, calc_loss=False):
     box_wh = K.exp(feats[..., 2:4]) * anchors_tensor / K.cast(input_shape[::-1], K.dtype(feats))
     box_confidence = K.sigmoid(feats[..., 4:5])
     box_class_probs = K.sigmoid(feats[..., 5:])
-    # print(feats[5:5][0][0][0][0].shape)
-    # print(num_classes,'test')
-    # return
+
     if calc_loss == True:
         return grid, feats, box_xy, box_wh
     return box_xy, box_wh, box_confidence, box_class_probs
