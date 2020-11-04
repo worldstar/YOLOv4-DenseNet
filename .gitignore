@@ -47,3 +47,4 @@ keras-yolo3/model_data/yolo_anchors.txt
 keras-yolo3/drawtraingbbox.py
 keras-yolo3/genAnnotationAutoML.py
 keras-yolo3/readautomlfile.py
+*.txt
