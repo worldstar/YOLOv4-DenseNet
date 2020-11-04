@@ -19,7 +19,7 @@ from yolo3.model_yolov4 import yolo_bodyV4,yolov4_loss,preprocess_true_boxes
 from yolo3.model import yolo_eval, yolo_body
 from yolo3.utils import letterbox_image
 from keras.utils import multi_gpu_model
-from yolo3.model_densenet import densenet_body
+from yolo3.model_densenet import densenet_body,yoloV4densenet_body
 import sys
 from pathlib import Path
 from yolo3.model_se_densenet import se_densenet_body
@@ -166,6 +166,9 @@ class YOLO(object):
 
             if modeltype == "SE-YOLOV3":
                 self.yolo_model = yolo_body(image_input, num_anchors//3, num_classes,"SE-YOLOV3")
+
+            if modeltype == "YOLOV3SPPDensenet":
+                self.yolo_model = densenet_body(image_input, num_anchors//3, num_classes,SPP=True)
                 
             if modeltype == "YOLOV4":
                 self.yolo_model = yolo_bodyV4(image_input, num_anchors//3, num_classes)
@@ -178,6 +181,9 @@ class YOLO(object):
                 
             if modeltype == "CSPSPPYOLOV3Densenet":
                 self.yolo_model = densenet_body(image_input, num_anchors//3, num_classes,CSP = True,SPP = True)
+                
+            if modeltype == "CSPYOLOV4Densenet":
+                self.yolo_model = yoloV4densenet_body(image_input, num_anchors//3, num_classes,CSP = True)
 
                 #self.yolo_model = yolo_body(Input(shape=(416, 416, 3)), num_anchors//3, num_classes)
             # self.yolo_model = tiny_yolo_body(Input(shape=(None,None,3)), num_anchors//2, num_classes) \
