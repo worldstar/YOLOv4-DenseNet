@@ -6,14 +6,14 @@ from functools import wraps
 import keras.backend as K
 from keras.models import Model
 from keras.layers import Lambda
-from keras.layers.core import Dense, Dropout, Activation, Reshape
-from keras.layers.convolutional import Conv2D, Conv2DTranspose, UpSampling2D
-from keras.layers.pooling import AveragePooling2D, MaxPooling2D
+from keras.layers import Dense, Dropout, Activation, Reshape
+from keras.layers import Conv2D, Conv2DTranspose, UpSampling2D
+from keras.layers import AveragePooling2D, MaxPooling2D
 from keras.layers import Conv2D, Add, ZeroPadding2D, UpSampling2D, Concatenate, MaxPooling2D
-from keras.layers.merge import concatenate
-from keras.layers.normalization import BatchNormalization
+from keras.layers import concatenate
+from keras.layers import BatchNormalization
 from keras.regularizers import l2
-from keras.utils.vis_utils import plot_model
+from keras.utils import plot_model
 
 #from subpixel import SubPixelUpscaling
 from yolo3.model import DarknetConv2D_BN_Leaky,make_last_layers
@@ -350,7 +350,6 @@ def __create_CSPdense_net(img_input, nb_classes=1000, include_top=True, depth=12
         myLRelu = Lambda(lambda x: K.relu(x, 0.1))
         x = myLRelu(x)
         x = MaxPooling2D((3, 3), strides=(2, 2), padding='same')(x)
-
     # Add dense blocks
     for block_idx in range(nb_dense_block - 1):
         shortconv = DensenetConv2D(x,weight_decay,nb_filter//2, (1,1))
@@ -369,6 +368,40 @@ def __create_CSPdense_net(img_input, nb_classes=1000, include_top=True, depth=12
     myLRelu=Lambda(lambda x: K.relu(x, 0.1))
     x = myLRelu(x)
     return x
+    # # Add dense blocks
+    # for block_idx in range(nb_dense_block - 1):
+    #     shortconv = DensenetConv2D(
+    #         Lambda(Fy0,arguments={'index':nb_filter})(x),
+    #         weight_decay,
+    #         nb_filter//2,
+    #          (1,1))
+    #     x, nb_filter = __dense_block(
+    #         Lambda(Fy1,arguments={'index':nb_filter})(x),
+    #         nb_layers[block_idx],
+    #         nb_filter,
+    #         growth_rate//2,
+    #         bottleneck=bottleneck,
+    #         dropout_rate=dropout_rate, weight_decay=weight_decay)
+    #     # add transition_block
+    #     x = __transition_block(x, nb_filter, compression=compression, weight_decay=weight_decay)
+    #     nb_filter = int(nb_filter * compression)
+    #     x = Concatenate()([x, shortconv])
+
+
+    # # The last dense_block does not have a transition_block
+    # x, nb_filter = __dense_block(x, final_nb_layer, nb_filter//2, growth_rate, bottleneck=bottleneck,
+    #                              dropout_rate=dropout_rate, weight_decay=weight_decay)
+
+    # x = BatchNormalization(axis=concat_axis, epsilon=1.1e-5)(x)
+    # myLRelu=Lambda(lambda x: K.relu(x, 0.1))
+    # x = myLRelu(x)
+    # return x
+
+def Fy0(x,index):
+    return x[:, :, :,0:index//2]
+
+def Fy1(x,index):
+    return x[:, :, :, index//2:index]
 
 def __create_CSPMishdense_net(img_input, nb_classes=1000, include_top=True, depth=121, nb_dense_block=4, growth_rate=32, nb_filter=64,
                        nb_layers_per_block=[6, 12, 24, 16], bottleneck=True, reduction=0.5, dropout_rate=0.0, weight_decay=1e-4,

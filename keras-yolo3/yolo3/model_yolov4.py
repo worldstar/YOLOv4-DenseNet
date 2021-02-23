@@ -14,6 +14,7 @@ from yolo3.utils import compose
 
 from keras.engine.base_layer import Layer
 from yolo3.se    import squeeze_excite_block
+from yolo3 import DropBlock2D
 
 import math
 
@@ -72,24 +73,42 @@ def DarknetConv2D_BN_Mish(*args, **kwargs):
         BatchNormalization(),
         Mish())
 
+def Fy0(x,index):
+    return x[:, :, :,0:index//2]
+
+def Fy1(x,index):
+    return x[:, :, :, index//2:index]
+
 def resblock_body(x, filters, num_blocks, all_narrow=True):
-    if all_narrow == True:
-        num_filters = filters // 2
-    else:
-        num_filters = filters
+
+    num_filters = filters // 2 if allow_narrow else filters
+
+    # if all_narrow == True:
+    #     num_filters = filters // 2
+    # else:
+    #     num_filters = filters
 
     x  = ZeroPadding2D(((1,0),(1,0)))(x)
     x  = DarknetConv2D_BN_Mish(filters, (3,3), strides=(2,2))(x)
 
     '''csp'''
-    x1 = DarknetConv2D_BN_Mish(num_filters, (1,1))(Lambda(y0)(x))
+    # x1 = DarknetConv2D_BN_Mish(num_filters, (1,1))(Lambda(y0)(x))
+    # x1 = DarknetConv2D_BN_Mish(num_filters, (1,1))(Lambda(Fy0,arguments={'index':num_filters})(x))
+    # x2 = DarknetConv2D_BN_Mish(num_filters, (1,1))(Lambda(Fy1,arguments={'index':num_filters})(x))
 
-    x2 = DarknetConv2D_BN_Mish(num_filters, (1,1))(Lambda(y1)(x))
+    x1 = DarknetConv2D_BN_Mish(num_filters, (1,1))(x)
+    x2 = DarknetConv2D_BN_Mish(num_filters, (1,1))(x)
+
+    # tf.Print(x1, [x1], message='Lambda1: ')
+    # tf.Print(x2, [x2], message='Lambda1: ')
+
 
     for i in range(num_blocks):
+        conv1 =DarknetConv2D_BN_Mish(filters//2, (1,1))
         y = compose(
-                DarknetConv2D_BN_Mish(filters//2, (1,1)),
+                conv1,
                 DarknetConv2D_BN_Mish(num_filters, (3,3)))(x2)
+        dropblock = DropBlock2D(keep_prob=0.9, block_size=3)
         x2 = Add()([x2,y])
 
     x2 = DarknetConv2D_BN_Mish(num_filters, (1,1))(x2)
@@ -97,16 +116,8 @@ def resblock_body(x, filters, num_blocks, all_narrow=True):
 
     return DarknetConv2D_BN_Mish(filters, (1,1))(x)
 
-def y0(x):
-	n = x.shape[0]
-	return x[0:n//2, :, :, :]
-	
-def y1(x):
-	n = x.shape[0]
-	return x[n//2:n, :, :, :]
-
 def darknet_body(x):
-
+    # print(x.shape)
     x = DarknetConv2D_BN_Mish(32, (3,3))(x)
 
     x = resblock_body(x, 64, 1, False)
@@ -480,9 +491,9 @@ def yolo_loss(args, anchors, num_classes, ignore_thresh=.5, print_loss=False):
         #loss += xy_loss + wh_loss + confidence_loss + class_loss
         #loss  += subtracted
         loss += xy_loss + wh_loss + confidence_loss + class_loss
-        if print_loss:
+        # if print_loss:
             #loss = tf.Print(loss, [subtracted], message='loss: ')
-            loss = tf.Print(loss, [loss, xy_loss, wh_loss, confidence_loss, class_loss, K.sum(ignore_mask)], message='loss: ')
+        # loss = tf.Print(loss, [loss, xy_loss, wh_loss, confidence_loss, class_loss, K.sum(ignore_mask)], message='loss: ')
     return loss
 def yolov4_loss(args, anchors, num_classes, ignore_thresh=.5, label_smoothing=0.1, print_loss=False):
 
@@ -538,13 +549,17 @@ def yolov4_loss(args, anchors, num_classes, ignore_thresh=.5, label_smoothing=0.
 
         class_loss = object_mask * K.binary_crossentropy(true_class_probs, raw_pred[...,5:], from_logits=True)
 
+        # print(class_loss)
+        # class_loss = tf.Print(class_loss,class_loss, message='loss: ')
+
         confidence_loss = K.sum(confidence_loss) / mf
         class_loss = K.sum(class_loss) / mf
+
 
         loss += location_loss + confidence_loss + class_loss
 
         # if print_loss:
-        #loss = tf.Print(loss, [loss, location_loss, confidence_loss, class_loss, K.sum(ignore_mask)], message='loss: ')
+        # loss = tf.Print(loss, [loss, location_loss, confidence_loss, class_loss, K.sum(ignore_mask)], message='loss: ')
     return loss
 
 def huber_loss(y_true, y_pred, delta=1.0):

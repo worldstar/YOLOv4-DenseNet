@@ -454,9 +454,9 @@ def yolo_loss(args, anchors, num_classes, ignore_thresh=.5, print_loss=False):
         #loss += xy_loss + wh_loss + confidence_loss + class_loss
         #loss  += subtracted
         loss += xy_loss + wh_loss + confidence_loss + class_loss
-        if print_loss:
+        # if print_loss:
             #loss = tf.Print(loss, [subtracted], message='loss: ')
-            loss = tf.Print(loss, [loss, xy_loss, wh_loss, confidence_loss, class_loss, K.sum(ignore_mask)], message='loss: ')
+        # loss = tf.Print(loss, [loss, xy_loss, wh_loss, confidence_loss, class_loss, K.sum(ignore_mask)], message='loss: ')
     return loss
 
 def huber_loss(y_true, y_pred, delta=1.0):
