@@ -9,7 +9,9 @@ from keras.layers import Input, Lambda
 from keras.models import Model
 from keras.optimizers import Adam
 from keras.callbacks import TensorBoard, ModelCheckpoint, ReduceLROnPlateau, EarlyStopping
-
+import os
+import glob
+from pathlib import Path
 from yolo3.model import yolo_body, yolo_loss,preprocess_true_boxes
 from keras.utils.vis_utils import plot_model
 from yolo3.model_yolov4 import yolo_bodyV4,yolov4_loss
@@ -74,9 +76,18 @@ def _main():
     input_shape     = (416,416) # multiple of 32, hw
     is_tiny_version = len(anchors)==6 # default setting
 
+    lastcheckpointh5 = sorted(glob.glob(log_dir+"sep*.h5"), key=os.path.getmtime)
+
+    if len(lastcheckpointh5) == 0:
+        lastcheckpointh5 = ""
+    else:
+        lastcheckpointh5 = lastcheckpointh5[-1]
+
     model = create_model(input_shape, anchors, num_classes,freeze_body=2,
-    load_pretrained=load_pretrained, weights_path=log_dir+'ep'+str(load_file)+'.h5') # make sure you know what you freeze
+    load_pretrained=load_pretrained, weights_path=lastcheckpointh5) # make sure you know what you freeze
     # logging = TensorBoard(log_dir=log_dir)
+
+    # model.build(input_shape)
 
     checkpoint = ModelCheckpoint(log_dir +'s'+str(load_file)+'_'+'ep{epoch:03d}-loss{loss:.3f}-val_loss{val_loss:.3f}.h5',
         monitor='val_loss', save_weights_only=True, save_best_only=True, period=3)
@@ -85,8 +96,8 @@ def _main():
     batch_print_callback = LambdaCallback(
         on_epoch_end=lambda epoch,logs: print(epoch))
 
-    checkpoint = ModelCheckpoint(log_dir +'s'+str(load_file)+'_'+'ep{epoch:03d}-loss{loss:.3f}-val_loss{val_loss:.3f}.h5',
-        monitor='val_loss', save_weights_only=True, save_best_only=True, period=3)
+    # checkpoint = ModelCheckpoint(log_dir +'s'+str(load_file)+'_'+'ep{epoch:03d}-loss{loss:.3f}-val_loss{val_loss:.3f}.h5',
+    #     monitor='val_loss', save_weights_only=True, save_best_only=True, period=3)
 
     #reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.1, patience=3, verbose=1)
     #early_stopping = EarlyStopping(monitor='val_loss', min_delta=0, patience=10, verbose=1)
@@ -103,7 +114,7 @@ def _main():
     np.random.seed(None)
 
     num_val = int(len(val_lines))
-    num_train = len(lines)
+    num_train = int(len(lines))
 
     # num_val = int(len(lines)*val_split)
     # num_train = len(lines) - num_val
@@ -114,12 +125,14 @@ def _main():
         for i in range(len(model.layers)):
             model.layers[i].trainable = True
         model.compile(optimizer=Adam(lr=1e-4), loss={lossname: lambda y_true, y_pred: y_pred}) # recompile to apply the change
-        # print('Unfreeze all of the layers.')
+
         model.save(log_dir +modeltype+'_network.h5')
+
+        # print('Unfreeze all of the layers.')
 
         #batch_size = 8 # note that more GPU memory is required after unfreezing the body
         #print('Train on {} samples, val on {} samples, with batch size {} , lines {}.'.format(num_train, num_val, batch_size,lines))
-        
+
         #For Google用
         model.fit_generator(data_generator_wrapper(lines[:num_train], batch_size, input_shape, anchors, num_classes, mosaic=mosaic),
             steps_per_epoch=max(1, num_train//batch_size),
@@ -128,6 +141,8 @@ def _main():
             epochs=epoch,
             initial_epoch=0,
             callbacks=[checkpoint,batch_print_callback])
+        
+        # model.summary()
 
         #For 測試用
         # model.fit_generator(data_generator_wrapper(lines[:num_train], batch_size, input_shape, anchors, num_classes, mosaic=mosaic),
@@ -138,7 +153,8 @@ def _main():
         #     initial_epoch=0,
         #     callbacks=[logging, checkpoint,batch_print_callback])
             #callbacks=[logging, checkpoint, reduce_lr, early_stopping])
-        # model.save_weights(log_dir + 'ep'+str(int(load_file)+int(epoch))+'.h5')
+
+        model.save_weights(log_dir + 'sep'+str(int(load_file)+int(epoch))+'.h5')
 
     # Further training if needed.
 
@@ -162,7 +178,7 @@ def create_model(input_shape, anchors, num_classes, load_pretrained=True, freeze
             weights_path='model_data/yolo_weights.h5'):
     '''create the training model'''
     K.clear_session() # get a new session
-    image_input = Input(shape=(None, None, 3))
+    image_input = Input(shape=(416, 416, 3))
     h, w = input_shape
     num_anchors = len(anchors)
 
@@ -242,7 +258,8 @@ def create_model(input_shape, anchors, num_classes, load_pretrained=True, freeze
             if freeze_body in [1, 2]:
                 # Do not freeze 3 output layers.
                 #num = len(model_body.layers)-7
-                num = len(model_body.layers)
+                # num = len(model_body.layers)
+                num = len(model_body.layers)-7
                 for i in range(num): model_body.layers[i].trainable = False
                 print('Freeze the first {} layers of total {} layers.'.format(num, len(model_body.layers)))
         if modeltype == "YOLOV3SE-Densenet":
@@ -296,8 +313,6 @@ def data_generator(annotation_lines, batch_size, input_shape, anchors, num_class
         image_data = np.array(image_data)
         box_data = np.array(box_data)
         y_true = preprocess_true_boxes(box_data, input_shape, anchors, num_classes)
-        # print(image_data)
-        # print('!!!!!!!!!!!!!!!!!!!!!!!')
         yield [image_data, *y_true], np.zeros(batch_size)
 
 def data_generator_wrapper(annotation_lines, batch_size, input_shape, anchors, num_classes, mosaic=False):
