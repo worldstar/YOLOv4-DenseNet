@@ -85,8 +85,10 @@ python train.py <log_dir> <annotation_path> <classes_path> <anchors_path> <valSp
 ## 預測
 
 1. 執行 [predictionGenMAPTxt_Pre.py](predictionGenMAPTxt_Pre.py) 預測並產生檔案至Data/SegmentationClass以及mAPTxt_pre
-
+範例: 
+```
 python predictionGenMAPTxt_Pre.py logs/YOLOV320200730V1/ ep500 YOLOV3
+```
 
 
 2. 執行 [genAnnotationMAPTxt.py](genAnnotationMAPTxt.py) 產生實際對應的檔案至mAPTxt
@@ -98,3 +100,17 @@ python predictionGenMAPTxt_Pre.py logs/YOLOV320200730V1/ ep500 YOLOV3
 1. 執行result.py
 
 2. 產生相對應result.csv 
+
+## 額外功能
+
+執行 [genAnnotationJson.py](genAnnotationJson.py) read xml,png to json , [json資料x1,y1,x2,y2 已經過 normalized] 參數說明
+- xmlpath   xml路徑
+- imagePath 圖檔路徑
+- writePath 寫入路徑
+- fr        voc_class 路徑
+```
+範例: 
+python genAnnotationJson.py "./Data/Annotations/" "./Dreadautomlfile/test/VSDType2/"#"./Data/JPEGImages/" "./model_data/train.txt" "model_data/voc_classes.txt" 
+自定義:
+python train.py <xmlpath> <imagePath> <writePath> <fr> 
+```

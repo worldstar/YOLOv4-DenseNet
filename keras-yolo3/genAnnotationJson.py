@@ -4,28 +4,29 @@ from os import getcwd
 import sys
 
 def _main():
-    path = sys.argv[1] #"./Data/Annotations/"
-    imagePath = sys.argv[2]#"./Data/JPEGImages/"
-    writePath = sys.argv[3]#"./model_data/train.txt"
-    deputyFileName = "png"
+    xmlpath      = sys.argv[1] #"./Data/Annotations/"
+    imagePath = sys.argv[2] #"./Dreadautomlfile/test/VSDType2/"#"./Data/JPEGImages/"
+    writePath = sys.argv[3] #"./model_data/train.txt"
+    fr = open(sys.argv[4],'r') #"model_data/voc_classes.txt"
     # classes = ["bicycle","car","cat","dog","person"]
-    fr = open(sys.argv[4] , 'r')#"model_data/voc_classes.txt"
     classes = fr.read().split("\n")
     fr.close()
 
-    fw = open(writePath, "w")
-    for fileName in os.listdir(path):
-        if fileName in ".gitignore":
-            continue
-        print("readFile:",(path+fileName))
-        convertResult = convert_annotation((path+fileName),classes,imagePath,deputyFileName)
-        fw.write(convertResult)
-    fw.close()
+    for fileName in os.listdir(imagePath):
+        # print(fileName)
+        if fileName.lower().endswith(('.png', '.jpg', '.jpeg')):
+            fw = open((writePath+fileName.replace(".png", ".txt")), "w")
+            # print("readFile:",(imagePath+fileName))
+            convertResult = convert_annotation((xmlpath+fileName.replace(".png", ".xml")),classes,imagePath)
+            fw.write(convertResult)
+            # break
+    # fw.close()
 
 def dataUs(infos):
     return infos.split(".")[0]
 
-def convert_annotation(path,classes,imagePath,deputyFileName): 
+def convert_annotation(path,classes,imagePath): 
+    resultstr = ""
     try: 
         xmlFile = open(path) 
     except:
@@ -56,12 +57,16 @@ def convert_annotation(path,classes,imagePath,deputyFileName):
                 ymin = int(dataUs(xmlObj2.find('ymin').text.replace(" ", "").replace("\t", "").replace("\n", "")))
                 xmax = int(dataUs(xmlObj2.find('xmax').text.replace(" ", "").replace("\t", "").replace("\n", "")))
                 ymax = int(dataUs(xmlObj2.find('ymax').text.replace(" ", "").replace("\t", "").replace("\n", "")))
-            result += " %s,%s,%s,%s,%d"%(xmin,ymin,xmax,ymax,classNum)
-    if(hasClass):
-        FileName = os.path.basename(path)
-        FileName = os.path.splitext(FileName)[0]
-        FileName = FileName+"."+deputyFileName
-        result = "%s%s\n"%((imagePath + FileName),result)
+                x = xmin / int(width)
+                y = ymin / int(height)
+                w = (xmax - xmin) / int(width)
+                h = (ymax - ymin) / int(height)
+            result += "%d %s %s %s %s"%(classNum,x,y,w,h) + "\n"
+    # if(hasClass):
+    #     FileName = os.path.basename(path)
+    #     FileName = os.path.splitext(FileName)[0]
+    #     FileName = FileName+"."+deputyFileName
+        # result = "%s%s\n"%((imagePath + FileName),result)
     return result
 
 if __name__ == "__main__":
