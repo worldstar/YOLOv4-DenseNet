@@ -12,6 +12,8 @@ import time
 from sklearn.metrics import confusion_matrix
 import numpy as np
 
+# python test.py --weights ../runs/train/20210121_ep500_vsdv1/weights/last.pt --data dataVSD.yaml --img 416
+
 MINOVERLAP = 0.5 # default value (defined in the PASCAL VOC2012 challenge)
 
 # log_dir         = sys.argv[1]#'logs/20200421_Y&D_Adam&1e-4_focalloss&gamma=2.^alpha=.25/'
@@ -338,6 +340,8 @@ def draw_plot_func(dictionary, n_classes, window_title, plot_title, x_label, out
     # unpacking the list of tuples into two lists
     sorted_keys, sorted_values = zip(*sorted_dic_by_value)
     # 
+    tick_font_size = 20
+
     if true_p_bar != "":
         """
          Special case to draw in:
@@ -372,7 +376,7 @@ def draw_plot_func(dictionary, n_classes, window_title, plot_title, x_label, out
             if i == (len(sorted_values)-1): # largest bar
                 adjust_axes(r, t, fig, axes)
     else:
-        plt.barh(range(n_classes), sorted_values, color=plot_color)
+        plt.barh(range(n_classes), sorted_values, color=plot_color, height = 0.4)
         """
          Write number on side of bar
         """
@@ -383,15 +387,16 @@ def draw_plot_func(dictionary, n_classes, window_title, plot_title, x_label, out
             str_val = " " + str(val) # add a space before
             if val < 1.0:
                 str_val = " {0:.2f}".format(val)
-            t = plt.text(val, i, str_val, color=plot_color, va='center', fontweight='bold')
+            t = plt.text(val, i, str_val, color=plot_color, va='center', fontweight='bold', fontsize=16)
             # re-set axes to show number inside the figure
             if i == (len(sorted_values)-1): # largest bar
                 adjust_axes(r, t, fig, axes)
     # set window title
     fig.canvas.set_window_title(window_title)
     # write classes in y axis
-    tick_font_size = 20
     plt.yticks(range(n_classes), sorted_keys, fontsize=tick_font_size)
+    plt.xticks(np.arange(0, 1.1, 0.2), fontsize=16)
+
     """
      Re-scale height accordingly
     """
@@ -407,6 +412,10 @@ def draw_plot_func(dictionary, n_classes, window_title, plot_title, x_label, out
     # set new height
     if figure_height > init_height:
         fig.set_figheight(figure_height)
+    fig.set_figheight(figure_height*2.5)
+    # print(figure_height)
+    # print(init_height)
+    # print("!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
     # set plot title
     plt.title(plot_title, fontsize=24)
@@ -455,14 +464,18 @@ gt_counter_per_class = {}
 counter_images_per_class = {}
 
 for txt_file in ground_truth_files_list:
-    if txt_file  in ".gitignore":
+
+    if ".gitignore"  in txt_file :
         continue;
-    #print(txt_file)
+
+    if "FPS.txt"  in txt_file:
+        continue;
     file_id = txt_file.split(".txt", 1)[0]
     file_id = os.path.basename(os.path.normpath(file_id))
     # check if there is a correspondent detection-results file
     temp_path = os.path.join(DR_PATH, (file_id + ".txt"))
     if not os.path.exists(temp_path):
+        continue;
         error_msg = "Error. File not found: {}\n".format(temp_path)
         error_msg += "(You can avoid this error message by running extra/intersect-gt-and-dr.py)"
         error(error_msg)
@@ -556,7 +569,9 @@ dr_files_list.sort()
 for class_index, class_name in enumerate(gt_classes):
     bounding_boxes = []
     for txt_file in dr_files_list:
-        if txt_file  in ".gitignore":
+        if ".gitignore"  in txt_file :
+            continue;
+        if "FPS.txt"  in txt_file:
             continue;
         #print(txt_file)
         # the first time it checks if all the corresponding ground-truth files exist
@@ -588,7 +603,10 @@ for class_index, class_name in enumerate(gt_classes):
         json.dump(bounding_boxes, outfile)
 
 for txt_file in dr_files_list:
-    if txt_file  in ".gitignore":
+    
+    if ".gitignore"  in txt_file :
+        continue;
+    if "FPS.txt"  in txt_file:
         continue;
     lines_list = file_lines_to_list(txt_file)
     for line in lines_list:
@@ -868,8 +886,8 @@ with open(results_files_path + "/results.txt", 'w') as results_file:
 
     print(text)
 
-with open(results_files_path + "/FPS.txt", 'w') as temp_file:
-    temp_file.write("It cost %f /S" % (147/(tEnd - tStart)))
+# with open(results_files_path + "/FPS.txt", 'w') as temp_file:
+#     temp_file.write("It cost %f /S" % (147/(tEnd - tStart)))
 
 # remove the temp_files directory
 shutil.rmtree(TEMP_FILES_PATH)
