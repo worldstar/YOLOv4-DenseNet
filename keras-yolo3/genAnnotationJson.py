@@ -4,7 +4,7 @@ from os import getcwd
 import sys
 
 def _main():
-    xmlpath      = sys.argv[1] #"./Data/Annotations/"
+    xmlpath   = sys.argv[1] #"./Data/Annotations/"
     imagePath = sys.argv[2] #"./Dreadautomlfile/test/VSDType2/"#"./Data/JPEGImages/"
     writePath = sys.argv[3] #"./model_data/train.txt"
     fr = open(sys.argv[4],'r') #"model_data/voc_classes.txt"

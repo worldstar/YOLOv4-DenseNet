@@ -2,43 +2,51 @@
 """
 Class definition of YOLO_v3 style detection model on image and video
 """
-
+import sys
 import colorsys
 import os
-from timeit import default_timer as timer
 import glob
 import time
-
 import numpy as np
+from os import getcwd
+
+from timeit import default_timer as timer
 from keras import backend as K
 from keras.models import load_model
 from keras.layers import Input
 from PIL import Image, ImageFont, ImageDraw
-
 from yolo3.model_yolov4 import yolo_bodyV4,yolov4_loss,preprocess_true_boxes
 from yolo3.model import yolo_eval, yolo_body
 from yolo3.utils import letterbox_image
 from keras.utils import multi_gpu_model
 from yolo3.model_densenet import densenet_body,yoloV4densenet_body
-import sys
-from pathlib import Path
 from yolo3.model_se_densenet import se_densenet_body
+from pathlib import Path
+from xml.etree import ElementTree as ET
+import cv2 
 
 os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 
 log_dir         = sys.argv[1]#'logs/20200421_Y&D_Adam&1e-4_focalloss&gamma=2.^alpha=.25/'
 filename        = sys.argv[2]
 modeltype       = sys.argv[3]
+xmllog_dir      = sys.argv[4]#'logs/20200421_Y&D_Adam&1e-4_focalloss&gamma=2.^alpha=.25/'
+xmltxttype      = sys.argv[5]#'logs/20200421_Y&D_Adam&1e-4_focalloss&gamma=2.^alpha=.25/'
+path   = "Data/VSDType2-20210223T090005Z-001/VSDType2/*/*.png"
+
 
 def _main():
-    detect_img(YOLO())
-
+    if xmltxttype == "txt":
+        detect_img(YOLO())
+    if xmltxttype == "xml":
+        detect_imgtoxml(YOLO())
 def detect_img(yolo):
-    path   = "Data/JPEGImages2/*.png"
-    outdir = "Data/SegmentationClass"
+    #outdir = "Data/SegmentationClass"
     SPath  = "mAPTxt_Pre/"+log_dir+filename+"/"
+
     FPSPath = "mAPTxt_Pre/"+log_dir+filename+"/"
     Path(SPath).mkdir(parents=True, exist_ok=True)
+
     ttotal = 0
     for jpgfile in glob.glob(path):
         s = '.'
@@ -61,6 +69,30 @@ def detect_img(yolo):
         temp_file.write("It cost %f /S" % (147/ttotal))
 
     yolo.close_session()
+def detect_imgtoxml(yolo):
+    #outdir = "Data/SegmentationClass"
+    SPath  = "mAPTxt_Pre/"+xmllog_dir+filename+"/"
+    Path(SPath).mkdir(parents=True, exist_ok=True)
+
+    for jpgfile in glob.glob(path):
+        img = Image.open(jpgfile)
+        image = cv2.imread(jpgfile)
+        imagename = os.path.basename(jpgfile)
+        (h, w) = image.shape[:2]
+        create_tree(imagename, h, w)
+        root,pre,predictedarray = yolo.detect_imagexml(img,annotation)
+        if pre == True:
+            for predicteditem in predictedarray:
+                tree = ET.ElementTree(root)
+                Path(SPath+"/"+predicteditem+"/").mkdir(parents=True, exist_ok=True)
+                tree.write('.\{}\{}.xml'.format(SPath+predicteditem+"/", imagename.strip('.png')))
+                img.save('.\{}\{}'.format(SPath+predicteditem+"/", imagename))
+        else:
+            Path(SPath+"Normal/").mkdir(parents=True, exist_ok=True)
+            img.save('.\{}\{}'.format(SPath+"Normal/", imagename))
+        # yolo.detect_imagexml(img)
+
+    # yolo.close_session()
 
 def detect_video(yolo, video_path, output_path=""):
     import cv2
@@ -102,6 +134,85 @@ def detect_video(yolo, video_path, output_path=""):
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
     yolo.close_session()
+# 定義一個創建一級分支object的函數
+def create_object(root,xi,yi,xa,ya,obj_name):   # 參數依次，樹根，xmin，ymin，xmax，ymax
+    #創建一級分支object
+    _object=ET.SubElement(root,'object')
+    #創建二級分支
+    name=ET.SubElement(_object,'name')
+    name.text= str(obj_name)
+    pose=ET.SubElement(_object,'pose')
+    pose.text='Unspecified'
+    truncated=ET.SubElement(_object,'truncated')
+    truncated.text='0'
+    difficult=ET.SubElement(_object,'difficult')
+    difficult.text='0'
+    #創建bndbox
+    bndbox=ET.SubElement(_object,'bndbox')
+    xmin=ET.SubElement(bndbox,'xmin')
+    xmin.text='%s'%xi
+    ymin = ET.SubElement(bndbox, 'ymin')
+    ymin.text = '%s'%yi
+    xmax = ET.SubElement(bndbox, 'xmax')
+    xmax.text = '%s'%xa
+    ymax = ET.SubElement(bndbox, 'ymax')
+    ymax.text = '%s'%ya
+
+# 創建xml文件的函數
+def create_tree(image_name, h, w):
+    global annotation
+    # 創建樹根annotation
+    annotation = ET.Element('annotation')
+    annotation.text ="\n    "
+    #創建一級分支folder
+    folder = ET.SubElement(annotation,'folder')
+    folder.tail ="\n    "
+
+    #添加folder標簽內容
+    # folder.text=(xmllog_dir)
+
+    #創建一級分支filename
+    filename=ET.SubElement(annotation,'filename')
+    filename.text=image_name
+    filename.tail ="\n    "
+
+    #創建一級分支path
+    # path=ET.SubElement(annotation,'path')
+
+    # path.text= getcwd() + '\{}\{}'.format(xmllog_dir,image_name)  # 用於返回當前工作目錄
+    #創建一級分支source
+    source=ET.SubElement(annotation,'source')
+    source.tail ="\n    "
+
+    #創建source下的二級分支database
+    database=ET.SubElement(source,'database')
+    database.text='Unknown'
+    database.tail ="\n    "
+
+    #創建一級分支size
+    size=ET.SubElement(annotation,'size')
+    size.tail ="\n    "
+
+    #創建size下的二級分支圖像的寬、高及depth
+    width=ET.SubElement(size,'width')
+    width.text= str(w)
+    width.tail ="\n    "
+
+    height=ET.SubElement(size,'height')
+    height.text= str(h)
+    height.tail ="\n    "
+
+    depth = ET.SubElement(size,'depth')
+    depth.text = '3'
+    depth.tail ="\n    "
+
+    #創建一級分支segmented
+    segmented = ET.SubElement(annotation,'segmented')
+    segmented.text = '0'
+
+    def close_session(self):
+        self.sess.close()
+
 
 class YOLO(object):
     _defaults = {
@@ -367,10 +478,89 @@ class YOLO(object):
         # print(end - start)
         timers = end - start
         return image,noFound,strJsonResult,timers
+    def detect_imagexml(self, image,root):
+        start = timer()
+        predicted = False
+        noFound = False
+        strJsonResult = ""
+        predictedarray = []
+        count = 1
+        if self.model_image_size != (None, None):
+            assert self.model_image_size[0]%32 == 0, 'Multiples of 32 required'
+            assert self.model_image_size[1]%32 == 0, 'Multiples of 32 required'
+            boxed_image = letterbox_image(image, tuple(reversed(self.model_image_size)))
+        else:
+            new_image_size = (image.width - (image.width % 32),
+                              image.height - (image.height % 32))
+            boxed_image = letterbox_image(image, new_image_size)
+        image_data = np.array(boxed_image, dtype='float32')
 
-    def close_session(self):
-        self.sess.close()
+        print(image_data.shape)
+        image_data /= 255.
+        image_data = np.expand_dims(image_data, 0)  # Add batch dimension.
 
+        out_boxes, out_scores, out_classes = self.sess.run(
+            [self.boxes, self.scores, self.classes],
+            feed_dict={
+                self.yolo_model.input: image_data,
+                self.input_image_shape: [image.size[1], image.size[0]],
+                K.learning_phase(): 0
+            })
+
+        print('Found {} boxes for {} '.format(len(out_boxes), 'img'))
+        if(len(out_boxes) == 0):
+            noFound = True
+        font = ImageFont.truetype(font='font/FiraMono-Medium.otf',
+                    size=np.floor(3e-2 * image.size[1] + 0.5).astype('int32'))
+        thickness = (image.size[0] + image.size[1]) // 300
+
+        for i, c in reversed(list(enumerate(out_classes))):
+            predicted = True
+            predicted_class = self.class_names[c]
+            predictedarray.append(predicted_class)
+            box = out_boxes[i]
+            score = out_scores[i]
+
+            label = '{} {:.2f}'.format(predicted_class, score)
+            draw = ImageDraw.Draw(image)
+            label_size = draw.textsize(label, font)
+
+            top, left, bottom, right = box
+            top = max(0, np.floor(top + 0.5).astype('int32'))
+            left = max(0, np.floor(left + 0.5).astype('int32'))
+            bottom = min(image.size[1], np.floor(bottom + 0.5).astype('int32'))
+            right = min(image.size[0], np.floor(right + 0.5).astype('int32'))
+            # print(label, (left, top), (right, bottom))
+
+            create_object(root, left,top,right,bottom, predicted_class)
+
+            strLabel = label.split(' ')
+            strJsonResult += '%s %s %s %s %s %s\n' %(strLabel[0],strLabel[1],left,top,right,bottom)
+            # if(count == len(out_boxes)):
+            #     strJsonResult += '{"x1": %d,"y1": %d,"x2": %d,"y2": %d,"class": "%s","prob": %s}' %(left,top,right,bottom,strLabel[0],strLabel[1])
+            # else:
+            #     strJsonResult += '{"x1": %d,"y1": %d,"x2": %d,"y2": %d,"class": "%s","prob": %s},' %(left,top,right,bottom,strLabel[0],strLabel[1])
+            #     count += 1
+
+            if top - label_size[1] >= 0:
+                text_origin = np.array([left, top - label_size[1]])
+            else:
+                text_origin = np.array([left, top + 1])
+
+            # for i in range(thickness):
+            #     draw.rectangle(
+            #         [left + i, top + i, right - i, bottom - i],
+            #         outline=self.colors[c])
+            # draw.rectangle(
+            #     [tuple(text_origin), tuple(text_origin + label_size)],
+            #     fill=self.colors[c])
+            # draw.text(text_origin, label, fill=(0, 0, 0), font=font)
+            # del draw
+
+        end = timer()
+        print(end - start)
+        timers = end - start
+        return root,predicted,predictedarray
 
 if __name__ == '__main__':
     _main()
