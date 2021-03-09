@@ -46,7 +46,6 @@ def xml2csv(xml_path):
         return pd.DataFrame(columns=['filename,width,height','class','xmin','ymin','xmax','ymax'])
     return xml_df
 
-
 def df2labelme(symbolDict,image_path,image):
     """ convert annotation in CSV format to labelme JSON
 

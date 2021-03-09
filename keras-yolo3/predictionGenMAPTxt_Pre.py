@@ -24,15 +24,19 @@ from yolo3.model_se_densenet import se_densenet_body
 from pathlib import Path
 from xml.etree import ElementTree as ET
 import cv2 
+import pandas as pd
+import xml.etree.ElementTree as ET
+import numpy as np
+import json
+import base64
 
 os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 
-log_dir         = sys.argv[1]#'logs/20200421_Y&D_Adam&1e-4_focalloss&gamma=2.^alpha=.25/'
-filename        = sys.argv[2]
-modeltype       = sys.argv[3]
-xmllog_dir      = sys.argv[4]#'logs/20200421_Y&D_Adam&1e-4_focalloss&gamma=2.^alpha=.25/'
-xmltxttype      = sys.argv[5]#'logs/20200421_Y&D_Adam&1e-4_focalloss&gamma=2.^alpha=.25/'
-path   = "Data/VSDType2-20210223T090005Z-001/VSDType2/*/*.png"
+readpath        = sys.argv[1]#"Data/VSDType2-20210223T090005Z-001/VSDType2/*/*.png"       圖檔來源
+log_dir         = sys.argv[2]#'logs/20200421_Y&D_Adam&1e-4_focalloss&gamma=2.^alpha=.25/' 模型路徑
+write_dir       = sys.argv[3]#'logs/20200421_Y&D_Adam&1e-4_focalloss&gamma=2.^alpha=.25/' 寫入路徑
+modeltype       = sys.argv[4]#                                                            模型類型
+xmltxttype      = sys.argv[5]#'logs/20200421_Y&D_Adam&1e-4_focalloss&gamma=2.^alpha=.25/' 
 
 
 def _main():
@@ -42,13 +46,13 @@ def _main():
         detect_imgtoxml(YOLO())
 def detect_img(yolo):
     #outdir = "Data/SegmentationClass"
-    SPath  = "mAPTxt_Pre/"+log_dir+filename+"/"
+    SPath  = write_dir
 
-    FPSPath = "mAPTxt_Pre/"+log_dir+filename+"/"
+    # FPSPath = "mAPTxt_Pre/"+log_dir+filename+"/"
     Path(SPath).mkdir(parents=True, exist_ok=True)
 
     ttotal = 0
-    for jpgfile in glob.glob(path):
+    for jpgfile in glob.glob(readpath):
         s = '.'
         Tfilename = os.path.basename(jpgfile).split('.')
         Tfilename.pop()
@@ -65,20 +69,19 @@ def detect_img(yolo):
         fw.write(strJsonResult)
         fw.close()
 
-    with open(FPSPath + "FPS.txt", 'w') as temp_file:
-        temp_file.write("It cost %f /S" % (147/ttotal))
+    # with open(FPSPath + "FPS.txt", 'w') as temp_file:
+    #     temp_file.write("It cost %f /S" % (147/ttotal))
 
     yolo.close_session()
 def detect_imgtoxml(yolo):
-    #outdir = "Data/SegmentationClass"
-    SPath  = "mAPTxt_Pre/"+xmllog_dir+filename+"/"
+    SPath  = write_dir
     Path(SPath).mkdir(parents=True, exist_ok=True)
 
-    for jpgfile in glob.glob(path):
-        img = Image.open(jpgfile)
-        image = cv2.imread(jpgfile)
+    for jpgfile in glob.glob(readpath):
+        img       = Image.open(jpgfile)
+        image     = cv2.imread(jpgfile)
         imagename = os.path.basename(jpgfile)
-        (h, w) = image.shape[:2]
+        (h, w)    = image.shape[:2]
         create_tree(imagename, h, w)
         root,pre,predictedarray = yolo.detect_imagexml(img,annotation)
         if pre == True:
@@ -87,6 +90,10 @@ def detect_imgtoxml(yolo):
                 Path(SPath+"/"+predicteditem+"/").mkdir(parents=True, exist_ok=True)
                 tree.write('.\{}\{}.xml'.format(SPath+predicteditem+"/", imagename.strip('.png')))
                 img.save('.\{}\{}'.format(SPath+predicteditem+"/", imagename))
+                xml_csv   = xml2csv('.\{}\{}.xml'.format(SPath+predicteditem+"/", imagename.strip('.png')))
+                csv_json=df2labelme(xml_csv,jpgfile,image)
+                with open('.\{}\{}.json'.format(SPath+predicteditem+"/", imagename.strip('.png')), 'w') as outfile:
+                    json.dump(csv_json, outfile)
         else:
             Path(SPath+"Normal/").mkdir(parents=True, exist_ok=True)
             img.save('.\{}\{}'.format(SPath+"Normal/", imagename))
@@ -214,9 +221,82 @@ def create_tree(image_name, h, w):
         self.sess.close()
 
 
+def xml2csv(xml_path):
+    """Convert XML to CSV
+
+    Args:
+        xml_path (str): Location of annotated XML file
+    Returns:
+        pd.DataFrame: converted csv file
+
+    """
+    # print("xml to csv {}".format(xml_path))
+    xml_list = []
+    xml_df=pd.DataFrame()
+    try:
+        tree = ET.parse(xml_path)
+        root = tree.getroot()
+        for member in root.findall('object'):
+            value = (root.find('filename').text,
+                     int(root.find('size')[0].text),
+                     int(root.find('size')[1].text),
+                     member[0].text,
+                     int(member[4][0].text),
+                     int(member[4][1].text),
+                     int(member[4][2].text),
+                     int(member[4][3].text)
+                     )
+            xml_list.append(value)
+            column_name = ['filename', 'width', 'height', 'class', 'xmin', 'ymin', 'xmax', 'ymax']
+            xml_df = pd.DataFrame(xml_list, columns=column_name)
+    except Exception as e:
+        # print('xml conversion failed:{}'.format(e))
+        return pd.DataFrame(columns=['filename,width,height','class','xmin','ymin','xmax','ymax'])
+    return xml_df
+
+def df2labelme(symbolDict,image_path,image):
+    """ convert annotation in CSV format to labelme JSON
+
+    Args:
+        symbolDict (dataframe): annotations in dataframe
+        image_path (str): path to image
+        image (np.ndarray): image read as numpy array
+
+    Returns:
+        JSON: converted labelme JSON
+
+    """
+    try:
+        symbolDict['min']= symbolDict[['xmin','ymin']].values.tolist()
+        symbolDict['max']= symbolDict[['xmax','ymax']].values.tolist()
+        symbolDict['points']= symbolDict[['min','max']].values.tolist()
+        symbolDict['line_color'] = None
+        symbolDict['fill_color'] = None
+        symbolDict['shape_type']='rectangle'
+        symbolDict['group_id']=None
+        height,width,_=image.shape
+        symbolDict['height']=height
+        symbolDict['width']=width
+        encoded = base64.b64encode(open(image_path, "rb").read())
+        symbolDict.loc[:,'imageData'] = encoded
+        symbolDict.rename(columns = {'class':'label','filename':'imagePath','height':'imageHeight','width':'imageWidth'},inplace=True)
+        converted_json = (symbolDict.groupby(['imagePath','imageWidth','imageHeight','imageData'], as_index=False)
+                     .apply(lambda x: x[['label','line_color','fill_color','points','shape_type','group_id']].to_dict('r'))
+                     .reset_index()
+                     .rename(columns={0:'shapes'})
+                     .to_json(orient='records'))
+        converted_json = json.loads(converted_json)[0]
+        converted_json["lineColor"]=  [0,255,0,128]
+        converted_json["fillColor"]=  [255,0,0,128]
+    except Exception as e:
+        converted_json={}
+        print('error in labelme conversion:{}'.format(e))
+    return converted_json
+
+
 class YOLO(object):
     _defaults = {
-        "model_path": log_dir+filename+".h5",
+        "model_path": log_dir,
         "anchors_path": 'model_data/yolo_anchors.txt',
         "classes_path": 'model_data/voc_classes.txt',
         "score" : 0.5,#0.5
@@ -495,7 +575,7 @@ class YOLO(object):
             boxed_image = letterbox_image(image, new_image_size)
         image_data = np.array(boxed_image, dtype='float32')
 
-        print(image_data.shape)
+        # print(image_data.shape)
         image_data /= 255.
         image_data = np.expand_dims(image_data, 0)  # Add batch dimension.
 

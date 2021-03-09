@@ -2,24 +2,56 @@ import xml.etree.ElementTree as ET
 import os
 from os import getcwd
 import sys
+import numpy as np
 
 def _main():
     path = sys.argv[1] #"./Data/Annotations/"
     imagePath = sys.argv[2]#"./Data/JPEGImages/"
-    writePath = sys.argv[3]#"./model_data/train.txt"
+    writetrainPath = sys.argv[3]#"./model_data/train.txt"
+    writevalPath = sys.argv[4]#"./model_data/train.txt"
+    lines = []
     deputyFileName = "png"
     # classes = ["bicycle","car","cat","dog","person"]
-    fr = open(sys.argv[4] , 'r')#"model_data/voc_classes.txt"
+    fr = open(sys.argv[5] , 'r')#"model_data/voc_classes.txt"
     classes = fr.read().split("\n")
     fr.close()
 
-    fw = open(writePath, "w")
+    fw = open(writetrainPath, "w")
+    fw2 = open(writevalPath, "w")
+
+    # with open(path) as f:
+    #     lines = f.readlines()
+
     for fileName in os.listdir(path):
         if fileName in ".gitignore":
             continue
-        print("readFile:",(path+fileName))
-        convertResult = convert_annotation((path+fileName),classes,imagePath,deputyFileName)
+        lines.append((path+fileName))
+
+    np.random.seed(10101)
+    np.random.shuffle(lines)
+    np.random.seed(None)
+
+    num_val = int(len(lines)*0.1)
+    num_train = len(lines) - num_val
+    print(len(lines))
+    print(len(lines[:num_train]))
+    print(len(lines[num_train:]))
+
+    # print(lines[num_train:])
+
+    for fileName in lines[:num_train]:
+        if fileName in ".gitignore":
+            continue
+        convertResult = convert_annotation((fileName),classes,imagePath,deputyFileName)
         fw.write(convertResult)
+
+    for fileName in lines[num_train:]:
+        if fileName in ".gitignore":
+            continue
+        convertResult = convert_annotation((fileName),classes,imagePath,deputyFileName)
+        fw2.write(convertResult)
+
+
     fw.close()
 
 def dataUs(infos):

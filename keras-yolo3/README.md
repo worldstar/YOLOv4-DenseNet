@@ -28,6 +28,44 @@
 
 8. yolo3 (主要計算核心)
 
+## 資料處理
+
+1. 將labelImg轉換為labelme使用格式 labelImg(xml) to labelme(json)
+執行[Xmltojson.py](Xmltojson.py) read xml , png to json 參數說明
+- xml_path  xml路徑
+- 在xml_path路徑下產出 json 格式
+```
+範例: 
+python Xmltojson.py "./Data/Annotations/" 
+python Xmltojson.py <xml_path>
+```
+
+2. 將labelme轉換為labelImg使用格式 labelme(json) to labelImg(xml)
+執行[labelme2voc.py](labelme2voc.py) read json , png to xml 參數說明
+
+- input_dir  輸入來源(包含圖檔、json檔案)
+- output_dir 輸出位址(結果儲存位置)
+- --labels   voc_classes 檔案
+```
+範例:
+python labelme2voc.py <input_dir> <output_dir> --labels <labels.txt>
+
+python labelme2voc.py "./Data/ASDType2/" "./Data/test/" --labels "./model_data/voc_classes.txt"
+
+```
+3. YOLOV5訓練時使用以下轉換成可訓練資料集 
+執行 [genAnnotationJson.py](genAnnotationJson.py) read xml,png to txt , [json資料x1,y1,x2,y2 已經過 normalized] 參數說明 
+- xmlpath   xml路徑
+- imagePath 圖檔路徑
+- writePath 寫入路徑
+- fr        voc_class 路徑
+```
+範例: 
+python genAnnotationJson.py "./Data/Annotations/" "./Dreadautomlfile/test/VSDType2/"#"./Data/JPEGImages/" "./model_data/train.txt" "model_data/voc_classes.txt" 
+自定義:
+python genAnnotationJson.py <xmlpath> <imagePath> <writePath> <fr> 
+```
+
 ## 訓練
 1. genAnnotationClasses 參數說明
 - Folderpath      檔案路徑 ex: ./Data/Annotations/
@@ -43,15 +81,16 @@ python genAnnotationClasses.py <Folderpath> <writePath>
 2. genAnnotationTrainPath 參數說明
 - path            檔案根目錄          ex: ./Data/Annotations/
 - imagePath       產生檔案路徑        ex: ./Data/JPEGImages/
-- writePath       寫入檔案路徑        ex: ./model_data/
+- writetrainPath  寫入訓練檔案路徑     ex: ./model_data/
+- writevalPath    寫入預測檔案路徑     ex: ./model_data/
 - voc_classesPath 指定voc_classes位置 ex: model_data/voc_classes.txt
-- genAnnotationTrainPath.py 產生 train.txt 檔案(待訓練圖片完整路徑、anchorbox)
+- genAnnotationTrainPath.py 產生 train.txt val.txt 檔案(待訓練圖片完整路徑、anchorbox)
 ```
 範例: 
-python genAnnotationTrainPath.py ./Data/Annotations/ ./Data/JPEGImages/ ./model_data/train.txt model_data/voc_classes.txt
+python genAnnotationTrainPath.py ./Data/Annotations/ ./Data/JPEGImages/ ./model_data/train.txt ./model_data/val.txt model_data/voc_classes.txt
 python genAnnotationTrainPath.py ./Dreadautomlfile/valxml/ ./Dreadautomlfile/val/ ./model_data/val.txt model_data/voc_classes.txt
 自定義:
-python genAnnotationTrainPath.py <path> <imagePath> <writePath> <voc_classesPath>
+python genAnnotationTrainPath.py <path> <imagePath> <writetrainPath> <writevalPath> <voc_classesPath>
 ```
 
 3. genKmeans 參數說明
@@ -101,16 +140,3 @@ python predictionGenMAPTxt_Pre.py logs/YOLOV320200730V1/ ep500 YOLOV3
 
 2. 產生相對應result.csv 
 
-## 額外功能
-
-執行 [genAnnotationJson.py](genAnnotationJson.py) read xml,png to json , [json資料x1,y1,x2,y2 已經過 normalized] 參數說明
-- xmlpath   xml路徑
-- imagePath 圖檔路徑
-- writePath 寫入路徑
-- fr        voc_class 路徑
-```
-範例: 
-python genAnnotationJson.py "./Data/Annotations/" "./Dreadautomlfile/test/VSDType2/"#"./Data/JPEGImages/" "./model_data/train.txt" "model_data/voc_classes.txt" 
-自定義:
-python train.py <xmlpath> <imagePath> <writePath> <fr> 
-```
