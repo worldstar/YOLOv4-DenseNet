@@ -1,6 +1,6 @@
 # YOLOv3流程(存放方式、訓練、預測、評估、回傳資料等)
 
-## 測試環境、存放方式
+## A. 測試環境、存放方式
 
 1. 測試環境
     - Python 3.7.1
@@ -8,44 +8,21 @@
     - Keras-gup 2.2.4
     - tensorflow 1.14.0
     - tensorflow-gup 1.14.0
-
 2. Data (資料存放)
   - Annotations(放入要訓練的Annotations xml檔案)
   - Annotations2(放入要預測的Annotations xml檔案[mAP計算才需使用])
   - JPEGImages(放入要訓練的Image檔案)
   - JPEGImages2(放入要預測的Image檔案)
   - SegmentationClass(產生預測Image結果圖檔)
-
 3. font (字型)
-
 4. mAPTxt (mAP計算所需檔案-Annotations)
-
 5. mAPTxt_Pre (mAP計算所需檔案-Annotations2)
-
 6. model (存放訓練產生model)
-
 7. model_data (存放訓練所需參數資料)
-
 8. yolo3 (主要計算核心)
 
-## 資料處理
-
-1. 將labelImg轉換為labelme使用格式 labelImg(xml) to labelme(json)
-執行[Xmltojson.py](Xmltojson.py) read xml , png to json 參數說明
-- xml_path  xml路徑
-- 在xml_path路徑下產出 json 格式
-```
-範例: 
-python Xmltojson.py "./Data/Annotations/" 
-python Xmltojson.py <xml_path>
-```
-
-2. 將labelme轉換為labelImg使用格式 labelme(json) to labelImg(xml)
-執行[labelme2voc.py](labelme2voc.py) read json , png to xml 參數說明
-
-- input_dir  輸入來源(包含圖檔、json檔案)
-- output_dir 輸出位址(結果儲存位置)
-- --labels   voc_classes 檔案
+## B. 標記資料格式轉換
+1. LabelMe JSON標記轉Pascal VOC
 ```
 範例:
 python labelme2voc.py <input_dir> <output_dir> --labels <labels.txt>
@@ -53,7 +30,7 @@ python labelme2voc.py <input_dir> <output_dir> --labels <labels.txt>
 python labelme2voc.py "./Data/ASDType2/" "./Data/test/" --labels "./model_data/voc_classes.txt"
 
 ```
-3. YOLOV5訓練時使用以下轉換成可訓練資料集 
+2. YOLOV5訓練時使用以下轉換成可訓練資料集 
 執行 [genAnnotationJson.py](genAnnotationJson.py) read xml,png to txt , [json資料x1,y1,x2,y2 已經過 normalized] 參數說明 
 - xmlpath   xml路徑
 - imagePath 圖檔路徑
@@ -66,7 +43,23 @@ python genAnnotationJson.py "./Data/Annotations/" "./Dreadautomlfile/test/VSDTyp
 python genAnnotationJson.py <xmlpath> <imagePath> <writePath> <fr> 
 ```
 
-## 訓練
+3. 其他需求：將labelImg轉換為LabelMe使用格式 labelImg(xml) to labelme(json)
+執行[Xmltojson.py](Xmltojson.py) read xml , png to json 參數說明
+- xml_path  xml路徑
+- 在xml_path路徑下產出 json 格式
+```
+範例: 
+python Xmltojson.py "./Data/Annotations/" 
+python Xmltojson.py <xml_path>
+```
+
+4. 其他需求：將LabelMe轉換為labelImg使用格式 labelme(json) to labelImg(xml)
+執行[labelme2voc.py](labelme2voc.py) read json , png to xml 參數說明
+- input_dir  輸入來源(包含圖檔、json檔案)
+- output_dir 輸出位址(結果儲存位置)
+- --labels   voc_classes 檔案
+
+## C. 訓練
 1. genAnnotationClasses 參數說明
 - Folderpath      檔案路徑 ex: ./Data/Annotations/
 - writePath   寫入檔案路徑 ex: ./model_data/
@@ -121,22 +114,15 @@ python train.py model/ model_data/train.txt  model_data/voc_classes.txt  model_d
 python train.py <log_dir> <annotation_path> <classes_path> <anchors_path> <valSplit> <epoch> <batchSize> <stepMultiple> 
 ```
 
-## 預測
-
+## D. 預測
 1. 執行 [predictionGenMAPTxt_Pre.py](predictionGenMAPTxt_Pre.py) 預測並產生檔案至Data/SegmentationClass以及mAPTxt_pre
 範例: 
 ```
 python predictionGenMAPTxt_Pre.py logs/YOLOV320200730V1/ ep500 YOLOV3
 ```
-
-
 2. 執行 [genAnnotationMAPTxt.py](genAnnotationMAPTxt.py) 產生實際對應的檔案至mAPTxt
 
 ## [評估(mAP)](../mAPCalculate)
-
-## 回傳資料
-
+回傳資料
 1. 執行result.py
-
 2. 產生相對應result.csv 
-
