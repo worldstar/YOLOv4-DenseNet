@@ -35,14 +35,14 @@ os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 readpath        = sys.argv[1]#"Data/VSDType2-20210223T090005Z-001/VSDType2/*/*.png"       圖檔來源
 log_dir         = sys.argv[2]#'logs/20200421_Y&D_Adam&1e-4_focalloss&gamma=2.^alpha=.25/' 模型路徑
 write_dir       = sys.argv[3]#'logs/20200421_Y&D_Adam&1e-4_focalloss&gamma=2.^alpha=.25/' 寫入路徑
-modeltype       = sys.argv[4]#                                                            模型類型
-xmltxttype      = sys.argv[5]#'logs/20200421_Y&D_Adam&1e-4_focalloss&gamma=2.^alpha=.25/' 
+modeltype       = sys.argv[4]# model                                                      模型類型
+filetype      = sys.argv[5]#'logs/20200421_Y&D_Adam&1e-4_focalloss&gamma=2.^alpha=.25/' 
 
 
 def _main():
-    if xmltxttype == "txt":
+    if filetype == "txt":
         detect_img(YOLO())
-    if xmltxttype == "xml":
+    if filetype == "xml":
         detect_imgtoxml(YOLO())
 def detect_img(yolo):
     #outdir = "Data/SegmentationClass"
@@ -72,7 +72,7 @@ def detect_img(yolo):
     # with open(FPSPath + "FPS.txt", 'w') as temp_file:
     #     temp_file.write("It cost %f /S" % (147/ttotal))
 
-    yolo.close_session()
+    # yolo.close_session()
 def detect_imgtoxml(yolo):
     SPath  = write_dir
     Path(SPath).mkdir(parents=True, exist_ok=True)
@@ -88,6 +88,7 @@ def detect_imgtoxml(yolo):
             for predicteditem in predictedarray:
                 tree = ET.ElementTree(root)
                 Path(SPath+"/"+predicteditem+"/").mkdir(parents=True, exist_ok=True)
+                print('.\{}\{}.xml'.format(SPath+predicteditem+"/", imagename.strip('.png')))
                 tree.write('.\{}\{}.xml'.format(SPath+predicteditem+"/", imagename.strip('.png')))
                 img.save('.\{}\{}'.format(SPath+predicteditem+"/", imagename))
                 xml_csv   = xml2csv('.\{}\{}.xml'.format(SPath+predicteditem+"/", imagename.strip('.png')))
