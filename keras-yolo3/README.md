@@ -127,6 +127,7 @@ python predictionGenMAPTxt_Pre.py "Data/JPEGImagesASD2/*.png" "logs/ASD/YOLOV3-D
 自定義
 python predictionGenMAPTxt_Pre.py <readpath> <log_dir> <write_dir> <modeltype> <filetype>
 ```
+
 2. 執行 [genAnnotationMAPTxt.py](genAnnotationMAPTxt.py) 產生實際對應的檔案至mAPTxt
 
 ## [評估(mAP)](../mAPCalculate)
