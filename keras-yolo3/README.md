@@ -69,18 +69,7 @@ python Xmltojson.py <xml_path>
 - --labels   voc_classes 檔案
 
 ## C. 訓練
-1. genAnnotationClasses 參數說明
-- Folderpath      檔案路徑 ex: ./Data/Annotations/
-- writePath   寫入檔案路徑 ex: ./model_data/
-- genAnnotationClasses.py 產生 voc_classes 檔案
-```
-範例: 
-python genAnnotationClasses.py ./Data/Annotations/ ./model_data/
-自定義:
-python genAnnotationClasses.py <Folderpath> <writePath> 
-```
-
-2. genAnnotationTrainPath 參數說明
+1. genAnnotationTrainPath 參數說明
 - path            檔案根目錄          ex: ./Data/Annotations/
 - imagePath       產生檔案路徑        ex: ./Data/JPEGImages/
 - writetrainPath  寫入訓練檔案路徑     ex: ./model_data/
@@ -96,7 +85,7 @@ python genAnnotationTrainPath.py ./Data/AnnotationsASD/ ./Data/JPEGImagesASD/ ./
 python genAnnotationTrainPath.py <path> <imagePath> <writetrainPath> <writevalPath> <voc_classesPath>
 ```
 
-3. genKmeans 參數說明
+2. genKmeans 參數說明
 - trainpath 訓練檔案路徑 ex: model_data/train.txt
 - writePath 寫入檔案路徑 ex: model_data/
 - genKmeans.py 產生 yolo_anchors.txt 檔案
@@ -108,7 +97,7 @@ python genKmeans.py <trainpath> <writePath>
 
 ```
 
-4. train 參數說明
+3. train 參數說明
 - annotation_path   檔案名稱 ex: model_data/train.txt
 - evaluations_path  檔案名稱 ex: model_data/val.txt
 - log_dir           產生檔案路徑 ex: model/
@@ -123,7 +112,8 @@ python train.py model/ model_data/train.txt  model_data/voc_classes.txt  model_d
 自定義:
 python train.py <log_dir> <annotation_path> <classes_path> <anchors_path> <valSplit> <epoch> <batchSize> <stepMultiple> 
 ```
-## 預測
+
+## D. 預測
 1. 執行 [predictionGenMAPTxt_Pre.py](predictionGenMAPTxt_Pre.py) 
 預測並產生檔案至<write_dir>資料夾內
 - readpath        讀取圖檔     ex:JPEGImages/ (僅包含圖檔格式)
