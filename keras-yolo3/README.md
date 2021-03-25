@@ -32,22 +32,6 @@ python genAnnotationClasses.py ./Data/Annotations/ ./model_data/
 python genAnnotationClasses.py <Folderpath> <writePath> 
 ```
 
-2. 將labelImg轉換為labelme使用格式 labelImg(xml) to labelme(json)
-執行[Xmltojson.py](Xmltojson.py) read xml , png to json 參數說明
-- xml_path  xml路徑
-- 在xml_path路徑下產出 json 格式
-```
-範例: 
-python Xmltojson.py "./Data/Annotations/" 
-python Xmltojson.py <xml_path>
-```
-
-3. 將labelme轉換為labelImg使用格式 labelme(json) to labelImg(xml)
-執行[labelme2voc.py](labelme2voc.py) read json , png to xml 參數說明
-- input_dir  輸入來源(包含圖檔、json檔案)
-- output_dir 輸出位址(結果儲存位置)
-- --labels   voc_classes 檔案
-
 ## B. 標記資料格式轉換
 1. LabelMe JSON標記轉Pascal VOC
 ```
