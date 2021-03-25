@@ -6,15 +6,14 @@
     - Python 3.7.1
     - Keras 2.2.4
     - Keras-gup 2.2.4
-    - tensorflow 1.14.0
-    - tensorflow-gup 1.14.0
+    - tensorflow 1.15.0
+    - tensorflow-gup 1.15.0
 
 2. Data (資料存放)
   - Annotations(放入要訓練的Annotations xml檔案)
   - Annotations2(放入要預測的Annotations xml檔案[mAP計算才需使用])
   - JPEGImages(放入要訓練的Image檔案)
   - JPEGImages2(放入要預測的Image檔案)
-  - SegmentationClass(產生預測Image結果圖檔)
 
 3. font (字型)
 
@@ -29,8 +28,18 @@
 8. yolo3 (主要計算核心)
 
 ## 資料處理
+1. genAnnotationClasses 參數說明
+- Folderpath      檔案路徑 ex: ./Data/Annotations/
+- writePath   寫入檔案路徑 ex: ./model_data/
+- genAnnotationClasses.py 產生 voc_classes 檔案
+```
+範例: 
+python genAnnotationClasses.py ./Data/Annotations/ ./model_data/
+自定義:
+python genAnnotationClasses.py <Folderpath> <writePath> 
+```
 
-1. 將labelImg轉換為labelme使用格式 labelImg(xml) to labelme(json)
+2. 將labelImg轉換為labelme使用格式 labelImg(xml) to labelme(json)
 執行[Xmltojson.py](Xmltojson.py) read xml , png to json 參數說明
 - xml_path  xml路徑
 - 在xml_path路徑下產出 json 格式
@@ -40,9 +49,8 @@ python Xmltojson.py "./Data/Annotations/"
 python Xmltojson.py <xml_path>
 ```
 
-2. 將labelme轉換為labelImg使用格式 labelme(json) to labelImg(xml)
+3. 將labelme轉換為labelImg使用格式 labelme(json) to labelImg(xml)
 執行[labelme2voc.py](labelme2voc.py) read json , png to xml 參數說明
-
 - input_dir  輸入來源(包含圖檔、json檔案)
 - output_dir 輸出位址(結果儲存位置)
 - --labels   voc_classes 檔案
@@ -53,7 +61,7 @@ python labelme2voc.py <input_dir> <output_dir> --labels <labels.txt>
 python labelme2voc.py "./Data/ASDType2/" "./Data/test/" --labels "./model_data/voc_classes.txt"
 
 ```
-3. YOLOV5訓練時使用以下轉換成可訓練資料集 
+4. YOLOV5訓練時使用以下轉換成可訓練資料集 
 執行 [genAnnotationJson.py](genAnnotationJson.py) read xml,png to txt , [json資料x1,y1,x2,y2 已經過 normalized] 參數說明 
 - xmlpath   xml路徑
 - imagePath 圖檔路徑
@@ -67,18 +75,8 @@ python genAnnotationJson.py <xmlpath> <imagePath> <writePath> <fr>
 ```
 
 ## 訓練
-1. genAnnotationClasses 參數說明
-- Folderpath      檔案路徑 ex: ./Data/Annotations/
-- writePath   寫入檔案路徑 ex: ./model_data/
-- genAnnotationClasses.py 產生 voc_classes 檔案
-```
-範例: 
-python genAnnotationClasses.py ./Data/Annotations/ ./model_data/
-自定義:
-python genAnnotationClasses.py <Folderpath> <writePath> 
-```
 
-2. genAnnotationTrainPath 參數說明
+1. genAnnotationTrainPath 參數說明
 - path            檔案根目錄          ex: ./Data/Annotations/
 - imagePath       產生檔案路徑        ex: ./Data/JPEGImages/
 - writetrainPath  寫入訓練檔案路徑     ex: ./model_data/
@@ -87,13 +85,14 @@ python genAnnotationClasses.py <Folderpath> <writePath>
 - genAnnotationTrainPath.py 產生 train.txt val.txt 檔案(待訓練圖片完整路徑、anchorbox)
 ```
 範例: 
-python genAnnotationTrainPath.py ./Data/Annotations/ ./Data/JPEGImages/ ./model_data/train.txt ./model_data/val.txt model_data/voc_classes.txt
+python genAnnotationTrainPath.py ./Data/Annotations/ ./Data/JPEGImages/ ./model_data/train.txt ./model_data/val.txt ./model_data/test.txt model_data/voc_classes.txt
 python genAnnotationTrainPath.py ./Dreadautomlfile/valxml/ ./Dreadautomlfile/val/ ./model_data/val.txt model_data/voc_classes.txt
+python genAnnotationTrainPath.py ./Data/AnnotationsASD/ ./Data/JPEGImagesASD/ ./model_data/train.txt ./model_data/val.txt ./model_data/test.txt model_data/voc_classes.txt
 自定義:
 python genAnnotationTrainPath.py <path> <imagePath> <writetrainPath> <writevalPath> <voc_classesPath>
 ```
 
-3. genKmeans 參數說明
+2. genKmeans 參數說明
 - trainpath 訓練檔案路徑 ex: model_data/train.txt
 - writePath 寫入檔案路徑 ex: model_data/
 - genKmeans.py 產生 yolo_anchors.txt 檔案
@@ -105,15 +104,15 @@ python genKmeans.py <trainpath> <writePath>
 
 ```
 
-4. train 參數說明
-- log_dir           產生檔案路徑 ex: model/
+3. train 參數說明
 - annotation_path   檔案名稱 ex: model_data/train.txt
+- evaluations_path  檔案名稱 ex: model_data/val.txt
+- log_dir           產生檔案路徑 ex: model/
 - classes_path      檔案名稱 ex: model_data/voc_classes.txt
 - anchors_path      檔案名稱 ex: model_data/yolo_anchors.txt
-- valSplit          ex:0.2
+- loadfile_path     檔案名稱 ex: model (若為''則重新訓練 若不為空則讀取<loadfile_path>模型訓練<epoch>次)
 - epoch             ex:400
 - batchSize         ex:4
-- stepMultiple      ex:1
 ```
 範例: 
 python train.py model/ model_data/train.txt  model_data/voc_classes.txt  model_data/yolo_anchors.txt 0.2 400 4 1 
@@ -123,10 +122,19 @@ python train.py <log_dir> <annotation_path> <classes_path> <anchors_path> <valSp
 
 ## 預測
 
-1. 執行 [predictionGenMAPTxt_Pre.py](predictionGenMAPTxt_Pre.py) 預測並產生檔案至Data/SegmentationClass以及mAPTxt_pre
-範例: 
+1. 執行 [predictionGenMAPTxt_Pre.py](predictionGenMAPTxt_Pre.py) 
+預測並產生檔案至<write_dir>資料夾內
+- readpath        讀取圖檔     ex:JPEGImages/ (僅包含圖檔格式)
+- log_dir         模型路徑     ex:{}.h5
+- write_dir       寫入路徑     ex:logs/
+- modeltype       框架名稱     ex:YOLOV3,YOLOV3Densenet,YOLOV3SE-Densenet,YOLOV4,YOLOV3-SPP,CSPYOLOV3Densenet,CSPSPPYOLOV3Densenet,CSPYOLOV4Densenet
+- filetype        檔案類型     ex:txt,xml (xml產出可直接使用LabelImg開啟<write_dir>進行瀏覽)
 ```
-python predictionGenMAPTxt_Pre.py logs/YOLOV320200730V1/ ep500 YOLOV3
+範例: 
+python predictionGenMAPTxt_Pre.py "Data/JPEGImagesASD2/*.png" "logs/ASD/YOLOV3-DENSENET20210309V1/sep1000.h5" "mAPTxt_Pre/logs/ASD/YOLOV3-DENSENET20210309V1/sep1000/" YOLOV3Densenet "xml" 
+自定義
+python predictionGenMAPTxt_Pre.py <readpath> <log_dir> <write_dir> <modeltype> <filetype>
+
 ```
 
 
