@@ -147,6 +147,7 @@ python train.py <log_dir> <annotation_path> <classes_path> <anchors_path> <valSp
 - write_dir       寫入路徑     ex:logs/
 - modeltype       框架名稱     ex:YOLOV3,YOLOV3Densenet,YOLOV3SE-Densenet,YOLOV4,YOLOV3-SPP,CSPYOLOV3Densenet,CSPSPPYOLOV3Densenet,CSPYOLOV4Densenet
 - filetype        檔案類型     ex:txt,xml (xml產出可直接使用LabelImg開啟<write_dir>進行瀏覽)
+```
 範例: 
 python predictionGenMAPTxt_Pre.py "Data/JPEGImagesASD2/*.png" "logs/ASD/YOLOV3-DENSENET20210309V1/sep1000.h5" "mAPTxt_Pre/logs/ASD/YOLOV3-DENSENET20210309V1/sep1000/" YOLOV3Densenet "xml" 
 自定義
