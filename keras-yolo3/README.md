@@ -68,6 +68,19 @@ python Xmltojson.py <xml_path>
 - output_dir 輸出位址(結果儲存位置)
 - --labels   voc_classes 檔案
 
+4. 其他需求：將xml轉換為googleautoml使用格式 xml to googleautoml
+執行[xmltogoogledataset.py](xmltogoogledataset.py)參數說明
+- Annotations_dir  輸入來源(包含圖檔、json檔案)
+- writepath        輸出位址(結果儲存位置)
+- googlepath       Google資料夾路徑
+- vocclassespath   voc_classes路徑
+```
+範例:
+python xmltogoogledataset.py "./Data/Annotations/" "./20210330googledataset.csv" "gs://ultrasoundall-uscentral1-automl/DataSetAll20200730VSD/" "./model_data/voc_classes.txt"
+自定義
+python xmltogoogledataset.py <Annotations_dir> <writepath> <googlepath> <vocclassespath>
+```
+
 ## C. 訓練
 1. genAnnotationTrainPath 參數說明
 - path            檔案根目錄          ex: ./Data/Annotations/
